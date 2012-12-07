@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %} Markx {% endblock title %}</title>
+	<meta name="description" content="" />
+	<meta name="author" content="Yoav Ram">
+	<meta name="keywords" content="">
+	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" type="image/ico" href="/static/favicon.ico">
+
+	<!-- Le style -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/static/style.css" rel="stylesheet">
+	<link href="/static/editor.css" rel="stylesheet">
+	<link href="/static/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/glyphicons.css" rel="stylesheet">
+	<style type="text/css">
+	[class^="icon-"] { background-image: url("/static/glyphicons-halflings.png"); } 
+	[class*="icon-white"] { background-image: url("/static/glyphicons-halflings-white.png"); } 
+	[class^="glyphicon-"] { background-image: url("/static/glyphicons.png"); } 
+	</style>
+
+	<!-- Le JS -->
+	<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="/static/Markdown.Converter.js"></script>
+	<script type="text/javascript" src="/static/Markdown.Sanitizer.js"></script>
+	<script type="text/javascript" src="/static/Markdown.Editor.js"></script>
+
+	<!-- google code prettifier http://code.google.com/p/google-code-prettify/ -->
+	<script type="text/javascript" src="/static/prettify.js"></script>
+	<link href="/static/prettify.css" rel="stylesheet">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	<!-- Online Debugger: http://www.onemathematicalcat.org/MathJaxDocumentation/TeXSyntax.htm -->
+	<!-- Doc: http://docs.mathjax.org/en/latest/output.html -->`
+	MathJax.Hub.Config({  
+		tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},          
+		"HTML-CSS": { availableFonts: ["STIX", "TeX"], 
+		linebreaks: { automatic: true }
+		}
+	});
+	</script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+	</script>
+
+	{% block head %}
+	{% endblock head %}
+
+</head>
+
+
+<body onload="prettyPrint()">
+
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+				<!-- Be sure to leave the brand out there if you want it shown -->
+				<a class="brand" href='/'>Markx</a>
+
+				<!-- Everything you want hidden at 940px or less, place within here -->
+				<div class="nav-collapse">
+					<ul class="nav">			
+						<li>
+							<a href="/help"
+							title="Help">
+							<i class="icon-question-sign"></i>
+							&nbsp;&nbsp;				
+						</a>		
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end Navbar -->
+
+	<!-- HEADER -->
+	{% block header %}	
+	{% endblock header %}
+
+	<!-- BODY -->	
+	<div class="row-fluid">
+		<div class="span5">
+
+			{% block left %}
+			
+			{% endblock left %}
+
+
+		</div>
+		<div class="span6 offset1">
+			{% block right %}
+			{% endblock right %}		
+		</div>
+
+	</div>
+
+	<!-- FOOTER -->
+	<div class="row-fluid">
+		<div class="span10 offset1">
+			<footer class="colophon"> 
+				{% block footer %}
+				{% endblock footer %}
+
+				<ul class="quick-links">
+					<li> 
+							<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+								<img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+					</li>
+					<li><a href="http://blog.getbootstrap.com/">Twitter Bootstrap</a></li>
+					<li><a href="http://glyphicons.com/" title="CC BY-SA 3.0">Glyphicons Free</a><li>
+					<li><a href="http://code.google.com/p/google-code-prettify/">Google Code Prettifier</a></li>
+					<li><a href="http://mathjax.org/">MathJax</a></li>
+					<li><a href="http://python.org/">Python</a></li>
+					<li><a href="http://flask.pocoo.org/">Flask</a></li>
+					<li><a href="http://www.github.com/">GitHub</a></li>	
+					<li><a href="http://daringfireball.net/projects/markdown/">Markdown</a></li>
+					<li><a href="http://johnmacfarlane.net/pandoc">Pandoc</a></li>
+					<li><a href="https://github.com/yoavram/marx">Marx</a></li>
+					</ul>
+
+				</footer>
+			</div>
+		</div>
+
+	</body>
+	</html>

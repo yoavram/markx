@@ -1,0 +1,189 @@
+/* from the jekyll.css theme
+Theme URI: http://markdotto.com/
+*/
+
+/* Body resets
+-------------------------------------------------- */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 60px 60px 0px 60px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  color: #454441;
+  background-color: #fff;
+}
+body,
+p {
+  font-size: 16px;
+  line-height: 28px;
+}
+li {
+  line-height: 28px;
+}
+
+p {
+  margin-bottom: 14px;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 0;
+  line-height: 28px;
+  color: #111;
+  text-rendering: optimizeLegibility;
+}
+h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 40px;
+}
+h2 {
+  margin: 20px 0 10px;
+  font-size: 24px;
+}
+h3 {
+  margin: 24px 0 5px;
+  font-size: 16px;
+}
+h4 {
+  margin: 16px 0 5px;
+  font-size: 10px;
+}
+h1 small {
+  font-size: 20px;
+  color: #999;
+}
+ul, ol {
+  padding: 0;
+  margin: 0 0 14px;
+}
+
+hr {
+  margin: 27px 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+}
+
+strong {
+  color: #222;
+}
+
+abbr {
+  #background-color: #eee;
+  #display: inline-block;
+  #padding: 3px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+code, pre {
+  padding: 0 3px 2px;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 15px;
+  color: #333333;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+code {
+  padding: 2px 4px;
+  color: #d14;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
+
+pre {
+  display: block;
+  padding: 13.5px;
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 28px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+pre code {
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+}
+
+blockquote {
+  background-color: #f5f5f5;
+  padding: 20px 30px;
+  margin-bottom: 14px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+blockquote p {
+  margin-bottom: 0;
+  color: #999999;
+  text-indent: -0.4em;
+}
+blockquote p:before {
+  content: '\201C';
+}
+blockquote p:after {
+  content: '\201D';
+}
+
+
+/* Links
+-------------------------------------------------- */
+a {
+  font-weight: inherit;
+  line-height: inherit;
+  color: #08c;
+  text-decoration: none;
+}
+a:hover {
+  color: #005580;
+  text-decoration: underline;
+}
+
+/* Footer
+-------------------------------------------------- */
+
+.colophon:before {
+  display: block;
+  content: '';
+  width: 100px;
+  height: 1px;
+  margin: 80px auto 20px;
+  background-color: #eee;
+}
+.colophon ul, .colophon p {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #999999;
+}
+.colophon ul {
+  margin-left: 0;
+}
+.colophon ul li {
+  display: inline;
+  padding: 0 10px;
+}
+.colophon ul a {
+  white-space: nowrap;
+}
