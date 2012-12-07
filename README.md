@@ -13,7 +13,7 @@
 
   * [Python] with [Flask]
   * [PageDown] markdown editor
-  * [Twitter Bootstrap] with [Glyphicons Free
+  * [Twitter Bootstrap] with [Glyphicons Free]
   * [Google Code Prettifier]
   * [MathJax]
 
