@@ -54,35 +54,17 @@
 
 <body onload="prettyPrint()">
 
-	<!-- Navbar -->
-	{% if True %}
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-
-				<!-- Be sure to leave the brand out there if you want it shown -->
-				<a class="brand" href='/'>Markx</a>
-
-				{% block navbar %}
-				{% endblock navbar %}
-
-				<!-- Everything you want hidden at 940px or less, place within here -->
-				<div class="nav-collapse">					
-				</div>
-
-			</div>
-		</div>
-	</div>
-	{% endif %}
-	<!-- end Navbar -->
-
+<div class="row-fluid">
 	<!-- HEADER -->
-	{% block header %}	
+
+	{% block header %}
 	{% endblock header %}
+
+</div>
 
 	<!-- BODY -->	
 	<div class="row-fluid">
-		<div class="span5">
+		<div class="span6">
 
 			{% block left %}
 			
@@ -90,7 +72,7 @@
 
 
 		</div>
-		<div class="span6 offset1">
+		<div class="span6">
 			{% block right %}
 			{% endblock right %}		
 		</div>

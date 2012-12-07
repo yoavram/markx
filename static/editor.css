@@ -21,6 +21,7 @@ body
 
 .wmd-input 
 { 
+	margin: 10px 10px 10px 10px;
 	width: 100%;
 	height: auto;
 	min-height: 450px;
@@ -30,6 +31,7 @@ body
 
 .wmd-preview 
 { 
+	margin: 10px 10px 10px 10px;
 	background-color: #ffffff; 
 }
 

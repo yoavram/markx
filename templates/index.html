@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
-{% block navbar %}
-<form class="navbar-form pull-left">
+{% block header %}
 
-<input type="text" class="span3" placeholder="Filename...">  
-	<button class="btn btn-link">Browse</button>
-	<button type="submit" class="btn btn-link">Save</button>
-</form>
+<div class="span6" style="line-height: 40px;">
+	<form class="form-inline">
+		<a class="brand" href="/">
+		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
+		</a>
+		<input type="text" placeholder="Filename...">  
+		<button class="btn">Browse</button>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
 
-	
-{% endblock navbar %}
+{% endblock header %}
 
 {% block left %}
 

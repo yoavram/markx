@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-  padding: 60px 60px 0px 60px;
+  padding: 10px 30px 30px 30px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   color: #454441;
   background-color: #fff;
@@ -144,6 +144,21 @@ blockquote p:before {
 }
 blockquote p:after {
   content: '\201D';
+}
+
+
+/* Header */
+/*--------*/
+
+.brand {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #555;
+  text-shadow: 0 1px 0 #fff
 }
 
 
