@@ -1,6 +1,6 @@
 # Markx
 
-*Marx* is a [Markdown] editor with [Pandoc] flavor.
+*Marx* is a [Markdown] editor with [Pandoc] flavor in your browser.
 
 ## Features
 
