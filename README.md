@@ -22,18 +22,14 @@ for x in lst:
   * [Google Code Prettifier]
   * [MathJax]
 
-## References
+## Install
 
-[Markdown]: http://daringfireball.net/projects/markdown/
-[Pandoc]: http://johnmacfarlane.net/pandoc
-[Python]: http://python.org/
-[Flask]: http://flask.pocoo.org/
-[Twitter Bootstrap]: http://blog.getbootstrap.com/
-[Google Code Prettifier]: http://code.google.com/p/google-code-prettify/
-[Glyphicons Free]: http://glyphicons.com/
-[MathJax]: http://mathjax.org/
-[PageDown]: http://code.google.com/p/pagedown/
-	
+1. Clone this repo
+2. Install [Python] and [Flask]
+3. Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
+4. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
+
+
 ## TODO
 
 1. Convert code blocks to google prettifier 
@@ -50,3 +46,13 @@ for x in lst:
 ## License
 
 ![](http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png)
+
+[Markdown]: http://daringfireball.net/projects/markdown/
+[Pandoc]: http://johnmacfarlane.net/pandoc
+[Python]: http://python.org/
+[Flask]: http://flask.pocoo.org/
+[Twitter Bootstrap]: http://blog.getbootstrap.com/
+[Google Code Prettifier]: http://code.google.com/p/google-code-prettify/
+[Glyphicons Free]: http://glyphicons.com/
+[MathJax]: http://mathjax.org/
+[PageDown]: http://code.google.com/p/pagedown/
