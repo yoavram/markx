@@ -21,6 +21,7 @@ for x in lst:
   * [Twitter Bootstrap] with [Glyphicons Free]
   * [Google Code Prettifier]
   * [MathJax]
+  * [BibTeX-js]
 
 ## Install
 
@@ -56,3 +57,4 @@ for x in lst:
 [Glyphicons Free]: http://glyphicons.com/
 [MathJax]: http://mathjax.org/
 [PageDown]: http://code.google.com/p/pagedown/
+[BibTeX-js]: http://bibtex-js.googlecode.com/
