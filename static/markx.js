@@ -11,7 +11,6 @@ function groupCitations() {
 };
 
 function get_bibtext(citation) {
-	$('#bibtex_input').val('');
 	$.getJSON('/bibtex', {
 		key: citation
 	}, function(data) {
@@ -38,5 +37,4 @@ function init_markdown_editor() {
     });
 
 	editor2.run();
-
 };

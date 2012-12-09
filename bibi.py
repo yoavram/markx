@@ -42,4 +42,5 @@ def to_string(bib, keys):
 
 if __name__ == '__main__':
 	bib = parse_file(r'd:\library.bib')
-	save_entries('tmp.bib', bib, ['Altenberg2011', 'Gavrilets2003', 'Gordo2005'])
+	to_file('tmp.bib', bib, ['Altenberg2011', 'Gavrilets2003', 'Gordo2005'])
+	print to_string(bib, ['Ram2012'])

@@ -30,6 +30,7 @@
 1. Zenware
 1. Display math - $x^2+y^2=r^2$
 1. Markdown flavor of Pandoc
+1. Citations using Pandoc/BibText: [@Drake1991]
 1. Code highlighting:
 <pre class="prettyprint numline:1">
 for x in lst:
@@ -44,6 +45,8 @@ for x in lst:
   * [Google Code Prettifier]
   * [MathJax]
 
+## References
+
 [Markdown]: http://daringfireball.net/projects/markdown/
 [Pandoc]: http://johnmacfarlane.net/pandoc
 [Python]: http://python.org/
@@ -54,41 +57,32 @@ for x in lst:
 [MathJax]: http://mathjax.org/
 [PageDown]: http://code.google.com/p/pagedown/
 	</textarea>
+	<br>
+	<button class="btn pull-right" id="citations">Citations</button>
 </div>
 {% endblock left %}
 
 {% block right %}
 <div id="wmd-preview-second" class="wmd-panel wmd-preview"></div>
+<div id="bibtex_display" class="wmd-panel wmd-preview">
+</div>
 {% endblock right %}	
 
 {% block footer %}
 
 <script type="text/javascript">
-(function () {   
-	var converter2 = new Markdown.Converter();
+init_markdown_editor();
 
-	converter2.hooks.chain("preConversion", function (text) {
-		return text.replace(/\b(a\w*)/gi, "*$1*");
-	});
-
-	converter2.hooks.chain("plainLinkText", function (url) {
-		return "This is a link to " + url.replace(/^https?:\/\//, "");
-	});
-
-	var help = function () { alert("Do you need help?"); }
-	var options = {
-		helpButton: { handler: help },
-		strings: { quoteexample: "whatever you're quoting, put it right here" }
-	};
-	var editor2 = new Markdown.Editor(converter2, "-second", options);
-
-	editor2.hooks.chain("onPreviewRefresh", function () {
-        prettyPrint();
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-    });
-
-	editor2.run();
-
-})();
+$("#citations").click(function() {
+	$('#bibtex_input').text('');
+	var citations = groupCitations();
+	for (c in citations) {
+		get_bibtext(citations[c]);
+	}
+});
 </script>
+
+<textarea id="bibtex_input" style="display:none;">
+
+</textarea>
 {%endblock footer %}	

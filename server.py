@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import os
+import bibi
 
 # add environment variables using 'heroku config:add VARIABLE_NAME=variable_name'
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
@@ -10,6 +11,13 @@ app.config.from_object(__name__)
 if app.debug:
 	print " * Running in debug mode"
 
+bib = bibi.parse_file(r'd:\library.bib')
+
+@app.route('/bibtex')
+def bibtex():
+    keys = [request.args.get('key', '', type=str)]
+    string = bibi.to_string(bib, keys)
+    return jsonify(result=string)
 
 @app.route("/")
 def index():
