@@ -36,14 +36,12 @@ for x in lst:
 	
 ## TODO
 
-1. Add favicon
 1. Convert code blocks to google prettifier 
 1. [TOC] tag
 1. Save and Load from local computer
 1. Put more stuff on TODO list
 1. Replace Python/Flask with JavaScript?
 1. Rerun MathJax/Prettifier only when relevant changes occurred?
-1. Citations with Bibtex
 1. Interface to GitHub?
 1. Interface to Mendeley?
 1. Python/R interfcace (knitr/Rmd/ipython notebook)?
