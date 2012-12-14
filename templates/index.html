@@ -1,15 +1,38 @@
 {% extends "base.html" %}
 
+{% block head %}
+<script type="text/javascript">
+window.onload = function() {
+	prettyPrintOne();
+}
+</script>
+{% endblock head %}
+
 {% block header %}
 
-<div class="span6" style="line-height: 40px;">
+<div class="span12" style="line-height: 40px;">
 	<form class="form-inline">
-		<a class="brand" href="/">
+		<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
 		</a>
-		<input type="text" placeholder="Filename...">  
-		<button class="btn">Browse</button>
-		<button type="submit" class="btn btn-primary">Save</button>
+		<div class="btn-toolbar">
+		<input class="input-smal" type="text" placeholder="Filename..." style="margin-right: 5px;">  
+		
+		<button class="btn"  rel="tooltip" title="Browse for file">Browse</button>
+		<button class="btn" type="submit"  rel="tooltip" title="Save to file">Save</button>
+		<button class="btn" id="btn-citations"  rel="tooltip" title="Update citations list">Citations</button>
+		<div class="btn-group">
+			<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
+				Highlight
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				{% for style in config.PRETTIFY_STYLESHEETS %}
+				<li><a href='#' class="btn-prettify">{{ style }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+		</div>
 	</form>
 </div>
 
@@ -32,9 +55,11 @@
 1. Markdown flavor of Pandoc
 1. Citations using Pandoc/BibTeX: [@Drake1991]
 1. Code highlighting:
-<pre class="prettyprint numline:1">
-for x in lst:
-	print x
+<pre class="prettyprint linenums">
+if __name__ == '__main__':
+	# Bind to PORT if defined, otherwise default to 5000.
+	port = int(os.environ.get('PORT', 5000))
+	app.run(host='0.0.0.0', port=port, debug=app.debug)
 </pre>
 
 ## Technology
@@ -59,8 +84,6 @@ for x in lst:
 [PageDown]: http://code.google.com/p/pagedown/
 [BibTeX-js]: http://bibtex-js.googlecode.com/
 	</textarea>
-	<br>
-	<button class="btn pull-right" id="citations">Citations</button>
 </div>
 {% endblock left %}
 
@@ -75,13 +98,22 @@ for x in lst:
 <script type="text/javascript">
 init_markdown_editor();
 
-$("#citations").click(function() {
+$("#btn-citations").click(function() {
 	$('#bibtex_input').text('');
 	var citations = groupCitations();
 	for (c in citations) {
 		get_bibtext(citations[c]);
 	}
 });
+</script>
+<script type="text/javascript">
+$(function() {
+	$('.btn-prettify').click(function() {
+		$('#prettify-style').attr('href','/static/prettify/' + $(this).text() + '.css');
+		prettyPrintOne();
+	});
+})
+
 </script>
 
 <textarea id="bibtex_input" style="display:none;">
