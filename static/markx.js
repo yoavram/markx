@@ -30,7 +30,11 @@ function updateCitations() {
 function init_markdown_editor() {   
 	var converter2 = new Markdown.Converter();
 
-	//converter2.hooks.chain("preConversion",);
+	converter2.hooks.chain("postConversion", function(text) {
+		text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
+		text = text.replace("\n</code></pre>", '\n</pre>');
+		return text;
+	});
 
 	var help = function () { alert("Do you need help?"); }
 	var options = {
