@@ -19,6 +19,14 @@ function get_bibtext(citation) {
 	});
 };
 
+function updateCitations() {
+	$('#bibtex_input').text('');
+	var citations = groupCitations();
+	for (c in citations) {
+		get_bibtext(citations[c]);
+	}
+}
+
 function init_markdown_editor() {   
 	var converter2 = new Markdown.Converter();
 

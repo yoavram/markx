@@ -1,13 +1,5 @@
 {% extends "base.html" %}
 
-{% block head %}
-<script type="text/javascript">
-window.onload = function() {
-	prettyPrintOne();
-}
-</script>
-{% endblock head %}
-
 {% block header %}
 
 <div class="span12" style="line-height: 40px;">
@@ -96,24 +88,21 @@ if __name__ == '__main__':
 {% block footer %}
 
 <script type="text/javascript">
+/* markdown editor */
 init_markdown_editor();
 
-$("#btn-citations").click(function() {
-	$('#bibtex_input').text('');
-	var citations = groupCitations();
-	for (c in citations) {
-		get_bibtext(citations[c]);
-	}
-});
-</script>
-<script type="text/javascript">
+/* citations */
+$("#btn-citations").click(updateCitations);
+updateCitations();
+
+/* code highlighting stuff */
 $(function() {
 	$('.btn-prettify').click(function() {
 		$('#prettify-style').attr('href','/static/prettify/' + $(this).text() + '.css');
 		prettyPrintOne();
 	});
 })
-
+prettyPrintOne();
 </script>
 
 <textarea id="bibtex_input" style="display:none;">
