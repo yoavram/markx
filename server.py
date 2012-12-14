@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
 import bibi
 
@@ -22,6 +22,29 @@ def bibtex():
     keys = [request.args.get('key', '', type=str)]
     string = bibi.to_string(bib, keys)
     return jsonify(result=string)
+
+
+@app.route('/save')
+def save():
+    content = request.args.get('content', '', type=unicode)
+    extension = request.args.get('extension', '', type=unicode)
+    fname = 'tmp.' + extension
+    f = open(fname, 'w')
+    f.write(content)
+    f.close()
+    return jsonify(result=fname)
+
+
+@app.route('/download/<string:filename>')
+def download(filename):
+	if filename.endswith('md'):
+		mimetype = 'text/x-markdown'
+	elif filename.endswith('bib'):
+		mimetype = 'text/x-bibtex'
+	else:
+		mimetype = 'application/octet-stream'
+	return send_file(filename, mimetype=mimetype, as_attachment=True, attachment_filename=filename)
+
 
 @app.route("/")
 def index():

@@ -50,3 +50,13 @@ function init_markdown_editor() {
 
 	editor2.run();
 };
+
+function download(content, extension) {
+	$.getJSON('/save', {
+		content: content,
+		extension: extension
+	}, function(data) {
+		var url = '/download/' + data.result;
+		window.location.assign(url);
+	});
+}
