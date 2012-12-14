@@ -6,13 +6,16 @@
 
 1. Zenware
 1. Display math - $x^2+y^2=r^2$
-1. Markdown flavor of Pandoc
+1. Imitating the markdown flavor of Pandoc
 1. Citations using Pandoc/BibTeX: [@Drake1991]
 1. Code highlighting:
-<pre class="prettyprint numline:1">
-for x in lst:
-	print x
-</pre>
+		
+		if __name__ == '__main__':
+		    # Bind to PORT if defined, otherwise default to 5000.
+		    port = int(os.environ.get('PORT', 5000))
+		    app.run(host='0.0.0.0', port=port, debug=app.debug)
+
+
 
 ## Technology
 
@@ -33,7 +36,6 @@ for x in lst:
 
 ## TODO
 
-1. Convert code blocks to google prettifier 
 1. [TOC] tag
 1. Save and Load from local computer
 1. Put more stuff on TODO list
