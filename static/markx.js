@@ -21,6 +21,7 @@ function get_bibtext(citation) {
 
 function updateCitations() {
 	$('#bibtex_input').text('');
+	$('#bibtex_display').html('');
 	var citations = groupCitations();
 	for (c in citations) {
 		get_bibtext(citations[c]);
