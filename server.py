@@ -1,11 +1,14 @@
 from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
+import os.path
 import bibi
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 BIB_FILE = os.environ.get('BIB_FILE', '')
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static/prettify')]
-
+FILES_FOLDER = 'files'
+if not os.path.exists(FILES_FOLDER):
+	os.mkdir(FILES_FOLDER)
 
 app = Flask(__name__)
 app.config.from_object(__name__)  
@@ -15,6 +18,10 @@ if app.debug:
 
 
 bib = bibi.parse_file(app.config['BIB_FILE'])
+
+
+def path_to_file(filename):
+	return FILES_FOLDER + os.path.sep + filename
 
 
 @app.route('/bibtex')
@@ -30,11 +37,11 @@ def save():
     extension = request.form.get('extension', '', type=unicode)
     if extension:
     	extension = '.' + extension
-    fname = 'markx' + extension
-    f = open(fname, 'w')
+    filename = 'markx' + extension
+    f = open(path_to_file(filename), 'w')
     f.write(content)
     f.close()
-    return jsonify(result=fname)
+    return jsonify(result=filename)
 
 
 @app.route('/download/<string:filename>')
@@ -45,7 +52,7 @@ def download(filename):
 		mimetype = 'text/x-bibtex'
 	else:
 		mimetype = 'application/octet-stream'
-	return send_file(filename, mimetype=mimetype, as_attachment=True, attachment_filename=filename)
+	return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=True, attachment_filename=filename)
 
 
 @app.route("/")
