@@ -73,6 +73,7 @@ function readSingleFile(evt) {
 			var contents = e.target.result;
 			$('textarea#wmd-input-second').val(contents);
 			editor.refreshPreview();
+			updateCitations();
 		}
       r.readAsText(f);
     } else { 
