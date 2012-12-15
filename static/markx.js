@@ -50,6 +50,7 @@ function init_markdown_editor() {
     });
 
 	editor2.run();
+	return editor2;
 };
 
 function download(content, extension) {
@@ -60,4 +61,21 @@ function download(content, extension) {
 		var url = '/download/' + data.result;
 		window.location.assign(url);
 	});
+}
+
+function readSingleFile(evt) {
+    //Retrieve the first (and only!) File from the FileList object
+    var f = evt.target.files[0]; 
+
+    if (f) {
+		var r = new FileReader();
+		r.onload = function(e) { 
+			var contents = e.target.result;
+			$('textarea#wmd-input-second').val(contents);
+			editor.refreshPreview();
+		}
+      r.readAsText(f);
+    } else { 
+      alert("Failed to load file");
+    }
 }

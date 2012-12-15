@@ -7,6 +7,7 @@
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
 		</a>
 		<div class="btn-toolbar">		
+		<button class="btn" id="btn-load-md">Load .md</button>
 		<button class="btn" id="btn-save-md">Save .md</button>
 		<button class="btn" id="btn-save-bibtex">Save .bib</button>
 		<button class="btn" id="btn-citations"  rel="tooltip" title="Update citations list">Citations</button>
@@ -85,7 +86,7 @@
 
 <script type="text/javascript">
 /* markdown editor */
-init_markdown_editor();
+var editor = init_markdown_editor();
 
 /* citations */
 $("#btn-citations").click(updateCitations);
@@ -110,9 +111,14 @@ $(function() {
 		var content = $('textarea#bibtex_input').val();
 		download(content, 'bib');
 	});
+
+	$('#btn-load-md').click(function() {
+		$('#fileinput').click();
+	});
+	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 })
 </script>
-
+<input type="file" id="fileinput" style="display:none;"/>
 <textarea id="bibtex_input" style="display:none;">
 
 </textarea>
