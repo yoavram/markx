@@ -24,11 +24,13 @@ def bibtex():
     return jsonify(result=string)
 
 
-@app.route('/save')
+@app.route('/save', methods=['POST'])
 def save():
-    content = request.args.get('content', '', type=unicode)
-    extension = request.args.get('extension', '', type=unicode)
-    fname = 'tmp.' + extension
+    content = request.form.get('content', '', type=unicode)
+    extension = request.form.get('extension', '', type=unicode)
+    if extension:
+    	extension = '.' + extension
+    fname = 'markx' + extension
     f = open(fname, 'w')
     f.write(content)
     f.close()

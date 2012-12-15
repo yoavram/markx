@@ -52,7 +52,7 @@ function init_markdown_editor() {
 };
 
 function download(content, extension) {
-	$.getJSON('/save', {
+	$.post('/save', {
 		content: content,
 		extension: extension
 	}, function(data) {
