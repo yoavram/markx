@@ -82,20 +82,20 @@ function readSingleFile(evt) {
 }
 
 function panelsDisplay() {
-	var editorPanel = $('#editor-panel')
-	var previewPanel = $('#preview-panel')
+	var leftPanel = $('#left-panel')
+	var rightPanel = $('#right-panel')
 	if (panelsDisplayStatus == 'dual') {
-		panelsDisplayStatus = 'editor';
-		editorPanel.show();
-		previewPanel.hide();
-	} else if (panelsDisplayStatus == 'editor') {
-		panelsDisplayStatus = 'preview';
-		editorPanel.hide()
-		previewPanel.show();
+		panelsDisplayStatus = 'left';
+		leftPanel.show().removeClass().addClass('span12');
+		rightPanel.hide().removeClass();
+	} else if (panelsDisplayStatus == 'left') {
+		panelsDisplayStatus = 'right';
+		leftPanel.hide().removeClass();
+		rightPanel.show().removeClass().addClass('span12');
 	} else {
 		panelsDisplayStatus = 'dual';
-		editorPanel.show();
-		previewPanel.show()
+		leftPanel.show().removeClass().addClass('span6');
+		rightPanel.show().removeClass().addClass('span6');
 	}
 	return panelsDisplayStatus;
 }

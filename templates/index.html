@@ -3,10 +3,10 @@
 {% block header %}
 
 <div class="span12" style="line-height: 40px;">
-		<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
+	<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
-		</a>
-		<div class="btn-toolbar">		
+	</a>
+	<div class="btn-toolbar">		
 		<button class="btn" id="btn-display-panels">Display</button>
 		<button class="btn" id="btn-load-md">Load .md</button>
 		<button class="btn" id="btn-save-md">Save .md</button>
@@ -23,7 +23,7 @@
 				{% endfor %}
 			</ul>
 		</div>
-		</div>
+	</div>
 </div>
 
 {% endblock header %}
@@ -47,19 +47,19 @@
 1. Code highlighting:
 
 		if __name__ == '__main__':
-		    # Bind to PORT if defined, otherwise default to 5000.
-		    port = int(os.environ.get('PORT', 5000))
-		    app.run(host='0.0.0.0', port=port, debug=app.debug)
+			# Bind to PORT if defined, otherwise default to 5000.
+			port = int(os.environ.get('PORT', 5000))
+			app.run(host='0.0.0.0', port=port, debug=app.debug)
 
 
 ## Technology
 
-  * [Python] with [Flask]
-  * [PageDown] markdown editor
-  * [Twitter Bootstrap] with [Glyphicons Free]
-  * [Google Code Prettifier]
-  * [MathJax]
-  * [$Bib\TeX_{js}$][BibTeX-js]
+* [Python] with [Flask]
+* [PageDown] markdown editor
+* [Twitter Bootstrap] with [Glyphicons Free]
+* [Google Code Prettifier]
+* [MathJax]
+* [$Bib\TeX_{js}$][BibTeX-js]
 
 ## References
 
@@ -79,9 +79,9 @@
 
 {% block right %}
 <div id="preview-panel">
-<div id="wmd-preview-second" class="wmd-panel wmd-preview"></div>
-<div id="bibtex_display" class="wmd-panel wmd-preview">
-</div>
+	<div id="wmd-preview-second" class="wmd-panel wmd-preview"></div>
+	<div id="bibtex_display" class="wmd-panel wmd-preview">
+	</div>
 </div>
 {% endblock right %}	
 
