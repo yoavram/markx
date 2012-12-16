@@ -46,7 +46,7 @@ function init_markdown_editor() {
 
 	editor2.hooks.chain("onPreviewRefresh", function () {
         prettyPrint();
-        //MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     });
 
 	editor2.run();
