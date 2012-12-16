@@ -64,6 +64,7 @@ function download(content, extension) {
 }
 
 function readSingleFile(evt) {
+	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
     var f = evt.target.files[0]; 
 
