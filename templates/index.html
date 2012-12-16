@@ -7,6 +7,7 @@
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
 		</a>
 		<div class="btn-toolbar">		
+		<button class="btn" id="btn-display-panels">Display</button>
 		<button class="btn" id="btn-load-md">Load .md</button>
 		<button class="btn" id="btn-save-md">Save .md</button>
 		<button class="btn" id="btn-save-bibtex">Save .bib</button>
@@ -30,7 +31,7 @@
 {% block left %}
 
 
-<div class="wmd-panel">
+<div class="wmd-panel" id="editor-panel">
 	<div id="wmd-button-bar-second"></div>
 	<textarea class="wmd-input" id="wmd-input-second">
 # Markx
@@ -77,8 +78,10 @@
 {% endblock left %}
 
 {% block right %}
+<div id="preview-panel">
 <div id="wmd-preview-second" class="wmd-panel wmd-preview"></div>
 <div id="bibtex_display" class="wmd-panel wmd-preview">
+</div>
 </div>
 {% endblock right %}	
 
@@ -116,6 +119,11 @@ $(function() {
 		$('#fileinput').click();
 	});
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+})
+/* display */
+var panelsDisplayStatus = 'dual';
+$(function() {
+	$('#btn-display-panels').click(panelsDisplay);
 })
 </script>
 <input type="file" id="fileinput" style="display:none;"/>

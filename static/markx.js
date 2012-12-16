@@ -46,7 +46,7 @@ function init_markdown_editor() {
 
 	editor2.hooks.chain("onPreviewRefresh", function () {
         prettyPrint();
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        //MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     });
 
 	editor2.run();
@@ -79,4 +79,23 @@ function readSingleFile(evt) {
     } else { 
       alert("Failed to load file");
     }
+}
+
+function panelsDisplay() {
+	var editorPanel = $('#editor-panel')
+	var previewPanel = $('#preview-panel')
+	if (panelsDisplayStatus == 'dual') {
+		panelsDisplayStatus = 'editor';
+		editorPanel.show();
+		previewPanel.hide();
+	} else if (panelsDisplayStatus == 'editor') {
+		panelsDisplayStatus = 'preview';
+		editorPanel.hide()
+		previewPanel.show();
+	} else {
+		panelsDisplayStatus = 'dual';
+		editorPanel.show();
+		previewPanel.show()
+	}
+	return panelsDisplayStatus;
 }
