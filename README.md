@@ -2,6 +2,8 @@
 
 *Markx* is a [Markdown] editor for scientific writing. 
 
+![](https://raw.github.com/yoavram/markx/master/screenshot.png)
+
 It imitates the [Pandoc] flavor of [Markdown] to facilitate conversion to multiple formats and 
 to enjoy the numerous [Markdown] extensions in [Pandoc].
 
