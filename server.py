@@ -19,6 +19,9 @@ if app.debug:
 
 bib = bibi.parse_file(app.config['BIB_FILE'])
 
+mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex'}
+def get_mimetype(extension):
+	return mimetypes.get(extension, 'application/octet-stream')
 
 def path_to_file(filename):
 	return FILES_FOLDER + os.path.sep + filename
@@ -46,12 +49,8 @@ def save():
 
 @app.route('/download/<string:filename>')
 def download(filename):
-	if filename.endswith('md'):
-		mimetype = 'text/x-markdown'
-	elif filename.endswith('bib'):
-		mimetype = 'text/x-bibtex'
-	else:
-		mimetype = 'application/octet-stream'
+	extension = os.path.splitext(filename)[1][1:].strip()
+	mimetype = get_mimetype(extension)
 	return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=True, attachment_filename=filename)
 
 
