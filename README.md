@@ -38,7 +38,7 @@ We would love to get feedback from anyone using it.
     * [PageDown] - [Stack Overflow]'s [Markdown] editor
     * [Google Code Prettifier] - Code highlighting
     * [MathJax] - Rendering of $LaTeX$ equations
-    * [BibTeX-js] - Processing [BibTex] citations
+    * [BibTeX-js] - Processing [BibTeX] citations
     * [Twitter Bootstrap] with [Glyphicons Free]
 
 
