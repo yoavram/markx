@@ -8,39 +8,36 @@
 		</a>
 		<div class="btn-toolbar">
 		<input class="input-small" type="text" id="filename" placeholder="file name" style="margin: auto 5px">	
-		<button class="btn" id="btn-display-panels">Display</button>
+		<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">Display</button>
 		<div class="btn-group">
+			<button class="btn" href='#' id="btn-save-md" rel="tooltip" title="Save to Markx">Save .md</button>
 			<button class="btn dropdown-toggle" data-toggle="dropdown">
-				Markdown
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href='#' id="btn-save-md">Save</a></li>
 				<li><a href='#' id="btn-download-md1">Download</a></li>
 				<li><a href='#' id="btn-load-md">Load</a></li>
 				<li><a href='#' id="btn-upload-md">Upload</a></li>
 			</ul>
 		</div>
 		<div class="btn-group">
+			<button class="btn" id="btn-citations" rel="tooltip" title="Update citations list">Citations</button>
 			<button class="btn dropdown-toggle" data-toggle="dropdown">
-				Citations
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href='#' id="btn-citations" rel="tooltip" title="Update citations list">Preview</a></li>
 				<li><a href='#' id="btn-save-bibtex">Save .bib</a></li>
 				<li><a href='#' id="btn-download-bibtex">Download .bib</a></li>
 		</ul>
 		</div>
 		<div class="btn-group">
+			<button class="btn" href='#' id="btn-download-pdf" rel="tooltip" title="Convert to reading format">PDF</button>
 			<button class="btn dropdown-toggle" data-toggle="dropdown">
-				Convert
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href='#' id="btn-download-pdf">pdf</a></li>
-				<li><a href='#' id="btn-download-docx">docx</a></li>
-				<li><a href='#' id="btn-download-epub">epub</a></li>
+				<li><a href='#' id="btn-download-docx">DOCX</a></li>
+				<li><a href='#' id="btn-download-epub">EPUB</a></li>
 			</ul>
 		</div>
 		<div class="btn-group">
