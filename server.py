@@ -24,7 +24,7 @@ if app.debug:
 
 bib = bibi.parse_file(app.config['BIB_FILE'])
 
-mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex'}
+mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
 def get_mimetype(extension):
 	return mimetypes.get(extension, 'application/octet-stream')
 

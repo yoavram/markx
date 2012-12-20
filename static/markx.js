@@ -54,21 +54,6 @@ function init_markdown_editor() {
 	return editor2;
 };
 
-function save(content, filename, extension, callback) {
-	$.post('/save', {
-		content: content,
-		extension: extension,
-		filename: filename
-	}, function(data) {
-		callback(data.result);
-	});
-}
-
-function download(filename) {
-	var url = '/download/' + filename;
-		window.location.assign(url)
-}
-
 function readSingleFile(evt) {
 	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
@@ -107,15 +92,50 @@ function panelsDisplay() {
 	return panelsDisplayStatus;
 }
 
-function check_for_filename() {
-	if ($('#filename').val()) {
+function check_for_filename(callback) {
+	var filename = $('#filename').val();
+	if (filename) {
 		$('#general-alert').hide();
-		return true;
+		callback(filename);
 	} else {
 		$('#general-alert').show();
 		$('#general-alert-message').html("<strong>Please choose a filename</strong>");
 		$('#filename').focus();
-		return false;
 	}
+}
+
+function save(content, filename, extension, callback) {
+	$.post('/save', {
+		content: content,
+		extension: extension,
+		filename: filename
+	}, function(data) {
+		callback(data.result);
+	});
+}
+
+function download(filename) {
+	var url = '/download/' + filename;
+		window.location.assign(url)
+}
+
+function save_text(content, extension, callback) {
+	check_for_filename(function(filename) {
+		save(content, filename, extension, callback);
+	});
+}
+
+function save_markdown(callack) {
+	save_text($('textarea#wmd-input-second').val(), 'md', callack);
+}
+
+function save_bibtext(callack) {
+	save_text($('textarea#bibtex_input').val(), 'bib', callack);
+}
+
+function save_output(extension, callack) {
+	save_text($('textarea#bibtex_input').val(), 'bib', function() {
+		save_text($('textarea#wmd-input-second').val(), extension, callack);
+	});
 }
 

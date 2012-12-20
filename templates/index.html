@@ -113,33 +113,22 @@ $(function() {
 })
 prettyPrintOne();
 
-/* files */
+/* files - maybe move to onclick in the buttons? */
 $(function() {
 	$('#btn-save-md').click(function() {
-		if (!check_for_filename()) return false;
-		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val();
-		save(content, filename, 'md', download);
+		save_markdown(download);
 	});
 	$('#btn-save-bibtex').click(function() {
-		var content = $('textarea#bibtex_input').val();
-		var filename = $('#filename').val();
-		save(content, filename, 'bib', download);
+		save_bibtext(download);
 	});
 	$('#btn-save-pdf').click(function() {
-		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val();
-		save(content, filename, 'pdf', download);
+		save_output('pdf', download);
 	});
 	$('#btn-save-docx').click(function() {
-		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val();
-		save(content, filename, 'docx', download);
+		save_output('docx', download);
 	});
 	$('#btn-save-epub').click(function() {
-		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val();
-		save(content, filename, 'epub', download);
+		save_output('epub', download);
 	});
 	$('#btn-load-md').click(function() {
 		$('#fileinput').click();
