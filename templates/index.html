@@ -9,13 +9,40 @@
 		<div class="btn-toolbar">
 		<input class="input-small" type="text" id="filename" placeholder="file name" style="margin: auto 5px">	
 		<button class="btn" id="btn-display-panels">Display</button>
-		<button class="btn" id="btn-load-md">Load .md</button>
-		<button class="btn" id="btn-save-md">Save .md</button>
-		<button class="btn" id="btn-save-bibtex">Save .bib</button>
-		<button class="btn" id="btn-save-pdf">Save .pdf</button>
-		<button class="btn" id="btn-save-docx">Save .docx</button>
-		<button class="btn" id="btn-save-epub">Save .epub</button>
-		<button class="btn" id="btn-citations"  rel="tooltip" title="Update citations list">Citations</button>
+		<div class="btn-group">
+			<button class="btn dropdown-toggle" data-toggle="dropdown">
+				Markdown
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href='#' id="btn-save-md">Save</a></li>
+				<li><a href='#' id="btn-download-md1">Download</a></li>
+				<li><a href='#' id="btn-load-md">Load</a></li>
+				<li><a href='#' id="btn-upload-md">Upload</a></li>
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn dropdown-toggle" data-toggle="dropdown">
+				Citations
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href='#' id="btn-citations" rel="tooltip" title="Update citations list">Preview</a></li>
+				<li><a href='#' id="btn-save-bibtex">Save .bib</a></li>
+				<li><a href='#' id="btn-download-bibtex">Download .bib</a></li>
+		</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn dropdown-toggle" data-toggle="dropdown">
+				Convert
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href='#' id="btn-download-pdf">pdf</a></li>
+				<li><a href='#' id="btn-download-docx">docx</a></li>
+				<li><a href='#' id="btn-download-epub">epub</a></li>
+			</ul>
+		</div>
 		<div class="btn-group">
 			<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
 				Highlight
@@ -115,24 +142,35 @@ prettyPrintOne();
 
 /* files - maybe move to onclick in the buttons? */
 $(function() {
+	$('#btn-upload-md').click(function() {
+		$('#fileinput').click();
+		alert('Please save after uploading')
+	});
+	$('#btn-load-md').click(function() {
+		alert('Not implemented')
+	});
 	$('#btn-save-md').click(function() {
+		save_markdown(function(){});
+	});
+	$('#btn-download-md').click(function() {
 		save_markdown(download);
 	});
 	$('#btn-save-bibtex').click(function() {
+		save_bibtext(function(){});
+	});
+	$('#btn-download-bibtex').click(function() {
 		save_bibtext(download);
 	});
-	$('#btn-save-pdf').click(function() {
+	$('#btn-download-pdf').click(function() {
 		save_output('pdf', download);
 	});
-	$('#btn-save-docx').click(function() {
+	$('#btn-download-docx').click(function() {
 		save_output('docx', download);
 	});
-	$('#btn-save-epub').click(function() {
+	$('#btn-download-epub').click(function() {
 		save_output('epub', download);
 	});
-	$('#btn-load-md').click(function() {
-		$('#fileinput').click();
-	});
+	
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 })
 /* display */
