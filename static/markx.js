@@ -81,3 +81,22 @@ function readSingleFile(evt) {
       alert("Failed to load file");
     }
 }
+
+function panelsDisplay() {
+	var leftPanel = $('#left-panel')
+	var rightPanel = $('#right-panel')
+	if (panelsDisplayStatus == 'dual') {
+		panelsDisplayStatus = 'left';
+		leftPanel.show().removeClass().addClass('span12');
+		rightPanel.hide().removeClass();
+	} else if (panelsDisplayStatus == 'left') {
+		panelsDisplayStatus = 'right';
+		leftPanel.hide().removeClass();
+		rightPanel.show().removeClass().addClass('span12');
+	} else {
+		panelsDisplayStatus = 'dual';
+		leftPanel.show().removeClass().addClass('span6');
+		rightPanel.show().removeClass().addClass('span6');
+	}
+	return panelsDisplayStatus;
+}
