@@ -23,6 +23,7 @@ function updateCitations() {
 	$('#bibtex_input').text('');
 	$('#bibtex_display').html('');
 	var citations = groupCitations();
+	citations.sort();
 	for (c in citations) {
 		get_bibtext(citations[c]);
 	}
