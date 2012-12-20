@@ -38,6 +38,12 @@ def bibtex():
     string = bibi.to_string(bib, keys)
     return jsonify(result=string)
 
+def save_text_file(filename, content):
+	filepath = path_to_file(filename)
+	f = open(filepath, 'w')
+	f.write(content)
+	f.close()
+	return filepath
 
 @app.route('/save', methods=['POST'])
 def save():
@@ -46,11 +52,18 @@ def save():
     extension = request.form.get('extension', '', type=unicode)
     if extension:
     	extension = '.' + extension
-    filepath = filename + extension
-    f = open(path_to_file(filepath), 'w')
-    f.write(content)
-    f.close()
-    return jsonify(result=filepath)
+    full_filename = filename + extension
+    print extension
+    if extension == '.pdf':
+    	save_text_file(filename + '.md', content)
+    	cmd = "pandoc " + path_to_file(filename + '.md') + ' -o ' + path_to_file(full_filename)
+    	if os.path.exists(path_to_file(filename + '.bib')):
+    		cmd += ' --bibliography=' + path_to_file(filename + '.bib')
+    	print cmd
+    	print os.popen2(cmd)
+    else:
+    	save_text_file(full_filename, content)
+    return jsonify(result=full_filename)
 
 
 @app.route('/download/<string:filename>')
