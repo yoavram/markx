@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
 import os.path
@@ -37,14 +42,15 @@ def bibtex():
 @app.route('/save', methods=['POST'])
 def save():
     content = request.form.get('content', '', type=unicode)
+    filename = request.form.get('filename', 'markx', type=unicode)
     extension = request.form.get('extension', '', type=unicode)
     if extension:
     	extension = '.' + extension
-    filename = 'markx' + extension
-    f = open(path_to_file(filename), 'w')
+    filepath = filename + extension
+    f = open(path_to_file(filepath), 'w')
     f.write(content)
     f.close()
-    return jsonify(result=filename)
+    return jsonify(result=filepath)
 
 
 @app.route('/download/<string:filename>')

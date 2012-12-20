@@ -6,7 +6,9 @@
 		<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
 		</a>
-		<div class="btn-toolbar">		
+
+		<div class="btn-toolbar">
+		<input class="input-small" type="text" name="filename" id="filename" placeholder="markx" style="margin: auto 5px">	
 		<button class="btn" id="btn-load-md">Load .md</button>
 		<button class="btn" id="btn-save-md">Save .md</button>
 		<button class="btn" id="btn-save-bibtex">Save .bib</button>
@@ -105,11 +107,13 @@ prettyPrintOne();
 $(function() {
 	$('#btn-save-md').click(function() {
 		var content = $('textarea#wmd-input-second').val();
-		download(content, 'md');
+		var filename = $('#filename').val();
+		download(content, filename, 'md');
 	});
 	$('#btn-save-bibtex').click(function() {
 		var content = $('textarea#bibtex_input').val();
-		download(content, 'bib');
+		var filename = $('#filename').val();
+		download(content, filename, 'bib');
 	});
 
 	$('#btn-load-md').click(function() {

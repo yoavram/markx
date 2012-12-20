@@ -54,10 +54,11 @@ function init_markdown_editor() {
 	return editor2;
 };
 
-function download(content, extension) {
+function download(content, filename, extension) {
 	$.post('/save', {
 		content: content,
-		extension: extension
+		extension: extension,
+		filename: filename
 	}, function(data) {
 		var url = '/download/' + data.result;
 		window.location.assign(url);
