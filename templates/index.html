@@ -113,27 +113,27 @@ $(function() {
 	$('#btn-save-md').click(function() {
 		var content = $('textarea#wmd-input-second').val();
 		var filename = $('#filename').val() || 'markx';
-		download(content, filename, 'md');
+		save(content, filename, 'md', download);
 	});
 	$('#btn-save-bibtex').click(function() {
 		var content = $('textarea#bibtex_input').val();
 		var filename = $('#filename').val() || 'markx';
-		download(content, filename, 'bib');
+		save(content, filename, 'bib', download);
 	});
 	$('#btn-save-pdf').click(function() {
 		var content = $('textarea#wmd-input-second').val();
 		var filename = $('#filename').val() || 'markx';
-		download(content, filename, 'pdf');
+		save(content, filename, 'pdf', download);
 	});
 	$('#btn-save-docx').click(function() {
 		var content = $('textarea#wmd-input-second').val();
 		var filename = $('#filename').val() || 'markx';
-		download(content, filename, 'docx');
+		save(content, filename, 'docx', download);
 	});
 	$('#btn-save-epub').click(function() {
 		var content = $('textarea#wmd-input-second').val();
 		var filename = $('#filename').val() || 'markx';
-		download(content, filename, 'epub');
+		save(content, filename, 'epub', download);
 	});
 	$('#btn-load-md').click(function() {
 		$('#fileinput').click();
