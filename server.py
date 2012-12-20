@@ -54,7 +54,7 @@ def save():
     	extension = '.' + extension
     full_filename = filename + extension
     print extension
-    if extension == '.pdf' or extension == '.docx':
+    if extension == '.pdf' or extension == '.docx' or extension == '.epub':
     	save_text_file(filename + '.md', content)
     	cmd = "pandoc " + path_to_file(filename + '.md') + ' -o ' + path_to_file(full_filename)
     	if os.path.exists(path_to_file(filename + '.bib')):

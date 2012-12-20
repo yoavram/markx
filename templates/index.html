@@ -14,6 +14,7 @@
 		<button class="btn" id="btn-save-bibtex">Save .bib</button>
 		<button class="btn" id="btn-save-pdf">Save .pdf</button>
 		<button class="btn" id="btn-save-docx">Save .docx</button>
+		<button class="btn" id="btn-save-epub">Save .epub</button>
 		<button class="btn" id="btn-citations"  rel="tooltip" title="Update citations list">Citations</button>
 		<div class="btn-group">
 			<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
@@ -129,7 +130,11 @@ $(function() {
 		var filename = $('#filename').val() || 'markx';
 		download(content, filename, 'docx');
 	});
-
+	$('#btn-save-epub').click(function() {
+		var content = $('textarea#wmd-input-second').val();
+		var filename = $('#filename').val() || 'markx';
+		download(content, filename, 'epub');
+	});
 	$('#btn-load-md').click(function() {
 		$('#fileinput').click();
 	});
