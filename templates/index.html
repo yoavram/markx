@@ -29,6 +29,11 @@
 		</div>
 	</div>
 </div>
+<div class="alert span10 offset1" id="general-alert" style="display: none">
+	<button type="button" class="close" onclick="$('#general-alert').hide()">&times;</button>
+	<div id="general-alert-message">
+	</div>
+</div>
 
 {% endblock header %}
 
@@ -111,28 +116,29 @@ prettyPrintOne();
 /* files */
 $(function() {
 	$('#btn-save-md').click(function() {
+		if (!check_for_filename()) return false;
 		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val() || 'markx';
+		var filename = $('#filename').val();
 		save(content, filename, 'md', download);
 	});
 	$('#btn-save-bibtex').click(function() {
 		var content = $('textarea#bibtex_input').val();
-		var filename = $('#filename').val() || 'markx';
+		var filename = $('#filename').val();
 		save(content, filename, 'bib', download);
 	});
 	$('#btn-save-pdf').click(function() {
 		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val() || 'markx';
+		var filename = $('#filename').val();
 		save(content, filename, 'pdf', download);
 	});
 	$('#btn-save-docx').click(function() {
 		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val() || 'markx';
+		var filename = $('#filename').val();
 		save(content, filename, 'docx', download);
 	});
 	$('#btn-save-epub').click(function() {
 		var content = $('textarea#wmd-input-second').val();
-		var filename = $('#filename').val() || 'markx';
+		var filename = $('#filename').val();
 		save(content, filename, 'epub', download);
 	});
 	$('#btn-load-md').click(function() {

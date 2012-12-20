@@ -54,15 +54,19 @@ function init_markdown_editor() {
 	return editor2;
 };
 
-function download(content, filename, extension) {
+function save(content, filename, extension, callback) {
 	$.post('/save', {
 		content: content,
 		extension: extension,
 		filename: filename
 	}, function(data) {
-		var url = '/download/' + data.result;
-		window.location.assign(url);
+		callback(data.result);
 	});
+}
+
+function download(filename) {
+	var url = '/download/' + filename;
+		window.location.assign(url)
 }
 
 function readSingleFile(evt) {
@@ -102,3 +106,16 @@ function panelsDisplay() {
 	}
 	return panelsDisplayStatus;
 }
+
+function check_for_filename() {
+	if ($('#filename').val()) {
+		$('#general-alert').hide();
+		return true;
+	} else {
+		$('#general-alert').show();
+		$('#general-alert-message').html("<strong>Please choose a filename</strong>");
+		$('#filename').focus();
+		return false;
+	}
+}
+
