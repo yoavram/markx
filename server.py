@@ -12,6 +12,7 @@ import subprocess
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 BIB_FILE = os.environ.get('BIB_FILE', '')
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static/prettify')]
+DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
 FILES_FOLDER = 'files'
 if not os.path.exists(FILES_FOLDER):
 	os.mkdir(FILES_FOLDER)
@@ -41,7 +42,7 @@ def save_text_file(filename, content):
 
 def pandoc(filename, extension):
     # TODO manage pandoc errors, for example exit status 43 when citations include Snigowski et al. 2000
-    options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension), '--ascii', '-s']
+    options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension), '--ascii', '-s', '--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     if os.path.exists(path_to_file(filename + '.bib')):
         options += ['--bibliography=' + path_to_file(filename + '.bib')]
     return subprocess.check_call(options)
