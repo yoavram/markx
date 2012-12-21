@@ -7,6 +7,7 @@ from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
 import os.path
 import bibi
+import subprocess
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 BIB_FILE = os.environ.get('BIB_FILE', '')
@@ -31,19 +32,25 @@ def get_mimetype(extension):
 def path_to_file(filename):
 	return FILES_FOLDER + os.path.sep + filename
 
+def save_text_file(filename, content):
+    filepath = path_to_file(filename)
+    f = open(filepath, 'w')
+    f.write(content)
+    f.close()
+    return filepath
+
+def pandoc(filename, extension):
+    # TODO manage pandoc errors, for example exit status 43 when citations include Snigowski et al. 2000
+    options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension), '--ascii', '-s']
+    if os.path.exists(path_to_file(filename + '.bib')):
+        options += ['--bibliography=' + path_to_file(filename + '.bib')]
+    return subprocess.check_call(options)
 
 @app.route('/bibtex')
 def bibtex():
     keys = [request.args.get('key', '', type=str)]
     string = bibi.to_string(bib, keys)
     return jsonify(result=string)
-
-def save_text_file(filename, content):
-	filepath = path_to_file(filename)
-	f = open(filepath, 'w')
-	f.write(content)
-	f.close()
-	return filepath
 
 @app.route('/save', methods=['POST'])
 def save():
@@ -53,14 +60,9 @@ def save():
     if extension:
     	extension = '.' + extension
     full_filename = filename + extension
-    print extension
     if extension == '.pdf' or extension == '.docx' or extension == '.epub':
     	save_text_file(filename + '.md', content)
-    	cmd = "pandoc " + path_to_file(filename + '.md') + ' -o ' + path_to_file(full_filename)
-    	if os.path.exists(path_to_file(filename + '.bib')):
-    		cmd += ' --bibliography=' + path_to_file(filename + '.bib')
-    	print cmd
-    	print os.popen2(cmd)
+    	pandoc(filename, extension)
     else:
     	save_text_file(full_filename, content)
     return jsonify(result=full_filename)
