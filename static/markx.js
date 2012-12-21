@@ -29,8 +29,60 @@ function updateCitations() {
 	}
 }
 
+function processTitleBlockToHTML(text) {
+	// This doesn't work because the first lines are wrapped in <p>
+	var textSplit = text.split('\n');
+
+	if (textSplit.length > 0) {
+		var titleLine = textSplit[0];
+		if (titleLine.substring(0,2) == '% ') {
+			text = text.replace(titleLine, '<h1 class="title">' + titleLine.substring(2, titleLine.length) + '</h1>');
+		}
+	}
+	if (textSplit.length > 1) {
+		var authorLine = textSplit[1];
+		if (authorLine.substring(0,2) == '% ') {
+			text = text.replace(authorLine, '<h2 class="author">' + authorLine.substring(2, authorLine.length) + '</h2>');
+		}
+	}
+	if (textSplit.length > 2) {
+		var dateLine = textSplit[2];
+		if (dateLine .substring(0,2) == '% ') {
+			text = text.replace(dateLine, '<h3 class="date">' + dateLine.substring(2, dateLine.length) + '</h3>');
+		}
+	}
+	return text;
+}
+
+function processTitleBlockToMarkdown(text) {
+	var textSplit = text.split('\n');
+
+	if (textSplit.length > 0) {
+		var titleLine = textSplit[0];
+		if (titleLine.substring(0,2) == '% ') {
+			text = text.replace(titleLine, '# ' + titleLine.substring(2, titleLine.length));
+		}
+	}
+	if (textSplit.length > 1) {
+		var authorLine = textSplit[1];
+		if (authorLine.substring(0,2) == '% ') {
+			text = text.replace(authorLine, '## ' + authorLine.substring(2, authorLine.length));
+		}
+	}
+	if (textSplit.length > 2) {
+		var dateLine = textSplit[2];
+		if (dateLine .substring(0,2) == '% ') {
+			text = text.replace(dateLine, '### ' + dateLine.substring(2, dateLine.length));
+		}
+	}
+	return text;
+} 
+
 function init_markdown_editor() {   
 	var converter2 = new Markdown.Converter();
+
+	//converter2.hooks.chain("postConversion", processTitleBlockToHTML);
+	converter2.hooks.chain("preConversion", processTitleBlockToMarkdown);
 
 	converter2.hooks.chain("postConversion", function(text) {
 		text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
@@ -46,9 +98,9 @@ function init_markdown_editor() {
 	var editor2 = new Markdown.Editor(converter2, "-second", options);
 
 	editor2.hooks.chain("onPreviewRefresh", function () {
-        prettyPrint();
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-    });
+		prettyPrint();
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+	});
 
 	editor2.run();
 	return editor2;
@@ -60,16 +112,16 @@ function readSingleFile(evt) {
     var f = evt.target.files[0]; 
 
     if (f) {
-		var r = new FileReader();
-		r.onload = function(e) { 
-			var contents = e.target.result;
-			$('textarea#wmd-input-second').val(contents);
-			editor.refreshPreview();
-			updateCitations();
-		}
-      r.readAsText(f);
+    	var r = new FileReader();
+    	r.onload = function(e) { 
+    		var contents = e.target.result;
+    		$('textarea#wmd-input-second').val(contents);
+    		editor.refreshPreview();
+    		updateCitations();
+    	}
+    	r.readAsText(f);
     } else { 
-      alert("Failed to load file");
+    	alert("Failed to load file");
     }
 }
 
@@ -116,7 +168,7 @@ function save(content, filename, extension, callback) {
 
 function download(filename) {
 	var url = '/download/' + filename;
-		window.location.assign(url)
+	window.location.assign(url)
 }
 
 function save_text(content, extension, callback) {
