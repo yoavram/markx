@@ -1,0 +1,409 @@
+{
+        "default": {
+            "container-title": {
+                "European Human Rights Reports": "E.H.R.R.",
+                "All England Reports": "All E.R.",
+                "Journal of Irreproducible Results": "J. Irreproducible Results",
+                "Crime, Law and Social Change": "Crime, L. &amp; Soc. Change",
+                "Butterworths Medico-Legal Reports": "B.M.L.R."
+            },
+            "collection-title": {},
+            "institution-entire": {},
+            "institution-part": {
+                "Columbia Broadcasting System": "CBS",
+                "Publishing House LLC": "Publishing House"
+            },
+            "nickname": {
+                "Frank Bennett": "the author"
+            },
+            "number": {
+                "Online Edition": "Online edition"
+            },
+            "title": {},
+            "place": {
+                "nz": "N.Z.",
+                "us": "U.S.",
+                "us;ak":"Alaska",
+                "us;al":"Ala.",
+                "us;ar":"Ark.",
+                "us;az":"Ariz.",
+                "us;ca":"Cal.",
+                "us;co":"Colo.",
+                "us;ct":"Conn.",
+                "us;de":"Del.",
+                "us;fl":"Fla.",
+                "us;ga":"Ga.",
+                "us;hi":"Haw.",
+                "us;ia":"Iowa",
+                "us;id":"Idaho",
+                "us;il":"Ill.",
+                "us;in":"Ind.",
+                "us;ks":"Kan.",
+                "us;ky":"Ky.",
+                "us;la":"La.",
+                "us;ma":"Mass.",
+                "us;md":"Md.",
+                "us;me":"Me.",
+                "us;mi":"Mich.",
+                "us;mn":"Minn.",
+                "us;mo":"Mo.",
+                "us;ms":"Miss.",
+                "us;mt":"Mont.",
+                "us;nc":"N.C.",
+                "us;nd":"N.D.",
+                "us;ne":"Neb.",
+                "us;nh":"N.H.",
+                "us;nj":"N.J.",
+                "us;nm":"N.M.",
+                "us;nv":"Nev.",
+                "us;ny":"N.Y.",
+                "us;oh":"Ohio",
+                "us;ok":"Okla.",
+                "us;or":"Or.",
+                "us;pa":"Pa.",
+                "us;pr":"Puerto Rico",
+                "us;ri":"R.I.",
+                "us;sc":"S.C.",
+                "us;sd":"S.D.",
+                "us;tn":"Tenn.",
+                "us;tx":"Tex.",
+                "us;ut":"Utah",
+                "us;va":"Va.",
+                "us;vt":"Vt.",
+                "us;wa":"Wash.",
+                "us;wi":"Wis.",
+                "us;wv":"W.Va.",
+                "us;wy":"Wyo.",
+                "us;federal;ak":"D. Alaska",
+                "us;federal;al.middle.district":"M.D. Ala.",
+                "us;federal;al.northern.district":"N.D. Ala.",
+                "us;federal;al.southern.district":"S.D. Ala.",
+                "us;federal;ar.eastern.district":"E.D. Ark.",
+                "us;federal;ar.western.district":"W.D. Ark.",
+                "us;federal;az":"D. Ariz.",
+                "us;federal;ca.central.district":"C.D. Cal.",
+                "us;federal;ca.eastern.district":"E.D. Cal.",
+                "us;federal;ca.northern.district":"N.D. Cal.",
+                "us;federal;ca.southern.district":"S.D. Cal.",
+                "us;federal;co":"D. Colo.",
+                "us;federal;ct":"D. Conn.",
+                "us;federal;dc":"D.D.C.",
+                "us;federal;de":"D. Del.",
+                "us;federal;fl.middle.district":"M.D. Fla.",
+                "us;federal;fl.northern.district":"N.D. Fla.",
+                "us;federal;fl.southern.district":"S.D. Fla.",
+                "us;federal;ga.middle.district":"M.D. Ga.",
+                "us;federal;ga.northern.district":"N.D. Ga.",
+                "us;federal;ga.southern.district":"S.D. Ga.",
+                "us;federal;hi":"D. Haw.",
+                "us;federal;ia.northern.district":"N.D. Iowa",
+                "us;federal;ia.southern.district":"S.D. Iowa",
+                "us;federal;id":"D. Idaho",
+                "us;federal;il.central.district":"C.D. Ill.",
+                "us;federal;il.northern.district":"N.D. Ill.",
+                "us;federal;il.southern.district":"S.D. Ill.",
+                "us;federal;in.northern.district":"N.D. Ind.",
+                "us;federal;in.southern.district":"S.D. Ind.",
+                "us;federal;ks":"D. Kan.",
+                "us;federal;ky.eastern.district":"E.D. Ky.",
+                "us;federal;ky.western.district":"W.D. Ky.",
+                "us;federal;la.eastern.district":"E.D. La.",
+                "us;federal;la.middle.district":"M.D. La.",
+                "us;federal;la.western.district":"W.D. La.",
+                "us;federal;ma":"D. Mass.",
+                "us;federal;md":"D. Md.",
+                "us;federal;me":"D. Me.",
+                "us;federal;mi.eastern.district":"E.D. Mich.",
+                "us;federal;mi.western.district":"W.D. Mich.",
+                "us;federal;mn":"D. Minn.",
+                "us;federal;mo.eastern.district":"E.D. Mo.",
+                "us;federal;mo.western.district":"W.D. Mo.",
+                "us;federal;ms.northern.district":"N.D. Miss.",
+                "us;federal;ms.southern.district":"S.D. Miss.",
+                "us;federal;mt":"D. Mont.",
+                "us;federal;nc.eastern.district":"E.D.N.C.",
+                "us;federal;nc.middle.district":"M.D.N.C.",
+                "us;federal;nc.western.district":"W.D.N.C.",
+                "us;federal;nd":"D.N.D.",
+                "us;federal;ne":"D. Neb.",
+                "us;federal;nh":"D.N.H.",
+                "us;federal;nj":"D.N.J.",
+                "us;federal;nm":"D.N.M.",
+                "us;federal;nv":"D. Nev.",
+                "us;federal;ny.eastern.district":"E.D.N.Y.",
+                "us;federal;ny.northern.district":"N.D.N.Y.",
+                "us;federal;ny.southern.district":"S.D.N.Y.",
+                "us;federal;ny.western.district":"W.D.N.Y.",
+                "us;federal;oh.northern.district":"N.D. Ohio",
+                "us;federal;oh.southern.district":"S.D. Ohio",
+                "us;federal;ok.eastern.district":"E.D. Okla.",
+                "us;federal;ok.northern.district":"N.D. Okla.",
+                "us;federal;ok.western.district":"W.D. Okla.",
+                "us;federal;or":"D. Or.",
+                "us;federal;pa.eastern.district":"E.D. Pa.",
+                "us;federal;pa.middle.district":"M.D. Pa.",
+                "us;federal;pa.western.district":"W.D. Pa.",
+                "us;federal;pr":"D. Puerto Rico",
+                "us;federal;ri":"D.R.I.",
+                "us;federal;sc":"D.S.C.",
+                "us;federal;sd":"D.S.D.",
+                "us;federal;tn.eastern.district":"E.D. Tenn.",
+                "us;federal;tn.middle.district":"M.D. Tenn.",
+                "us;federal;tn.western.district":"W.D. Tenn.",
+                "us;federal;tx.eastern.district":"E.D. Tex.",
+                "us;federal;tx.northern.district":"N.D. Tex.",
+                "us;federal;tx.southern.district":"S.D. Tex.",
+                "us;federal;tx.western.district":"W.D. Tex.",
+                "us;federal;ut":"D. Utah",
+                "us;federal;va.eastern.district":"E.D. Va.",
+                "us;federal;va.western.district":"W.D. Va.",
+                "us;federal;vt":"D. Vt.",
+                "us;federal;wa.eastern.district":"E.D. Wash.",
+                "us;federal;wa.western.district":"W.D. Wash.",
+                "us;federal;wi.eastern.district":"E.D. Wis.",
+                "us;federal;wi.western.district":"W.D. Wis.",
+                "us;federal;wv.northern.district":"N.D. W.Va.",
+                "us;federal;wv.southern.district":"S.D. W.Va.",
+                "us;federal;wy":"D. Wyo.",
+                "ca": "Can.",
+                "ca;federal":"Can.",
+                "ca;federal;ab":"Alta.",
+                "ca;federal;bc":"B.C.",
+                "ca;federal;mb":"Man.",
+                "ca;federal;nb":"N.B.",
+                "ca;federal;nl":"Nfld.",
+                "ca;federal;nt":"N.W.T.",
+                "ca;federal;ns":"N.S.",
+                "ca;federal;nu":"Nun.",
+                "ca;federal;on":"Ont.",
+                "ca;federal;pe":"P.E.I.",
+                "ca;federal;qc":"Que.",
+                "ca;federal;sk":"Sask.",
+                "ca;federal;yt":"Yukon",
+                "ca;ab":"Alta.",
+                "ca;bc":"B.C.",
+                "ca;mb":"Man.",
+                "ca;nb":"N.B.",
+                "ca;nl":"Nfld.",
+                "ca;nt":"N.W.T.",
+                "ca;ns":"N.S.",
+                "ca;nu":"Nun.",
+                "ca;on":"Ont.",
+                "ca;pe":"P.E.I.",
+                "ca;qc":"Que.",
+                "ca;sk":"Sask.",
+                "ca;yt":"Yukon"
+             },
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "us": {
+            "container-title": {
+                "Wisconsin Reporter Second": "!jurisdiction,authority&gt;&gt;&gt;Wisc.2d",
+                "Northwest Reporter Second": "N.W.2d",
+                "Statutes at Large": "Stat.",
+                "US Code": "U.S.C.",
+                "Pennsylvania Statutes Annotated": "Pa. Stat. Ann."
+            },
+            "collection-title": {},
+            "institution-entire": {},
+            "institution-part": {
+                "House of Representatives": "H.R.",
+                "U.S. Congress": "Cong.",
+                "Supreme Court": "Sup. Ct."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {
+                "House of Representatives Joint Resolution": "H.R.J. Res.",
+                "Senate Joint Resolution": "S.J. Res.",
+                "Special Session": "Spec. Sess."
+            },
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "us;federal": {
+            "container-title": {
+            },
+            "collection-title": {},
+            "institution-entire": {
+            },
+            "institution-part": {
+                "District Court": "!here&gt;&gt;&gt;",
+                "Bankruptcy Court": "Bankr.",
+                "Tenth Circuit Court of Appeals":"10th Cir.",
+                "Eleventh Circuit Court of Appeals":"11th Cir.",
+                "First Circuit Court of Appeals":"1st Cir.",
+                "Second Circuit Court of Appeals":"2nd Cir.",
+                "Third Circuit Court of Appeals":"3rd Cir.",
+                "Fourth Circuit Court of Appeals":"4th Cir.",
+                "Fifth Circuit Court of Appeals":"5th Cir.",
+                "Sixth Circuit Court of Appeals":"6th Cir.",
+                "Seventh Circuit Court of Appeals":"7th Cir.",
+                "Eighth Circuit Court of Appeals":"8th Cir.",
+                "Ninth Circuit Court of Appeals":"9th Cir."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {
+            },
+            "place": {
+            },
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "gb": {
+            "container-title": {},
+            "collection-title": {},
+            "institution-entire": {},
+            "institution-part": {
+                "House of Lords": "H.L."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {
+              "George III": "Geo 3"
+            },
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "gb;england.and.wales": {
+            "container-title": {},
+            "collection-title": {},
+            "institution-entire": {
+                "High Court": "EWHC",
+                "Court of Appeal|Civil Division":"EWCA Civ"
+            },
+            "institution-part": {
+                "Chancery": "Ch.",
+                "Court of Appeal": "C.A.",
+                "Queen's Bench": "Q.B."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {},
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "coe.int": {
+            "container-title": {
+                "Reports of Judgments and Decisions (Series A)": "Eur. Ct. H.R. (ser. A)",
+                "Collection of Decisions": "Eur. Comm'n H.R. Col. Dec.",
+                "Decisions and Reports": "Eur. Comm'n H.R. Dec. &amp; Rep."
+            },
+            "collection-title": {},
+            "institution-entire": {
+                "European Court of Human Rights": "Eur. Ct. H.R."
+            },
+            "institution-part": {
+                "European Court of Human Rights": "Eur. Ct. H.R.",
+                "European Commission of Human Rights": "Eur. Comm'n H.R."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {},
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "ca": {
+            "container-title": {
+              "Supreme Court Reports": "!authority&gt;&gt;&gt;S.C.R.",
+              "Ontario Reports Second": "!jurisdiction&gt;&gt;&gt;O.R. (2d)",
+              "Federal Court Reports": "F.C."
+            },
+            "collection-title": {
+            },
+            "institution-entire": {
+                "Supreme Court": "!authority&gt;&gt;&gt;SCC"
+            },
+            "institution-part": {
+                "Court of Appeal": "C.A.",
+                "Supreme Court": "S.C."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {},
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "ca;on": {
+            "container-title": {
+            },
+            "collection-title": {
+            },
+            "institution-entire": {
+            },
+            "institution-part": {
+               "High Court of Justice": "H Ct J"
+            },
+            "nickname": {},
+            "number": {},
+            "title": {},
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "nz": {
+            "container-title": {
+            },
+            "collection-title": {
+            },
+            "institution-entire": {
+            },
+            "institution-part": {
+               "High Court": "H.C."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {},
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        },
+        "un.org": {
+            "container-title": {
+               "United Nations General Assembly Official Record":"U.N. GAOR"
+            },
+            "collection-title": {
+            },
+            "institution-entire": {
+            },
+            "institution-part": {
+               "High Court": "H.C.",
+               "General Assembly": "G.A."
+            },
+            "nickname": {},
+            "number": {},
+            "title": {
+              "Resolution": "Res."
+            },
+            "place": {},
+            "hereinafter": {},
+            "classic": {},
+            "container-phrase": {},
+            "title-phrase": {}
+        }
+}
