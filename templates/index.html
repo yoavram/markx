@@ -53,6 +53,7 @@
 				{% endfor %}
 			</ul>
 		</div>
+		<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
 	</div>
 </div>
 <div class="alert span10 offset1" id="general-alert" style="display: none">
@@ -125,6 +126,7 @@
 <script type="text/javascript">
 /* markdown editor */
 var editor = init_markdown_editor();
+$('#wmd-input-second').wordCount({counterElement:"word_counter"});
 
 /* citations */
 $("#btn-citations").click(updateCitations);
