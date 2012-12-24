@@ -11,11 +11,14 @@ import subprocess
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 BIB_FILE = os.environ.get('BIB_FILE', '')
-PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static/prettify')]
+PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static'  + os.path.sep + 'prettify')]
 DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
 FILES_FOLDER = 'files'
 if not os.path.exists(FILES_FOLDER):
 	os.mkdir(FILES_FOLDER)
+CSL_FOLDER = 'static' + os.path.sep + 'csl'
+CSL_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.csl')]
+ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
 
 app = Flask(__name__)
 app.config.from_object(__name__)  
@@ -45,6 +48,13 @@ def pandoc(filename, extension):
     options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension), '--ascii', '-s', '--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     if os.path.exists(path_to_file(filename + '.bib')):
         options += ['--bibliography=' + path_to_file(filename + '.bib')]
+    if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
+        csl_file = app.config['CSL_FILES'][0]
+        options += ['--csl=' + CSL_FOLDER + os.path.sep + csl_file]
+    if 'ABBR_FILES' in app.config and len(app.config['ABBR_FILES']) > 0:
+        abbr_file = app.config['ABBR_FILES'][0]
+        options += ['--citation-abbreviations=' + CSL_FOLDER + os.path.sep + abbr_file]
+    print options
     return subprocess.check_call(options)
 
 @app.route('/bibtex')
