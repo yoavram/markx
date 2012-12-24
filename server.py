@@ -19,7 +19,10 @@ if not os.path.exists(FILES_FOLDER):
 CSL_FOLDER = 'static' + os.path.sep + 'csl'
 CSL_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.csl')]
 ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
-
+DEFAULT_TEXT_FILE = "README.md"
+with open(DEFAULT_TEXT_FILE,'r') as f:
+    DEFAULT_TEXT = f.read()
+    
 app = Flask(__name__)
 app.config.from_object(__name__)  
 app.config.from_pyfile('config.py')

@@ -70,45 +70,7 @@
 <div class="wmd-panel" id="editor-panel">
 	<div id="wmd-button-bar-second"></div>
 	<textarea class="wmd-input" id="wmd-input-second">
-# Markx
-
-*Marx* is a [Markdown] editor with [Pandoc] flavor in your browser.
-
-## Features
-
-1. Zenware
-1. Display math - $x^2+y^2=r^2$
-1. Markdown flavor of Pandoc
-1. Citations using Pandoc/BibTeX: [@Drake1991]
-1. Code highlighting:
-
-		if __name__ == '__main__':
-			# Bind to PORT if defined, otherwise default to 5000.
-			port = int(os.environ.get('PORT', 5000))
-			app.run(host='0.0.0.0', port=port, debug=app.debug)
-
-
-## Technology
-
-  * [Python] with [Flask]
-  * [PageDown] markdown editor
-  * [Twitter Bootstrap] with [Glyphicons Free]
-  * [Google Code Prettifier]
-  * [MathJax]
-  * [BibTeX-js]
-
-## References
-
-[Markdown]: http://daringfireball.net/projects/markdown/
-[Pandoc]: http://johnmacfarlane.net/pandoc
-[Python]: http://python.org/
-[Flask]: http://flask.pocoo.org/
-[Twitter Bootstrap]: http://blog.getbootstrap.com/
-[Google Code Prettifier]: http://code.google.com/p/google-code-prettify/
-[Glyphicons Free]: http://glyphicons.com/
-[MathJax]: http://mathjax.org/
-[PageDown]: http://code.google.com/p/pagedown/
-[BibTeX-js]: http://bibtex-js.googlecode.com/
+{{ config.DEFAULT_TEXT }}
 	</textarea>
 </div>
 {% endblock left %}
