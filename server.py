@@ -22,7 +22,8 @@ ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
 DEFAULT_TEXT_FILE = "README.md"
 with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
-    
+PANDOC_EXTENSIONS = ['.pdf', '.docx', '.epub', '.html', '.htm']    
+
 app = Flask(__name__)
 app.config.from_object(__name__)  
 app.config.from_pyfile('config.py')
@@ -74,7 +75,7 @@ def save():
     if extension:
     	extension = '.' + extension
     full_filename = filename + extension
-    if extension == '.pdf' or extension == '.docx' or extension == '.epub':
+    if extension in app.config['PANDOC_EXTENSIONS']:
     	save_text_file(filename + '.md', content)
     	pandoc(filename, extension)
     else:
@@ -88,6 +89,12 @@ def download(filename):
 	mimetype = get_mimetype(extension)
 	return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=True, attachment_filename=filename)
 
+
+@app.route('/view/<string:filename>')
+def view(filename):
+    extension = os.path.splitext(filename)[1][1:].strip()
+    mimetype = get_mimetype(extension)
+    return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=False)
 
 @app.route("/")
 def index():
