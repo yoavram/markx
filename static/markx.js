@@ -168,7 +168,12 @@ function save(content, filename, extension, callback) {
 
 function download(filename) {
 	var url = '/download/' + filename;
-	window.location.assign(url)
+	window.location.assign(url);
+}
+
+function view(filename) {
+	var url = '/view/' + filename;
+	window.open(url, '_newtab');
 }
 
 function save_text(content, extension, callback) {

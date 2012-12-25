@@ -40,6 +40,7 @@
 			<ul class="dropdown-menu">
 				<li><a href='#' id="btn-download-docx">DOCX</a></li>
 				<li><a href='#' id="btn-download-epub">EPUB</a></li>
+				<li><a href='#' id="btn-download-html">HTML</a></li>
 			</ul>
 		</div>
 		<div class="btn-group">
@@ -125,7 +126,7 @@ $(function() {
 		save_bibtext(download);
 	});
 	$('#btn-download-pdf').click(function() {
-		save_output('pdf', download);
+		save_output('pdf', view);
 	});
 	$('#btn-download-docx').click(function() {
 		save_output('docx', download);
@@ -133,7 +134,10 @@ $(function() {
 	$('#btn-download-epub').click(function() {
 		save_output('epub', download);
 	});
-	
+	$('#btn-download-html').click(function() {
+		save_output('html', view);
+	});
+
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 })
 /* display */
