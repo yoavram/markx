@@ -1,6 +1,13 @@
 # Markx
 
-*Markx* is a [Markdown] editor for scientific writing. 
+*Markx* is a [Markdown] editor for scientific writing.
+
+# Why Markx?
+Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write.  We decided to build Markx as a make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:
+
+* [How to ditch Word](http://inundata.org/2012/12/04/how-to-ditch-word/)  
+* [Thoughts on a preprint server](http://inundata.org/2012/12/06/pre-print-servers/)
+
 
 ![](https://raw.github.com/yoavram/markx/master/screenshot.png)
 
