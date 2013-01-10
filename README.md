@@ -67,7 +67,7 @@ We would love to get feedback from anyone using it.
 - [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
 - [ ] Replace *Python*/*Flask* with *node.js*?
 - [ ] Put more stuff on TODO list
-- [ ] incomplete
+
 ## License
 
 ![](http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png)
