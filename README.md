@@ -60,13 +60,13 @@ We would love to get feedback from anyone using it.
 
 ## TODO
 
-1. `--toc` option
-1. Interface to *git*
-1. Help/About page
-1. Interface to *Mendeley*?
-1. *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
-1. Replace *Python*/*Flask* with *node.js*?
-1. Put more stuff on TODO list
+- [ ] `--toc` option
+- [ ] Interface to *git*
+- [ ] Help/About page
+- [ ] Interface to *Mendeley*?
+- [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
+- [ ] Replace *Python*/*Flask* with *node.js*?
+- [ ] Put more stuff on TODO list
 
 ## License
 
