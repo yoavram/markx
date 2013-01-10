@@ -58,17 +58,16 @@ We would love to get feedback from anyone using it.
 3. Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
 4. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
 
-## TODO
-- [x] completed
-- 
-- [ ] `--toc` option
-- [ ] Interface to *git*
-- [ ] Help/About page
-- [ ] Interface to *Mendeley*?
-- [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
-- [ ] Replace *Python*/*Flask* with *node.js*?
-- [ ] Put more stuff on TODO list
-- [ ] incomplete
+## TODO  
+
+[ ] `--toc` option
+[ ] Interface to *git*
+[ ] Help/About page
+[ ] Interface to *Mendeley*?
+[ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
+[ ] Replace *Python*/*Flask* with *node.js*?
+[ ] Put more stuff on TODO list
+[ ] incomplete
 ## License
 
 ![](http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png)
