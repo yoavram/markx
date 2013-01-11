@@ -1,6 +1,13 @@
 # Markx
 
-*Markx* is a [Markdown] editor for scientific writing. 
+*Markx* is a [Markdown] editor for scientific writing.
+
+# Why Markx?
+Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write.  We decided to build Markx as a make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:
+
+* [How to ditch Word](http://inundata.org/2012/12/04/how-to-ditch-word/)  
+* [Thoughts on a preprint server](http://inundata.org/2012/12/06/pre-print-servers/)
+
 
 ![](https://raw.github.com/yoavram/markx/master/screenshot.png)
 
@@ -51,15 +58,15 @@ We would love to get feedback from anyone using it.
 3. Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
 4. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
 
-## TODO
+## TODO  
 
-1. `--toc` option
-1. Interface to *git*
-1. Help/About page
-1. Interface to *Mendeley*?
-1. *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
-1. Replace *Python*/*Flask* with *node.js*?
-1. Put more stuff on TODO list
+- [ ] `--toc` option
+- [ ] Interface to *git*
+- [ ] Help/About page
+- [ ] Interface to *Mendeley*?
+- [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
+- [ ] Replace *Python*/*Flask* with *node.js*?
+- [ ] Put more stuff on TODO list
 
 ## License
 
