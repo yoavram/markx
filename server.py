@@ -49,7 +49,9 @@ def save_text_file(filename, content):
 
 def pandoc(filename, extension):
     # TODO manage pandoc errors, for example exit status 43 when citations include Snigowski et al. 2000
-    options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension), '--ascii', '-s', '--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
+    options = ['pandoc', path_to_file(filename + '.md'), '-o', path_to_file(filename + extension)]
+    options += ['--ascii', '-s', '--toc']
+    options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     if os.path.exists(path_to_file(filename + '.bib')):
         options += ['--bibliography=' + path_to_file(filename + '.bib')]
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
