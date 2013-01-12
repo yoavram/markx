@@ -8,7 +8,8 @@
 	</a>
 	<div class="btn-toolbar">
 		<input class="input-small" type="text" id="username" placeholder="username" style="margin: auto">	
-		<input class="input-small" type="password" id="password" placeholder="password" style="margin: auto 5px">		
+		<input class="input-small" type="password" id="password" placeholder="password" style="margin: auto 5px">	
+		<button class="btn" id="btn-github"><i class="glyphicon-github"></i></button>	
 		<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">Display</button>
 		<div class="btn-group">			
 			<button class="btn" id="btn-citations" rel="tooltip" title="Update citations list">Citations</button>
@@ -47,7 +48,7 @@
 		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
 		<input class="input-small" type="text" id="repo" placeholder="repo" style="margin: auto 5px">
 		<input class="input-small" type="text" id="branch" placeholder="branch" value="master" style="margin: auto">
-		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="/README.md" style="margin: auto 5px">
+		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="README.md" style="margin: auto 5px">
 		<div class="btn-group">
 		<button class="btn" id="btn-pull" rel="tooltip" title="Pull file and load to editor">Load</button>
 		<button class="btn" id="btn-commit-push" rel="tooltip" title="Commit file and push">Save</button>		
@@ -102,9 +103,58 @@ $(function() {
 })
 prettyPrintOne();
 
-/* files - maybe move to onclick in the buttons? */
+/* github api */
+var github = null;
 $(function() {
-	$('#')
+	$('#btn-github').click(function() {
+		// TODO validate username and password
+		github = new Github({
+			username: $('#username').val(),
+			password: $('#password').val(),
+			auth: "basic"
+		});
+		// TODO error message?
+	})
+	$('#btn-pull').click(function() {
+		// TODO validate variables, check github nullity
+		var user = $('#user').val();
+		var reponame = $('#repo').val();
+		var branch = $('#branch').val();
+		var filepath = $('#filepath').val();
+
+		var repo = github.getRepo(user, reponame);
+
+		repo.read(branch, filepath, function (err, data) {
+			var msg = '';
+			if (err) {
+				msg = err;
+			} else {
+				msg = data;
+			}
+			$('textarea#wmd-input-second').val(msg);
+		});
+	});
+
+	$('#btn-commit-push').click(function() {
+		// TODO validate variables, check github nullity
+		var user = $('#user').val();
+		var reponame = $('#repo').val();
+		var branch = $('#branch').val();
+		var filepath = $('#filepath').val();
+		var commit_msg = $('#commit-message').val();
+
+		var repo = github.getRepo(user, reponame);
+
+		var data = $('textarea#wmd-input-second').val();
+		
+		repo.write(branch, filepath, data, commit_msg, function (err) {
+			if (err) {
+				alert(err);
+			} 
+		});
+	});
+
+/* files - maybe move to onclick in the buttons? */
 	$('#btn-upload-md').click(function() {
 		$('#fileinput').click();
 		alert('Please save after uploading')
