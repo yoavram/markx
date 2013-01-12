@@ -5,24 +5,12 @@
 <div class="span12" style="line-height: 40px;">
 	<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
-		</a>
-		<div class="btn-toolbar">
-		<input class="input-small" type="text" id="filename" placeholder="file name" style="margin: auto 5px">	
+	</a>
+	<div class="btn-toolbar">
+		<input class="input-small" type="text" id="username" placeholder="username" style="margin: auto">	
+		<input class="input-small" type="password" id="password" placeholder="password" style="margin: auto 5px">		
 		<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">Display</button>
-		<div class="btn-group">
-			<button class="btn" href='#' id="btn-save-md" rel="tooltip" title="Save to Markx">
-				Save .md
-			</button>
-			<button class="btn dropdown-toggle" data-toggle="dropdown">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><a href='#' id="btn-download-md">Download</a></li>
-				<li><a href='#' id="btn-load-md">Load</a></li>
-				<li><a href='#' id="btn-upload-md">Upload</a></li>
-			</ul>
-		</div>
-		<div class="btn-group">
+		<div class="btn-group">			
 			<button class="btn" id="btn-citations" rel="tooltip" title="Update citations list">Citations</button>
 			<button class="btn dropdown-toggle" data-toggle="dropdown">
 				<span class="caret"></span>
@@ -30,7 +18,7 @@
 			<ul class="dropdown-menu">
 				<li><a href='#' id="btn-save-bibtex">Save .bib</a></li>
 				<li><a href='#' id="btn-download-bibtex">Download .bib</a></li>
-		</ul>
+			</ul>
 		</div>
 		<div class="btn-group">
 			<button class="btn" href='#' id="btn-download-pdf" rel="tooltip" title="Convert to reading format">PDF</button>
@@ -55,6 +43,16 @@
 			</ul>
 		</div>
 		<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
+		<br>
+		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
+		<input class="input-small" type="text" id="repo" placeholder="repo" style="margin: auto 5px">
+		<input class="input-small" type="text" id="branch" placeholder="branch" value="master" style="margin: auto">
+		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="/README.md" style="margin: auto 5px">
+		<div class="btn-group">
+		<button class="btn" id="btn-pull" rel="tooltip" title="Pull file and load to editor">Load</button>
+		<button class="btn" id="btn-commit-push" rel="tooltip" title="Commit file and push">Save</button>		
+		</div>	
+		<input class="input" type="text" id="commit-message" placeholder="Commit message: Fixed typos" style="margin: auto 5px">
 	</div>
 </div>
 <div class="alert span10 offset1" id="general-alert" style="display: none">
@@ -106,6 +104,7 @@ prettyPrintOne();
 
 /* files - maybe move to onclick in the buttons? */
 $(function() {
+	$('#')
 	$('#btn-upload-md').click(function() {
 		$('#fileinput').click();
 		alert('Please save after uploading')
