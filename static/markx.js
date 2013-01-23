@@ -99,6 +99,7 @@ function init_markdown_editor() {
 
 	editor2.hooks.chain("onPreviewRefresh", function () {
 		prettyPrint();
+		// TODO  catch ReferenceError from next line when running without network
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 	});
 
@@ -225,5 +226,9 @@ jQuery.fn.wordCount = function(params){
 	{ 
 		total_words=this.value.split(/[\s\.\?]+/).length;
 		jQuery('#'+p.counterElement).html(total_words);
-	});	
+	});
+	// TODO this is a patch to get the initial word count
+	// also need to make sure this runs when loading/uploading new files
+	total_words = this.val().split(/[\s\.\?]+/).length;
+	jQuery('#'+p.counterElement).html(total_words);
 };
