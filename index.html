@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Marxx - markdown for science</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Markdown web client for academic writing">
+    <meta name="author" content="oav Ram and Karthik Ram (we're not related)">
+    <script src="http://use.edgefonts.net/source-code-pro.js"></script>
+    <script src="http://use.edgefonts.net/lato.js"></script>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/github.css">
+    <script src="assets/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+
+
+  <body>
+    <br><br>
+  <div class="row">
+  <div class="span11 offset1"><h1>Marxx - a markdown web app for science</h1>
+  <i>Write versioned papers online!</i>
+  </div>
+ </div>
+  <div class="row">
+    <div class="hero-unit">
+      <center><img src="screenshot.png" width="900"></center>
+  </div>
+
+<div class="span8 offset2">
+<h2>What is Markx?</h2>
+<p>Markx is a Markdown editor for scientific writing.</p>
+<hr class="soften">
+<br>
+<h2>Why Markx?</h2>
+<p>Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write. We decided to build Markx as a make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:<br>
+<br>
+<a href="http://inundata.org/2012/06/01/markdown-and-the-future-of-collaborative-manuscript-writing/">Markdown and the future of collaborative academic writing</a><br>
+<a href="http://inundata.org/2012/12/06/pre-print-servers/">Thoughts on a pre-print server</a><br>
+<a href="http://inundata.org/2012/12/04/how-to-ditch-word/">How to ditch Word.</a><br>
+</p>
+<hr class="soften">
+<br>
+
+<h2>Features</h2>
+<ul>
+<li>Zenware</li>
+<li>Realtime preview</li>
+<li>Display math <code>- $x^2+y^2=r^2$</code></li>
+<li>Imitating the Markdown flavor of Pandoc</li>
+<li>Citations using Pandoc+BibTeX: <code>[@Drake1991]</code></li>
+<li>Code highlighting</li>
+</ul>
+<hr class="soften">
+<br>
+
+<h2>Upcoming features</h2>
+<ul>
+<li>Export to multiple format</li>
+<li>Integration with git</li>
+<li>Hosted option</li>
+</ul>
+<hr class="soften">
+<br>
+
+<h2>Installing</h2>
+<br>
+<ol>
+<li><a href="https://github.com/yoavram/markx">Clone this repo</a></li>
+<li>Install Python and Flask</li>
+<li>Add an environment variable named <code>BIB_FILE</code> with the path to your BibTeX <code>.bib</code>file, or create <code>config.py</code> file with the <code>key-value BIB_FILE = /path/to/bib/file.</code></li>
+<li>Run the editor locally by calling python <code>server.py</code> and opening your browser at <code>http://localhost:5000.</code></li>
+ </ol><br>
+  <div>
+   <a href="https://github.com/yoavram/markx" style="color:#ffffff"> <button class="btn btn-success btn-large" style="display: block; width: 100%;"><i class="icon-white icon-download"></i>Install from GitHub (additional instructions)</button></a>
+
+</div>
+<hr class="soften">
+<br>
+
+</div>
+  </div>
+
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
