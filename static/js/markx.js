@@ -99,7 +99,6 @@ function init_markdown_editor() {
 
 	editor2.hooks.chain("onPreviewRefresh", function () {
 		prettyPrint();
-		// TODO  catch ReferenceError from next line when running without network
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 	});
 
