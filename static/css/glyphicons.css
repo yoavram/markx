@@ -2,7 +2,7 @@
     display: inline-block;
     *margin-right: .3em;
     line- vertical-align: text-top;
-    background-image: url("images/glyphicons-2.png");
+    background-image: url("/static/img/glyphicons.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
     width: 12px;
