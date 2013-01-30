@@ -11,7 +11,8 @@ import subprocess
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 BIB_FILE = os.environ.get('BIB_FILE', '')
-PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static'  + os.path.sep + 'prettify')]
+PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/'
+PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir('static'  + os.path.sep + 'css' + os.path.sep + 'prettify' + os.path.sep)]
 DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
 FILES_FOLDER = 'files'
 if not os.path.exists(FILES_FOLDER):

@@ -4,7 +4,7 @@
 
 <div class="span12" style="line-height: 40px;">
 	<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
-		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/karl-marx-160x40.png">
+		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/img/karl-marx-160x40.png">
 	</a>
 	<div class="btn-toolbar">
 		<input class="input-small" type="text" id="username" placeholder="username" style="margin: auto">	
@@ -97,7 +97,7 @@ updateCitations();
 /* code highlighting stuff */
 $(function() {
 	$('.btn-prettify').click(function() {
-		$('#prettify-style').attr('href','/static/prettify/' + $(this).text() + '.css');
+		$('#prettify-style').attr('href','{{ config.PRETTIFY_STYLESHEETS_FOLDER }}' + $(this).text() + '.css');
 		prettyPrintOne();
 	});
 })
