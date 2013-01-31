@@ -7,9 +7,7 @@
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/img/karl-marx-160x40.png">
 	</a>
 	<div class="btn-toolbar">
-		<input class="input-small" type="text" id="username" placeholder="username" style="margin: auto">	
-		<input class="input-small" type="password" id="password" placeholder="password" style="margin: auto 5px">	
-		<button class="btn" id="btn-github">
+		<button href="#modal-github-signin" id="btn-github-signin-show" role="button" class="btn" data-toggle="modal" rel="tooltip" title="Sign in to GitHub">
 			<i class="icon-github-2"></i>
 		</button>	
 		<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">
@@ -84,6 +82,28 @@
 	</div>
 </div>
 
+<!-- GitHub Sign in Modal -->
+<div id="modal-github-signin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-github-signin-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-github-signin-label">Sign in to GitHub</h3>
+  </div>
+   
+
+  <div class="modal-body">
+  	<form class="form-inline">
+	  <input type="text" class="input-small" placeholder="Username" id="github-username">
+	  <input type="password" class="input-small" placeholder="Password" id="github-password">
+	  </form>
+ </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button type="submit" class="btn btn-primary" id="btn-github-signin-submit" data-dismiss="modal">Sign in</button>
+  </div>
+  
+
+</div>
+
 {% endblock header %}
 
 {% block left %}
@@ -128,14 +148,23 @@ prettyPrintOne();
 /* github api */
 var github = null;
 $(function() {
-	$('#btn-github').click(function() {
+	$('#btn-github-signin-submit').click(function() {
 		// TODO validate username and password
 		github = new Github({
-			username: $('#username').val(),
-			password: $('#password').val(),
+			username: $('#github-username').val(),
+			password: $('#github-password').val(),
 			auth: "basic"
 		});
-		// TODO error message?
+		$('#user').val($('#github-username').val());
+		var user = github.getUser($('#user').val());
+		user.userRepos($('#user').val(), function(err, repos) {
+			if (err){
+				alert(err);
+			} else {
+				jQuery.each(repos, function(index, item) {
+					alert(item['name']);
+				});			}
+		});
 	})
 	$('#btn-pull').click(function() {
 		// TODO validate variables, check github nullity
@@ -147,13 +176,11 @@ $(function() {
 		var repo = github.getRepo(user, reponame);
 
 		repo.read(branch, filepath, function (err, data) {
-			var msg = '';
 			if (err) {
-				msg = err;
+				$("#general-alert-message").text(err);
 			} else {
-				msg = data;
+				$('textarea#wmd-input-second').val(data);
 			}
-			$('textarea#wmd-input-second').val(msg);
 		});
 	});
 
@@ -171,7 +198,7 @@ $(function() {
 		
 		repo.write(branch, filepath, data, commit_msg, function (err) {
 			if (err) {
-				alert(err);
+				$("#general-alert-message").text(err);
 			} 
 		});
 	});
@@ -179,10 +206,10 @@ $(function() {
 /* files - maybe move to onclick in the buttons? */
 	$('#btn-upload-md').click(function() {
 		$('#fileinput').click();
-		alert('Please save after uploading')
+		$("#general-alert-message").text('Please save after uploading')
 	});
 	$('#btn-load-md').click(function() {
-		alert('Not implemented')
+		$("#general-alert-message").text('Not implemented')
 	});
 	$('#btn-save-md').click(function() {
 		save_markdown(function(){});
