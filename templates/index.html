@@ -62,8 +62,10 @@
 		<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
 		<br>
 		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
-		<input class="input-small" type="text" id="repo" placeholder="repo" style="margin: auto 5px">
-		<input class="input-small" type="text" id="branch" placeholder="branch" value="master" style="margin: auto">
+		<select class="input-small" type="text" id="repo" style="margin: auto 5px">
+		</select>
+		<select class="input-small" type="text" id="branche" style="margin: auto 5px">
+		</select>		
 		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="README.md" style="margin: auto 5px">
 		<div class="btn-group">
 		<button class="btn" id="btn-pull" rel="tooltip" title="Pull file and load to editor">
@@ -147,25 +149,49 @@ prettyPrintOne();
 
 /* github api */
 var github = null;
+function loadUserRepos(username) {
+	var user = github.getUser(username);
+	user.userRepos(username, function(err, repos) {
+		if (err){
+			alert(err);
+		} else {
+			jQuery.each(repos, function(index, item) {
+				var option = '<option value="' + item['name'] + ' url="' + item['url'] +'>' +item['name'] + '</option>';
+				$('#repo').append(option);					
+			});			
+		}
+	});
+}
 $(function() {
 	$('#btn-github-signin-submit').click(function() {
+		var username = $('#github-username').val();
 		// TODO validate username and password
 		github = new Github({
-			username: $('#github-username').val(),
+			username: username,
 			password: $('#github-password').val(),
 			auth: "basic"
 		});
-		$('#user').val($('#github-username').val());
-		var user = github.getUser($('#user').val());
-		user.userRepos($('#user').val(), function(err, repos) {
+		$('#user').val(username);
+		loadUserRepos(username);
+	});
+
+	$('#repo').click( function() {
+		var username = $('#user').val();
+		var reponame = $('#repo').val();
+		var repo = github.getRepo(username, reponame);
+		repo.listBranches(function(err, branches) {
 			if (err){
 				alert(err);
 			} else {
-				jQuery.each(repos, function(index, item) {
-					alert(item['name']);
-				});			}
+				jQuery.each(branches, function(index, item) {
+					var option = '<option value="' + item['name'] + ' url="' + item['url'] +'>' +item['name'] + '</option>';
+					$('#branch').append(option);	
+					// TODO select master				
+				});			
+			}
 		});
-	})
+	});
+
 	$('#btn-pull').click(function() {
 		// TODO validate variables, check github nullity
 		var user = $('#user').val();
