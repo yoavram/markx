@@ -64,7 +64,7 @@
 		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
 		<select class="input-small" type="text" id="repo" style="margin: auto 5px">
 		</select>
-		<select class="input-small" type="text" id="branche" style="margin: auto 5px">
+		<select class="input-small" type="text" id="branch" style="margin: auto 5px">
 		</select>		
 		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="README.md" style="margin: auto 5px">
 		<div class="btn-group">
@@ -151,7 +151,7 @@ prettyPrintOne();
 var github = null;
 
 function print_error(err) {
-	$("#general-alert-message").text(err['message']);
+	alert(err['message']);
 }
 
 function loadUserRepos(username) {
@@ -160,13 +160,35 @@ function loadUserRepos(username) {
 		if (err){
 			print_error(err);
 		} else {
+			$('#repo').empty();
+			$('#repo').append('<option></option>');
 			jQuery.each(repos, function(index, item) {
-				var option = '<option value="' + item['name'] + ' url="' + item['url'] +'">' +item['name'] + '</option>';
+				var reponame = $.trim(item['name']);
+				var option = '<option value="' + reponame + '">' + reponame + '</option>';
 				$('#repo').append(option);					
 			});			
 		}
 	});
+	$('#repo').focus();
 }
+
+function loadRepoBranches(username, reponame) {
+	var repo = github.getRepo(username, reponame);
+	repo.listBranches(function(err, branches) {
+		if (err){
+			print_error(err);
+		} else {
+			$('#branch').empty();
+			jQuery.each(branches, function(index, item) {
+				var branchname = $.trim(item['name']);
+				var option = '<option value="' + branchname + '">' + branchname + '</option>';
+				$('#branch').append(option);	
+				// TODO select master				
+			});			
+		}
+	});
+}
+
 $(function() {
 	$('#btn-github-signin-submit').click(function() {
 		var username = $('#github-username').val();
@@ -177,24 +199,13 @@ $(function() {
 			auth: "basic"
 		});
 		$('#user').val(username);
-		loadUserRepos(username);
+		loadUserRepos(username);		
 	});
 
-	$('#repo').click( function() {
+	$('#repo').change( function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
-		var repo = github.getRepo(username, reponame);
-		repo.listBranches(function(err, branches) {
-			if (err){
-				print_error(err);
-			} else {
-				jQuery.each(branches, function(index, item) {
-					var option = '<option value="' + item['name'] + '>' +item['name'] + '</option>';
-					$('#branch').append(option);	
-					// TODO select master				
-				});			
-			}
-		});
+		loadRepoBranches(username, reponame);
 	});
 
 	$('#btn-pull').click(function() {
