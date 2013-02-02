@@ -68,8 +68,14 @@
 		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
 		<select class="input-small" type="text" id="repo" style="margin: auto 5px">
 		</select>
+		<button class="btn" id="repo-ok">
+			<i class="icon-folder-open"></i>
+		</button>
 		<select class="input-small" type="text" id="branch" style="margin: auto 5px">
-		</select>		
+		</select>
+		<button id="branch-ok" class="btn">
+			<i class="icon-folder-open"></i>
+		</button>		
 		<select class="input-small" type="text" id="path" placeholder="/path/to/file" style="margin: auto 5px">
 		</select>
 		
@@ -220,13 +226,13 @@ $(function() {
 		$('#btn-github-signin-show').show();
 	});
 
-	$('#repo').change( function() {
+	$('#repo-ok').click( function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
 		loadRepoBranches(username, reponame);
 	});
 
-	$('#branch').change(function() {
+	$('#branch-ok').click(function() {
 		var branchname = $('#branch').val();
 		loadBranchPaths(branchname);
 	});
