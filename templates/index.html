@@ -6,9 +6,12 @@
 	<a class="brand" href="/" rel="tooltip" title="Karl Heinrich Marx, 1818 – 1883">
 		<img class="img-rounded" alt="Markx" title="Markx" alt="Markx"src="/static/img/karl-marx-160x40.png">
 	</a>
-	<div class="btn-toolbar">
+	<div class="btn-toolbar" id="general-toolbar">
 		<button href="#modal-github-signin" id="btn-github-signin-show" role="button" class="btn" data-toggle="modal" rel="tooltip" title="Sign in to GitHub">
 			<i class="icon-github-2"></i>
+		</button>
+		<button id="btn-github-signout" class="btn" rel="tooltip" title="Sign out of GitHub" style="display: none;">
+			<i class="icon-exit"></i>
 		</button>	
 		<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">
 			<i class=" icon-screen"></i>
@@ -60,7 +63,8 @@
 			</ul>
 		</div>
 		<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
-		<br>
+	</div>
+	<div class="btn-toolbar" id="github-toolbar" style="display: none">	
 		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto">
 		<select class="input-small" type="text" id="repo" style="margin: auto 5px">
 		</select>
@@ -86,35 +90,7 @@
 	</div>
 </div>
 
-<!-- GitHub Sign in Modal -->
-<div id="modal-github-signin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-github-signin-label" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="modal-github-signin-label">
-    	<i class="icon-enter"></i> &nbsp; Sign in to GitHub
-    </h3>
-  </div>
-   
-
-  <div class="modal-body">
-  	<form class="form-inline">
-	  <input type="text" class="input-small" placeholder="Username" id="github-username">
-	  <input type="password" class="input-small" placeholder="Password" id="github-password">
-	  <span class="help-block">
-	  	<small>
-	  	Your username and password are never saved in <em>markx</em>. <br>
-	  	They are sent to <a href="http://github.com/">GitHub</a> directly from your browser via the javascript library <a href="https://github.com/michael/github">github.js</a>.
-	  	</small>
-	  </span>
-	  </form>
- </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    <button type="submit" class="btn btn-primary" id="btn-github-signin-submit" data-dismiss="modal">Sign in</button>
-  </div>
-  
-
-</div>
+{% include 'github_signin.html' %}
 
 {% endblock header %}
 
@@ -140,6 +116,11 @@
 {% block footer %}
 
 <script type="text/javascript">
+function alert_message(message) {
+	$('#general-alert-message').text(message);
+	$('#general-alert').show();
+}
+
 /* markdown editor */
 var editor = init_markdown_editor();
 $('#wmd-input-second').wordCount({counterElement:"word_counter"});
@@ -161,15 +142,12 @@ prettyPrintOne();
 var github = null;
 var user = null;
 var repo = null;
-function print_error(err) {
-	alert(err['message']);
-}
 
 function loadUserRepos(username) {
 	user = github.getUser(username);
 	user.userRepos(username, function(err, repos) {
 		if (err){
-			print_error(err);
+			alert_message(err['message']);
 		} else {
 			$('#repo').empty();
 			jQuery.each(repos, function(index, item) {
@@ -186,7 +164,7 @@ function loadRepoBranches(username, reponame) {
 	repo = github.getRepo(username, reponame);
 	repo.listBranches(function(err, branches) {
 		if (err){
-			print_error(err);
+			alert_message(err['message']);
 		} else {
 			$('#branch').empty();
 			jQuery.each(branches, function(index, item) {
@@ -201,7 +179,7 @@ function loadRepoBranches(username, reponame) {
 function loadBranchPaths(branchname) {
 	repo.getTree(branchname, function(err, tree) {
 		if (err){
-			print_error(err);
+			alert_message(err['message']);
 		} else {
 			$('#path').empty();
 			jQuery.each(tree, function(index, item){
@@ -216,14 +194,30 @@ function loadBranchPaths(branchname) {
 $(function() {
 	$('#btn-github-signin-submit').click(function() {
 		var username = $('#github-username').val();
-		// TODO validate username and password
-		github = new Github({
-			username: username,
-			password: $('#github-password').val(),
-			auth: "basic"
-		});
-		$('#user').val(username);
-		loadUserRepos(username);		
+		if (username) {
+			// TODO validate username and password
+			github = new Github({
+				username: username,
+				password: $('#github-password').val(),
+				auth: "basic"
+			});
+			$('#user').val(username);
+			loadUserRepos(username);
+			$('#github-toolbar').show();
+		} else {
+			alert_message("GitHub signin failed");
+		}
+		$('#btn-github-signin-show').hide();
+		$('#btn-github-signout').show();
+	});
+
+	$('#btn-github-signout').click(function() {
+		github = null;
+		user = null;
+		repo = null;
+		$('#github-toolbar').hide();
+		$(this).hide();
+		$('#btn-github-signin-show').show();
 	});
 
 	$('#repo').change( function() {
@@ -248,7 +242,7 @@ $(function() {
 
 		repo.read(branch, filepath, function (err, data) {
 			if (err) {
-				print_error(err);
+				alert_message(err['message']);
 			} else {
 				$('textarea#wmd-input-second').val(data);
 			}
@@ -269,7 +263,7 @@ $(function() {
 		
 		repo.write(branch, filepath, data, commit_msg, function (err) {
 			if (err) {
-				print_error(err);
+				alert_message(err['message']);
 			} 
 		});
 	});
@@ -277,10 +271,10 @@ $(function() {
 /* files - maybe move to onclick in the buttons? */
 	$('#btn-upload-md').click(function() {
 		$('#fileinput').click();
-		$("#general-alert-message").text('Please save after uploading')
+		alert_message('Please save after uploading');
 	});
 	$('#btn-load-md').click(function() {
-		$("#general-alert-message").text('Not implemented')
+		alert_message('Not implemented');
 	});
 	$('#btn-save-md').click(function() {
 		save_markdown(function(){});
