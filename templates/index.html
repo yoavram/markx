@@ -90,7 +90,9 @@
 <div id="modal-github-signin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-github-signin-label" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="modal-github-signin-label">Sign in to GitHub</h3>
+    <h3 id="modal-github-signin-label">
+    	<i class="icon-enter"></i> &nbsp; Sign in to GitHub
+    </h3>
   </div>
    
 
@@ -98,6 +100,12 @@
   	<form class="form-inline">
 	  <input type="text" class="input-small" placeholder="Username" id="github-username">
 	  <input type="password" class="input-small" placeholder="Password" id="github-password">
+	  <span class="help-block">
+	  	<small>
+	  	Your username and password are never saved in <em>markx</em>. <br>
+	  	They are sent to <a href="http://github.com/">GitHub</a> directly from your browser via the javascript library <a href="https://github.com/michael/github">github.js</a>.
+	  	</small>
+	  </span>
 	  </form>
  </div>
   <div class="modal-footer">
@@ -234,7 +242,7 @@ $(function() {
 		var user = $('#user').val();
 		var reponame = $('#repo').val();
 		var branch = $('#branch').val();
-		var filepath = $('#filepath').val();
+		var filepath = $('#path').val();
 
 		var repo = github.getRepo(user, reponame);
 
@@ -252,7 +260,7 @@ $(function() {
 		var user = $('#user').val();
 		var reponame = $('#repo').val();
 		var branch = $('#branch').val();
-		var filepath = $('#filepath').val();
+		var filepath = $('#path').val();
 		var commit_msg = $('#commit-message').val();
 
 		var repo = github.getRepo(user, reponame);
