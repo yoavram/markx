@@ -66,7 +66,9 @@
 		</select>
 		<select class="input-small" type="text" id="branch" style="margin: auto 5px">
 		</select>		
-		<input class="input-small" type="text" id="filepath" placeholder="/path/to/file" value="README.md" style="margin: auto 5px">
+		<select class="input-small" type="text" id="path" placeholder="/path/to/file" style="margin: auto 5px">
+		</select>
+		
 		<div class="btn-group">
 		<button class="btn" id="btn-pull" rel="tooltip" title="Pull file and load to editor">
 			<i class="icon-cloud-download"></i>
@@ -149,19 +151,19 @@ prettyPrintOne();
 
 /* github api */
 var github = null;
-
+var user = null;
+var repo = null;
 function print_error(err) {
 	alert(err['message']);
 }
 
 function loadUserRepos(username) {
-	var user = github.getUser(username);
+	user = github.getUser(username);
 	user.userRepos(username, function(err, repos) {
 		if (err){
 			print_error(err);
 		} else {
 			$('#repo').empty();
-			$('#repo').append('<option></option>');
 			jQuery.each(repos, function(index, item) {
 				var reponame = $.trim(item['name']);
 				var option = '<option value="' + reponame + '">' + reponame + '</option>';
@@ -173,7 +175,7 @@ function loadUserRepos(username) {
 }
 
 function loadRepoBranches(username, reponame) {
-	var repo = github.getRepo(username, reponame);
+	repo = github.getRepo(username, reponame);
 	repo.listBranches(function(err, branches) {
 		if (err){
 			print_error(err);
@@ -183,8 +185,22 @@ function loadRepoBranches(username, reponame) {
 				var branchname = $.trim(item['name']);
 				var option = '<option value="' + branchname + '">' + branchname + '</option>';
 				$('#branch').append(option);	
-				// TODO select master				
 			});			
+		}
+	});
+}
+
+function loadBranchPaths(branchname) {
+	repo.getTree(branchname, function(err, tree) {
+		if (err){
+			print_error(err);
+		} else {
+			$('#path').empty();
+			jQuery.each(tree, function(index, item){
+				var path =$.trim(item['path']);
+				var option = '<option value="' + path + '">' + path + '</option>';
+				$('#path').append(option);	
+			});
 		}
 	});
 }
@@ -206,6 +222,11 @@ $(function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
 		loadRepoBranches(username, reponame);
+	});
+
+	$('#branch').change(function() {
+		var branchname = $('#branch').val();
+		loadBranchPaths(branchname);
 	});
 
 	$('#btn-pull').click(function() {
