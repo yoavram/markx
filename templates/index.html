@@ -149,14 +149,19 @@ prettyPrintOne();
 
 /* github api */
 var github = null;
+
+function print_error(err) {
+	$("#general-alert-message").text(err['message']);
+}
+
 function loadUserRepos(username) {
 	var user = github.getUser(username);
 	user.userRepos(username, function(err, repos) {
 		if (err){
-			alert(err);
+			print_error(err);
 		} else {
 			jQuery.each(repos, function(index, item) {
-				var option = '<option value="' + item['name'] + ' url="' + item['url'] +'>' +item['name'] + '</option>';
+				var option = '<option value="' + item['name'] + ' url="' + item['url'] +'">' +item['name'] + '</option>';
 				$('#repo').append(option);					
 			});			
 		}
@@ -181,10 +186,10 @@ $(function() {
 		var repo = github.getRepo(username, reponame);
 		repo.listBranches(function(err, branches) {
 			if (err){
-				alert(err);
+				print_error(err);
 			} else {
 				jQuery.each(branches, function(index, item) {
-					var option = '<option value="' + item['name'] + ' url="' + item['url'] +'>' +item['name'] + '</option>';
+					var option = '<option value="' + item['name'] + '>' +item['name'] + '</option>';
 					$('#branch').append(option);	
 					// TODO select master				
 				});			
@@ -203,7 +208,7 @@ $(function() {
 
 		repo.read(branch, filepath, function (err, data) {
 			if (err) {
-				$("#general-alert-message").text(err);
+				print_error(err);
 			} else {
 				$('textarea#wmd-input-second').val(data);
 			}
@@ -224,7 +229,7 @@ $(function() {
 		
 		repo.write(branch, filepath, data, commit_msg, function (err) {
 			if (err) {
-				$("#general-alert-message").text(err);
+				print_error(err);
 			} 
 		});
 	});
