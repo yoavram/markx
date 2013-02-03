@@ -239,15 +239,34 @@ $(function() {
 	});
 
 	$('#btn-pull').click(function() {
-		// TODO validate variables, check github nullity
-		var user = $('#user').val();
-		var reponame = $('#repo').val();
-		var branch = $('#branch').val();
+		if (github == null) {
+			alert_message("Please sign in to GitHub");
+			return false;
+		} 
+		if (repo == null) {
+			alert_message("Please load a repository");
+			return false;
+		}
+		
+		var branchname = $('#branch').val();
+		if (!branchname || !branchname.length) {
+			alert_message("Please load a branch");
+			return false;
+		}
+
 		var filepath = $('#path').val();
+		if (!filepath || !filepath.length) {
+			alert_message("Please choose a file");
+			return false;
+		}
 
-		var repo = github.getRepo(user, reponame);
+		if ($('textarea#wmd-input-second').val().length) {
+			if (!confirm("The contents of the editor panel will be deleted, contine?")) {
+				return false;
+			}
+		}
 
-		repo.read(branch, filepath, function (err, data) {
+		repo.read(branchname, filepath, function (err, data) {
 			if (err) {
 				alert_message(err['message']);
 			} else {
