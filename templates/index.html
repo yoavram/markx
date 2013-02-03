@@ -292,8 +292,20 @@ $(function() {
 		}
 
 		var commit_msg = $('#commit-message').val();
+		if (!commit_msg || !commit_msg.length) {
+			alert_message("Please enter a commit message");
+			$('#commit-message').focus();
+			return false;
+		}
+
+
 		var data = $('textarea#wmd-input-second').val();
-		
+		if (!data || !data.length) {
+			if (!confirm("Editor is empty, continue with commit?")) {
+				return false;
+			}
+		}
+
 		repo.write(branchname, filepath, data, commit_msg, function (err) {
 			if (err) {
 				alert_message(err['message']);
