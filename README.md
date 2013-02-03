@@ -37,8 +37,8 @@ We would love to get feedback from anyone using it.
 
 ## Future Features
 
-1. Export to multiple format
-1. Integration with [git]
+1. Export to multiple formats
+2. Integration with [GitHub] - [work in progress](https://github.com/yoavram/markx/tree/github)
 
 ## Technology
   * Server side (this is what you need to install if you run it on localhost):
@@ -60,8 +60,9 @@ We would love to get feedback from anyone using it.
 
 ## TODO  
 
+More tasks can be found on the issues board.
+
 - [ ] `--toc` option
-- [ ] Interface to *git*
 - [ ] Help/About page
 - [ ] Interface to *Mendeley*?
 - [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
@@ -85,3 +86,4 @@ We would love to get feedback from anyone using it.
 [Stack Overflow]: http://stackoverflow.com/
 [git]: http://git-scm.com/
 [BibTeX]: http://www.bibtex.org/
+[GitHub]: https://github.com/
