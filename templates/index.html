@@ -238,7 +238,7 @@ $(function() {
 		loadBranchPaths(branchname);
 	});
 
-	$('#btn-pull').click(function() {
+	function checkVariablesForFileAction(branchname, filepath) {
 		if (github == null) {
 			alert_message("Please sign in to GitHub");
 			return false;
@@ -248,15 +248,23 @@ $(function() {
 			return false;
 		}
 		
-		var branchname = $('#branch').val();
 		if (!branchname || !branchname.length) {
 			alert_message("Please load a branch");
 			return false;
 		}
 
-		var filepath = $('#path').val();
 		if (!filepath || !filepath.length) {
 			alert_message("Please choose a file");
+			return false;
+		}
+		return true;
+	}
+
+	$('#btn-pull').click(function() {
+		var branchname = $('#branch').val();
+		var filepath = $('#path').val();
+		
+		if (!checkVariablesForFileAction(branchname, filepath)) {
 			return false;
 		}
 
@@ -276,18 +284,17 @@ $(function() {
 	});
 
 	$('#btn-commit-push').click(function() {
-		// TODO validate variables, check github nullity
-		var user = $('#user').val();
-		var reponame = $('#repo').val();
-		var branch = $('#branch').val();
+		var branchname = $('#branch').val();
 		var filepath = $('#path').val();
+		
+		if (!checkVariablesForFileAction(branchname, filepath)) {
+			return false;
+		}
+
 		var commit_msg = $('#commit-message').val();
-
-		var repo = github.getRepo(user, reponame);
-
 		var data = $('textarea#wmd-input-second').val();
 		
-		repo.write(branch, filepath, data, commit_msg, function (err) {
+		repo.write(branchname, filepath, data, commit_msg, function (err) {
 			if (err) {
 				alert_message(err['message']);
 			} 
