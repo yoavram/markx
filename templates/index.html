@@ -64,9 +64,9 @@
 		</div>
 		<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
 	</div>
-	<div class="btn-toolbar" id="github-toolbar" style="display: none">	
-		<button class="btn" rel="tooltip" title="GitHub links" disabled><i class="icon-github-2"></i></button>
-		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto 5px" disabled>
+	<div class="btn-toolbar" id="github-toolbar" style="display: none">
+		<button class="btn" rel="tooltip" title="GitHub links"  style="margin: auto 5px" disabled><i class="icon-github-2"></i></button>
+		<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto 5px">
 		<select class="input-medium" type="text" id="repo" style="margin: auto 5px">
 		</select>
 		<button class="btn" id="repo-ok" rel="tooltip" title="Open repository">
@@ -124,7 +124,10 @@
 
 <script type="text/javascript">
 function alert_message(message) {
-	$('#general-alert-message').text(message);
+	if (!message || !message.length) {
+		message = "Undefined";
+	}
+	$('#general-alert-message').html("<strong>Error:</strong> " + message);
 	$('#general-alert').show();
 }
 
@@ -152,17 +155,19 @@ var repo = null;
 
 function loadUserRepos(username) {
 	user = github.getUser(username);
+	repo = null;
+	// TODO check if user loaded
 	user.userRepos(username, function(err, repos) {
 		if (err){
 			alert_message(err['message']);
-		} else {
-			$('#repo').empty();
-			jQuery.each(repos, function(index, item) {
-				var reponame = $.trim(item['name']);
-				var option = '<option value="' + reponame + '">' + reponame + '</option>';
-				$('#repo').append(option);					
-			});			
-		}
+			return false;
+		} 
+		$('#repo').empty();
+		jQuery.each(repos, function(index, item) {
+			var reponame = $.trim(item['name']);
+			var option = '<option value="' + reponame + '">' + reponame + '</option>';
+			$('#repo').append(option);					
+		});			
 	});
 	$('#repo').focus();
 }
@@ -172,48 +177,67 @@ function loadRepoBranches(username, reponame) {
 	repo.listBranches(function(err, branches) {
 		if (err){
 			alert_message(err['message']);
-		} else {
-			$('#branch').empty();
-			jQuery.each(branches, function(index, item) {
-				var branchname = $.trim(item['name']);
-				var option = '<option value="' + branchname + '">' + branchname + '</option>';
-				$('#branch').append(option);	
-			});			
-		}
+			return false;
+		} 
+		$('#branch').empty();
+		jQuery.each(branches, function(index, item) {
+			var branchname = $.trim(item['name']);
+			var option = '<option value="' + branchname + '">' + branchname + '</option>';
+			$('#branch').append(option);	
+		});			
 	});
+	$('#branch').focus();
 }
 
 function loadBranchPaths(branchname) {
 	repo.getTree(branchname, function(err, tree) {
-		if (err){
+		if (err) {
 			alert_message(err['message']);
-		} else {
-			$('#path').empty();
-			jQuery.each(tree, function(index, item){
-				var path =$.trim(item['path']);
-				var option = '<option value="' + path + '">' + path + '</option>';
-				$('#path').append(option);	
-			});
-		}
+			return false;
+		} 
+		$('#path').empty();
+		jQuery.each(tree, function(index, item){
+			var path =$.trim(item['path']);
+			var option = '<option value="' + path + '">' + path + '</option>';
+			$('#path').append(option);	
+		});
 	});
+	$('#path').focus();
 }
 
 $(function() {
+	$('#user').change(function() {
+		loadUserRepos($(this).val());
+	});
+
 	$('#btn-github-signin-submit').click(function() {
+		$('#modal-github-signin').modal('hide');
 		var username = $('#github-username').val();
-		if (username) {
-			// TODO validate username and password
-			github = new Github({
-				username: username,
-				password: $('#github-password').val(),
-				auth: "basic"
-			});
-			$('#user').val(username);
-			loadUserRepos(username);
-			$('#github-toolbar').show();
-		} else {
-			alert_message("GitHub signin failed");
+		var password = $('#github-password').val();
+		$('#github-password').empty();
+		if (!username || !username.length) {
+			alert_message("GitHub sign in requires a username");
+			return false;
 		}
+		if (!password || !password.length) {
+			alert_message("GitHub sign in requires a password");
+			return false;
+		}
+		github = new Github({
+			username: username,
+			password: password,
+			auth: "basic"
+		});
+		password = null; // for security mesaures
+		if (!github) {
+			alert_message("GitHub sign in failed");
+			return false;
+		}
+		$('#user').val(username); // TODO check if this toggles "change" event, maybe move after next line
+		if (!loadUserRepos(username)) {
+			return false;
+		}
+		$('#github-toolbar').show();
 		$('#btn-github-signin-show').hide();
 		$('#btn-github-signout').show();
 	});
@@ -230,31 +254,50 @@ $(function() {
 	$('#repo-ok').click( function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
+		if (!username || !username.length) {
+			alert_message("Please enter a user name");
+			$('#user').focus();
+			return false;
+		}
+		if (!reponame || !reponame.length) {
+			alert_message("Please choose a repository name");
+			$('#repo').focus();
+			return false;
+		}
 		loadRepoBranches(username, reponame);
 	});
 
 	$('#branch-ok').click(function() {
+		if (!repo || repo==null) {
+			alert_message("Please load a repository");
+			$('#repo-ok').focus();
+			return false;
+		}
+		if (!branchname || !branchname.length) {
+			alert_message("Please choose a branch name");
+			$('#branch').focus();
+			return false;
+		}
 		var branchname = $('#branch').val();
 		loadBranchPaths(branchname);
 	});
 
-	function checkVariablesForFileAction(branchname, filepath) {
-		if (github == null) {
-			alert_message("Please sign in to GitHub");
-			return false;
-		} 
+	function checkVariablesForFileAction(branchname, filepath) {	
 		if (repo == null) {
 			alert_message("Please load a repository");
+			$('#repo-ok').focus();
 			return false;
 		}
 		
 		if (!branchname || !branchname.length) {
-			alert_message("Please load a branch");
+			alert_message("Please choose a branch");
+			$('#branch').focus();
 			return false;
 		}
 
 		if (!filepath || !filepath.length) {
 			alert_message("Please choose a file");
+			$('#path').focus();
 			return false;
 		}
 		return true;
