@@ -401,7 +401,7 @@ function saveBibtext(callack) {
 }
 
 function saveOutput(extension, callack) {
-	saveText($('textarea#bibtex_input').val(), 'bib', function() {
+	saveBibtext(function() {
 		saveText($('textarea#wmd-input-second').val(), extension, callack);
 	});
 }
