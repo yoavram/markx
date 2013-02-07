@@ -205,16 +205,27 @@ function loadBranchPaths(branchname) {
 	$('#path').focus();
 }
 
+function clearGithubSigninForm() {
+	$('#modal-github-signin').modal('hide');
+	$('#github-username').val('');
+	$('#github-password').val('');
+}
+
 $(function() {
 	$('#user').change(function() {
 		loadUserRepos($(this).val());
 	});
 
+	$('#btn-github-signin-cancel').click(clearGithubSigninForm);
+
+	$('#btn-github-signin-close').click(clearGithubSigninForm);
+
+
 	$('#btn-github-signin-submit').click(function() {
-		$('#modal-github-signin').modal('hide');
 		var username = $('#github-username').val();
 		var password = $('#github-password').val();
-		$('#github-password').empty();
+		clearGithubSigninForm();
+
 		if (!username || !username.length) {
 			alert_message("GitHub sign in requires a username");
 			return false;
