@@ -217,36 +217,33 @@ function updateEditor(text) {
 
 /* citations */
 
-function groupCitations() {
-	var citations = new Array();
+function updateCitations() {
+	// clear citations
+	$('#bibtex_input').text('');
+	$('#bibtex_display').html('');
+	// redo citations
 	var regex = /\[?-?@(\w+)\]?/gm; 
 	var input = $('textarea#wmd-input-second').val();
 	var match = regex.exec(input);
 	while (match != null) {
-		citations.push(match[1]);
+		getCitation(match[1]);
 		match = regex.exec(input);
 	}
-	return(citations);
-};
+}
 
-function getBibtext(citation) {
+
+function getCitation(citation) {
 	$.getJSON('/bibtex', {
 		key: citation
 	}, function(data) {
+		// data is a bibtex entry
+		// append it to the bibtex hidden textarea
 		$('#bibtex_input').append(data.result); 
+		// and call bibtex.js function to render citations list
 		bibtex_js_draw();
 	});
-};
-
-function updateCitations() {
-	$('#bibtex_input').text('');
-	$('#bibtex_display').html('');
-	var citations = groupCitations();
-	citations.sort();
-	for (c in citations) {
-		getBibtext(citations[c]);
-	}
 }
+
 
 /* markdown */
 
