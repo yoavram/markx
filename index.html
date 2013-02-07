@@ -35,7 +35,8 @@
 <hr class="soften">
 <br>
 <h2>Why Markx?</h2>
-<p>Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write. We decided to build Markx as a make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:<br>
+<p>Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as `pandoc`, it provides an easy and powerful way to write.  We decided to build Markx to make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:
+<br>
 <br>
 <a href="http://inundata.org/2012/06/01/markdown-and-the-future-of-collaborative-manuscript-writing/">Markdown and the future of collaborative academic writing</a><br>
 <a href="http://inundata.org/2012/12/06/pre-print-servers/">Thoughts on a pre-print server</a><br>
@@ -48,6 +49,8 @@
 <ul>
 <li>Zenware</li>
 <li>Realtime preview</li>
+<li>Integration with GitHub</li>
+<li>Export to multiple formats</li>
 <li>Display math <code>- $x^2+y^2=r^2$</code></li>
 <li>Imitating the Markdown flavor of Pandoc</li>
 <li>Citations using Pandoc+BibTeX: <code>[@Drake1991]</code></li>
@@ -58,8 +61,6 @@
 
 <h2>Upcoming features</h2>
 <ul>
-<li>Export to multiple format</li>
-<li>Integration with git</li>
 <li>Hosted option</li>
 </ul>
 <hr class="soften">
@@ -71,7 +72,7 @@
 <li><a href="https://github.com/yoavram/markx">Clone this repo</a></li>
 <li>Install Python and Flask</li>
 <li>Add an environment variable named <code>BIB_FILE</code> with the path to your BibTeX <code>.bib</code>file, or create <code>config.py</code> file with the <code>key-value BIB_FILE = /path/to/bib/file.</code></li>
-<li>Run the editor locally by calling python <code>server.py</code> and opening your browser at <code>http://localhost:5000.</code></li>
+<li>Run the editor locally by calling <code>python server.py</code> and opening your browser at <code>http://localhost:5000.</code></li>
  </ol><br>
   <div>
    <a href="https://github.com/yoavram/markx" style="color:#ffffff"> <button class="btn btn-success btn-large" style="display: block; width: 100%;"><i class="icon-white icon-download"></i>Install from GitHub (additional instructions)</button></a>
