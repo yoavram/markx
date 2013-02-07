@@ -18,6 +18,7 @@
 
 
   <body>
+  <a href="https://github.com/yoavram/markx"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
     <br><br>
   <div class="row">
   <div class="span11 offset1"><h1>Marxx - a markdown web app for science</h1>
@@ -51,7 +52,7 @@
 <li>Realtime preview</li>
 <li>Integration with GitHub</li>
 <li>Export to multiple formats</li>
-<li>Display math <code>- $x^2+y^2=r^2$</code></li>
+<li>Display math - $x^2+y^2=r^2$</li>
 <li>Imitating the Markdown flavor of Pandoc</li>
 <li>Citations using Pandoc+BibTeX: <code>[@Drake1991]</code></li>
 <li>Code highlighting</li>
@@ -98,6 +99,15 @@
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({  
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},          
+        "HTML-CSS": { availableFonts: ["STIX", "TeX"], 
+        linebreaks: { automatic: true }
+        }
+      });
+      </script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+      </script>
   </body>
 </html>
