@@ -357,15 +357,11 @@ function readSingleFile(evt) {
 
 
 function checkForFilename(callback) {
-	var filename = $('#filename').val();
-	if (filename) {
-		$('#general-alert').hide();
-		callback(filename);
-	} else {
-		$('#general-alert').show();
-		$('#general-alert-message').html("<strong>Please choose a filename</strong>");
-		$('#filename').focus();
+	var filename = $('#path').val();
+	if (!filename) {
+		filename = "markx";
 	}
+	callback(filename);
 }
 
 function save(content, filename, extension, callback) {
