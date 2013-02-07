@@ -71,6 +71,10 @@ function signoutOfGithub() {
 	github = null;
 	user = null;
 	repo = null;
+	$('#user').val('');
+	$('#repo').empty();
+	$('#branch').empty();
+	$('#path').empty();
 	$('#github-toolbar').hide();
 	$(this).hide();
 	$('#btn-github-signin-show').show();
