@@ -3,28 +3,34 @@
 *Markx* is a [Markdown] editor for scientific writing.
 
 # Why Markx?
-Markdown has recently become popular among academics as a way to produce scientific documents. When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write.  We decided to build Markx as a make markdown writing a collaborative effort that could be hosted as web service. For additional discussion, see these blog posts:
+Markdown has recently become popular among academics as a way to produce scientific documents. 
+When paired with document conversion engines such as pandoc, it provides an easy and powerful way to write.
+Being a simple plain-text markup language, Markdown is easy to learn, and can be handled by version control systems.
+We decided to build Markx as to make markdown writing a collaborative effort that could be hosted as web service.
+For additional discussion, see these blog posts:
 
-* [How to ditch Word](http://inundata.org/2012/12/04/how-to-ditch-word/)  
+* [Markdown and the future of collaborative academic writing](http://inundata.org/2012/06/01/markdown-and-the-future-of-collaborative-manuscript-writing/)
 * [Thoughts on a preprint server](http://inundata.org/2012/12/06/pre-print-servers/)
-
+* [How to ditch Word](http://inundata.org/2012/12/04/how-to-ditch-word/)  
 
 ![](https://raw.github.com/yoavram/markx/master/screenshot.png)
 
-It imitates the [Pandoc] flavor of [Markdown] to facilitate conversion to multiple formats and 
-to enjoy the numerous [Markdown] extensions in [Pandoc].
+It imitates the [Pandoc] flavor of [Markdown] to facilitate conversion to multiple formats and to benefit from the numerous [Markdown] extensions in [Pandoc].
 
 It runs in your browser with a limited number of requirements.
 
+It integrates with [GitHub] to allow you to seemlessly version, share and collaborate on your documents.
+
 It is free (beer and speech).
 
-*Markx* is currently in development but the *master* branch is working localy and can be used on machines with [Python].
-We would love to get feedback from anyone using it.
+*Markx* is currently in development but the *master* branch is working nicely and can be downloaded and used.
+We would love to get feedback from anyone using it!
 
 ## Features
 
 1. Zenware
 1. Realtime preview
+1. Integration with [GitHub]
 1. Display math - $x^2+y^2=r^2$
 1. Imitating the [Markdown] flavor of [Pandoc]
 1. Citations using [Pandoc]+[BibTeX]: [@Drake1991]
@@ -35,39 +41,26 @@ We would love to get feedback from anyone using it.
 		    port = int(os.environ.get('PORT', 5000))
 		    app.run(host='0.0.0.0', port=port, debug=app.debug)
 
-## Future Features
-
-1. Export to multiple formats
-2. Integration with [GitHub] - [work in progress](https://github.com/yoavram/markx/tree/github)
-
 ## Technology
   * Server side (this is what you need to install if you run it on localhost):
     * [Python] with [Flask]
+    * [Pandoc] - optional, for conversion to PDF, DOCX etc. **Feature plans is to integrate with [Docverter] to remove this dependecy**.
   * Client side (no installation required):
     * [PageDown] - [Stack Overflow]'s [Markdown] editor
     * [Google Code Prettifier] - Code highlighting
     * [MathJax] - Rendering of $LaTeX$ equations
     * [BibTeX-js] - Processing [BibTeX] citations
     * [Twitter Bootstrap] with [Glyphicons Free]
+    * [Github.js] - integration with [GitHub]
 
 
 ## Install
 
 1. Clone this repo
-2. Install [Python] and [Flask] (`pip install Flask`)
-3. Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
-4. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
-
-## TODO  
-
-More tasks can be found on the issues board.
-
-- [ ] `--toc` option
-- [ ] Help/About page
-- [ ] Interface to *Mendeley*?
-- [ ] *Python*/*R* interfcace (*knitr*/*Rmd*/*ipython notebook*)?
-- [ ] Replace *Python*/*Flask* with *node.js*?
-- [ ] Put more stuff on TODO list
+1. Install [Python] 
+1. Install [Flask]: `pip install Flask`
+1. Optional: Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
+1. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
 
 ## License
 
@@ -79,7 +72,7 @@ More tasks can be found on the issues board.
 [Flask]: http://flask.pocoo.org/
 [Twitter Bootstrap]: http://blog.getbootstrap.com/
 [Google Code Prettifier]: http://code.google.com/p/google-code-prettify/
-[Glyphicons Free]: http://glyphicons.com/
+[Icomoon Free]: http://keyamoon.com/icomoon/
 [MathJax]: http://mathjax.org/
 [PageDown]: http://code.google.com/p/pagedown/
 [BibTeX-js]: http://bibtex-js.googlecode.com/
@@ -87,3 +80,5 @@ More tasks can be found on the issues board.
 [git]: http://git-scm.com/
 [BibTeX]: http://www.bibtex.org/
 [GitHub]: https://github.com/
+[Github.js]: https://github.com/michael/github
+[Docverter]: http://www.docverter.com/
