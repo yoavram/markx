@@ -178,12 +178,12 @@ $(function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
 		if (!username || !username.length) {
-			alert_message("Please enter a user name");
+			alertMessage("Please enter a user name");
 			$('#user').focus();
 			return false;
 		}
 		if (!reponame || !reponame.length) {
-			alert_message("Please choose a repository name");
+			alertMessage("Please choose a repository name");
 			$('#repo').focus();
 			return false;
 		}
@@ -192,13 +192,13 @@ $(function() {
 
 	$('#branch-ok').click(function() {
 		if (!repo || repo==null) {
-			alert_message("Please load a repository");
+			alertMessage("Please load a repository");
 			$('#repo-ok').focus();
 			return false;
 		}
 		branchname = $('#branch').val();
 		if (!branchname || !branchname.length) {
-			alert_message("Please choose a branch name");
+			alertMessage("Please choose a branch name");
 			$('#branch').focus();
 			return false;
 		}
@@ -224,34 +224,34 @@ $(function() {
 	/* files - maybe move to onclick in the buttons? */
 	$('#btn-upload-md').click(function() {
 		$('#fileinput').click();
-		alert_message('Please save after uploading');
+		alertMessage('Please save after uploading');
 	});
 	$('#btn-load-md').click(function() {
-		alert_message('Not implemented');
+		alertMessage('Not implemented');
 	});
 	$('#btn-save-md').click(function() {
-		save_markdown(function(){});
+		saveMarkdown(function(){});
 	});
 	$('#btn-download-md').click(function() {
-		save_markdown(download);
+		saveMarkdown(download);
 	});
 	$('#btn-save-bibtex').click(function() {
-		save_bibtext(function(){});
+		saveBibtext(function(){});
 	});
 	$('#btn-download-bibtex').click(function() {
-		save_bibtext(download);
+		saveBibtext(download);
 	});
 	$('#btn-download-pdf').click(function() {
-		save_output('pdf', view);
+		saveOutput('pdf', view);
 	});
 	$('#btn-download-docx').click(function() {
-		save_output('docx', download);
+		saveOutput('docx', download);
 	});
 	$('#btn-download-epub').click(function() {
-		save_output('epub', download);
+		saveOutput('epub', download);
 	});
 	$('#btn-download-html').click(function() {
-		save_output('html', view);
+		saveOutput('html', view);
 	});
 
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);

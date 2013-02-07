@@ -1,4 +1,4 @@
-function alert_message(message) {
+function alertMessage(message) {
 	if (!message || !message.length) {
 		message = "Undefined";
 	}
@@ -6,7 +6,7 @@ function alert_message(message) {
 	$('#general-alert').show();
 }
 
-function info_message(message) {
+function infoMessage(message) {
 	if (!message || !message.length) {
 		message = "Undefined";
 	}
@@ -41,11 +41,11 @@ function signinToGithub() {
 	clearGithubSigninForm();
 
 	if (!username || !username.length) {
-		alert_message("GitHub sign in requires a username");
+		alertMessage("GitHub sign in requires a username");
 		return false;
 	}
 	if (!password || !password.length) {
-		alert_message("GitHub sign in requires a password");
+		alertMessage("GitHub sign in requires a password");
 		return false;
 	}
 	github = new Github({
@@ -55,7 +55,7 @@ function signinToGithub() {
 	});
 	password = null; // for security mesaures
 	if (!github) {
-		alert_message("Failed contacting GitHub");
+		alertMessage("Failed contacting GitHub");
 		return false;
 	}
 	$('#user').val(username); // TODO check if this toggles "change" event, maybe move after next line		
@@ -88,7 +88,7 @@ function loadUserRepos(username) {
 			} else {
 				code = String(code);
 			}
-			alert_message(code);
+			alertMessage(code);
 			return false;
 		}
 		$('#repo').empty();
@@ -106,7 +106,7 @@ function loadRepoBranches(username, reponame) {
 	repo = github.getRepo(username, reponame);
 	repo.listBranches(function(err, branches) {
 		if (err){
-			alert_message(err['message']);
+			alertMessage(err['message']);
 			return false;
 		} 
 		$('#branch').empty();
@@ -123,7 +123,7 @@ function loadRepoBranches(username, reponame) {
 function loadBranchPaths(branchname) {
 	repo.getTree(branchname, function(err, tree) {
 		if (err) {
-			alert_message(err['message']);
+			alertMessage(err['message']);
 			return false;
 		} 
 		$('#path').empty();
@@ -145,19 +145,19 @@ function clearGithubSigninForm() {
 
 function checkVariablesForGithubFileAction(branchname, filepath) {
 	if (repo == null) {
-		alert_message("Please load a repository");
+		alertMessage("Please load a repository");
 		$('#repo-ok').focus();
 		return false;
 	}
 	
 	if (!branchname || !branchname.length) {
-		alert_message("Please choose a branch");
+		alertMessage("Please choose a branch");
 		$('#branch').focus();
 		return false;
 	}
 
 	if (!filepath || !filepath.length) {
-		alert_message("Please choose a file");
+		alertMessage("Please choose a file");
 		$('#path').focus();
 		return false;
 	}
@@ -177,7 +177,7 @@ function pullFromGithub(branchname, filepath, text, callback) {
 
 	repo.read(branchname, filepath, function (err, data) {
 		if (err) {
-			alert_message(err['message']);
+			alertMessage(err['message']);
 		} else {
 			updateEditor(data);
 		}
@@ -190,7 +190,7 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 	}
 
 	if (!commit_msg || !commit_msg.length) {
-		alert_message("Please enter a commit message");
+		alertMessage("Please enter a commit message");
 		$('#commit-message').focus();
 		return false;
 	}
@@ -203,9 +203,9 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 
 	repo.write(branchname, filepath, text, commit_msg, function (err) {
 		if (err) {
-			alert_message(err['message']);
+			alertMessage(err['message']);
 		} else {
-			info_message("Commit was successful");
+			infoMessage("Commit was successful");
 		}
 	});
 }
@@ -247,6 +247,7 @@ function getCitation(citation) {
 
 /* markdown */
 
+
 function processTitleBlockToHTML(text) {
 	// This doesn't work because the first lines are wrapped in <p>
 	var textSplit = text.split('\n');
@@ -272,6 +273,7 @@ function processTitleBlockToHTML(text) {
 	return text;
 }
 
+
 function processTitleBlockToMarkdown(text) {
 	var textSplit = text.split('\n');
 
@@ -296,17 +298,21 @@ function processTitleBlockToMarkdown(text) {
 	return text;
 } 
 
+
+function processGooglePrettifierPreBlocks(text) {
+	text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
+	text = text.replace("\n</code></pre>", '\n</pre>');
+	return text;
+}
+
+
 function init_markdown_editor() {   
 	var converter2 = new Markdown.Converter();
 
 	//converter2.hooks.chain("postConversion", processTitleBlockToHTML);
 	converter2.hooks.chain("preConversion", processTitleBlockToMarkdown);
 
-	converter2.hooks.chain("postConversion", function(text) {
-		text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
-		text = text.replace("\n</code></pre>", '\n</pre>');
-		return text;
-	});
+	converter2.hooks.chain("postConversion", processGooglePrettifierPreBlocks);
 
 	var help = function () { alert("Do you need help?"); }
 	var options = {
@@ -329,23 +335,24 @@ function init_markdown_editor() {
 function readSingleFile(evt) {
 	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
+    var file = evt.target.files[0]; 
 
-    if (f) {
-    	var r = new FileReader();
-    	r.onload = function(e) { 
-    		var contents = e.target.result;
+    if (file) {
+    	var reader = new FileReader();
+    	reader.onload = function(event) { 
+    		var contents = event.target.result;
     		$('textarea#wmd-input-second').val(contents);
     		editor.refreshPreview();
     		updateCitations();
     	}
-    	r.readAsText(f);
+    	reader.readAsText(file);
     } else { 
     	alert("Failed to load file");
     }
 }
 
-function check_for_filename(callback) {
+
+function checkForFilename(callback) {
 	var filename = $('#filename').val();
 	if (filename) {
 		$('#general-alert').hide();
@@ -377,23 +384,23 @@ function view(filename) {
 	window.open(url, '_newtab');
 }
 
-function save_text(content, extension, callback) {
-	check_for_filename(function(filename) {
+function saveText(content, extension, callback) {
+	checkForFilename(function(filename) {
 		save(content, filename, extension, callback);
 	});
 }
 
-function save_markdown(callack) {
-	save_text($('textarea#wmd-input-second').val(), 'md', callack);
+function saveMarkdown(callack) {
+	saveText($('textarea#wmd-input-second').val(), 'md', callack);
 }
 
-function save_bibtext(callack) {
-	save_text($('textarea#bibtex_input').val(), 'bib', callack);
+function saveBibtext(callack) {
+	saveText($('textarea#bibtex_input').val(), 'bib', callack);
 }
 
-function save_output(extension, callack) {
-	save_text($('textarea#bibtex_input').val(), 'bib', function() {
-		save_text($('textarea#wmd-input-second').val(), extension, callack);
+function saveOutput(extension, callack) {
+	saveText($('textarea#bibtex_input').val(), 'bib', function() {
+		saveText($('textarea#wmd-input-second').val(), extension, callack);
 	});
 }
 
