@@ -25,7 +25,6 @@
 				<ul class="dropdown-menu">
 					<li><a  href="#" id="btn-citations" rel="tooltip" title="Update citations list">
 						Update citations</a></li>
-						<li><a href='#' id="btn-save-bibtex">Save .bib</a></li>
 						<li><a href='#' id="btn-download-bibtex">Download .bib</a></li>
 					</ul>
 				</div>
@@ -234,9 +233,6 @@ $(function() {
 	});
 	$('#btn-download-md').click(function() {
 		saveMarkdown(download);
-	});
-	$('#btn-save-bibtex').click(function() {
-		saveBibtext(function(){});
 	});
 	$('#btn-download-bibtex').click(function() {
 		saveBibtext(download);
