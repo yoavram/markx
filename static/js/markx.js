@@ -361,6 +361,7 @@ function checkForFilename(callback) {
 	if (!filename) {
 		filename = "markx";
 	}
+	filename = filename.substr(0, filename.lastIndexOf('.')) || filename;
 	callback(filename);
 }
 
