@@ -220,7 +220,7 @@ function updateEditor(text) {
 function groupCitations() {
 	var citations = new Array();
 	var regex = /\[?-?@(\w+)\]?/gm; 
-	var input = $('#wmd-preview-second').text();
+	var input = $('textarea#wmd-input-second').val();
 	var match = regex.exec(input);
 	while (match != null) {
 		citations.push(match[1]);
@@ -229,7 +229,7 @@ function groupCitations() {
 	return(citations);
 };
 
-function get_bibtext(citation) {
+function getBibtext(citation) {
 	$.getJSON('/bibtex', {
 		key: citation
 	}, function(data) {
@@ -244,7 +244,7 @@ function updateCitations() {
 	var citations = groupCitations();
 	citations.sort();
 	for (c in citations) {
-		get_bibtext(citations[c]);
+		getBibtext(citations[c]);
 	}
 }
 
