@@ -107,13 +107,14 @@ function loadUserRepos(username) {
 }
 
 function loadRepoBranches(username, reponame) {
+	$('#branch').empty();
+	$('#path').empty();
 	repo = github.getRepo(username, reponame);
 	repo.listBranches(function(err, branches) {
 		if (err){
 			alertMessage(err['message']);
 			return false;
 		} 
-		$('#branch').empty();
 		jQuery.each(branches, function(index, item) {
 			var branchname = $.trim(item['name']);
 			var option = '<option value="' + branchname + '">' + branchname + '</option>';
@@ -125,12 +126,12 @@ function loadRepoBranches(username, reponame) {
 }
 
 function loadBranchPaths(branchname) {
+	$('#path').empty();
 	repo.getTree(branchname, function(err, tree) {
 		if (err) {
 			alertMessage(err['message']);
 			return false;
 		} 
-		$('#path').empty();
 		jQuery.each(tree, function(index, item){
 			var path =$.trim(item['path']);
 			var option = '<option value="' + path + '">' + path + '</option>';
