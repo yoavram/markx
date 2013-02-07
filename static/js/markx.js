@@ -33,6 +33,188 @@ function panelsDisplay() {
 	return panelsDisplayStatus;
 }
 
+/* github */
+
+function signinToGithub() {
+	var username = $('#github-username').val();
+	var password = $('#github-password').val();
+	clearGithubSigninForm();
+
+	if (!username || !username.length) {
+		alert_message("GitHub sign in requires a username");
+		return false;
+	}
+	if (!password || !password.length) {
+		alert_message("GitHub sign in requires a password");
+		return false;
+	}
+	github = new Github({
+		username: username,
+		password: password,
+		auth: "basic"
+	});
+	password = null; // for security mesaures
+	if (!github) {
+		alert_message("Failed contacting GitHub");
+		return false;
+	}
+	$('#user').val(username); // TODO check if this toggles "change" event, maybe move after next line		
+	if (!loadUserRepos(username)) {
+		return false;
+	}
+	$('#github-toolbar').show();
+	$('#btn-github-signin-show').hide();
+	$('#btn-github-signout').show();
+}
+
+function signoutOfGithub() {
+	github = null;
+	user = null;
+	repo = null;
+	$('#github-toolbar').hide();
+	$(this).hide();
+	$('#btn-github-signin-show').show();
+}
+
+function loadUserRepos(username) {
+	user = github.getUser(username);
+	repo = null;
+	// TODO check if user loaded
+	user.userRepos(username, function(err, repos) {
+		if (err){
+			var code = err['error'];
+			if (code == 401) {
+				code = String(code) + " Unauthorized";
+			} else {
+				code = String(code);
+			}
+			alert_message(code);
+			return false;
+		}
+		$('#repo').empty();
+		jQuery.each(repos, function(index, item) {
+			var reponame = $.trim(item['name']);
+			var option = '<option value="' + reponame + '">' + reponame + '</option>';
+			$('#repo').append(option);					
+		});			
+	});
+	$('#repo').focus();
+	return true;
+}
+
+function loadRepoBranches(username, reponame) {
+	repo = github.getRepo(username, reponame);
+	repo.listBranches(function(err, branches) {
+		if (err){
+			alert_message(err['message']);
+			return false;
+		} 
+		$('#branch').empty();
+		jQuery.each(branches, function(index, item) {
+			var branchname = $.trim(item['name']);
+			var option = '<option value="' + branchname + '">' + branchname + '</option>';
+			$('#branch').append(option);	
+		});			
+	});
+	$('#branch').focus();
+	return true;
+}
+
+function loadBranchPaths(branchname) {
+	repo.getTree(branchname, function(err, tree) {
+		if (err) {
+			alert_message(err['message']);
+			return false;
+		} 
+		$('#path').empty();
+		jQuery.each(tree, function(index, item){
+			var path =$.trim(item['path']);
+			var option = '<option value="' + path + '">' + path + '</option>';
+			$('#path').append(option);	
+		});
+	});
+	$('#path').focus();
+	return true;
+}
+
+function clearGithubSigninForm() {
+	$('#modal-github-signin').modal('hide');
+	$('#github-username').val('');
+	$('#github-password').val('');
+}
+
+function checkVariablesForGithubFileAction(branchname, filepath) {
+	if (repo == null) {
+		alert_message("Please load a repository");
+		$('#repo-ok').focus();
+		return false;
+	}
+	
+	if (!branchname || !branchname.length) {
+		alert_message("Please choose a branch");
+		$('#branch').focus();
+		return false;
+	}
+
+	if (!filepath || !filepath.length) {
+		alert_message("Please choose a file");
+		$('#path').focus();
+		return false;
+	}
+	return true;
+}
+
+function pullFromGithub(branchname, filepath, text, callback) {
+	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
+		return false;
+	}
+
+	if (text.length) {
+		if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
+			return false;
+		}
+	}
+
+	repo.read(branchname, filepath, function (err, data) {
+		if (err) {
+			alert_message(err['message']);
+		} else {
+			updateEditor(data);
+		}
+	});
+}
+
+function pushToGithub(branchname, filepath, commit_msg, text) {
+	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
+		return false;
+	}
+
+	if (!commit_msg || !commit_msg.length) {
+		alert_message("Please enter a commit message");
+		$('#commit-message').focus();
+		return false;
+	}
+	
+	if (!text || !text.length) {
+		if (!confirm("Editor is empty, continue with commit?")) {
+			return false;
+		}
+	}
+
+	repo.write(branchname, filepath, text, commit_msg, function (err) {
+		if (err) {
+			alert_message(err['message']);
+		} else {
+			info_message("Commit was successful");
+		}
+	});
+}
+
+function updateEditor(text) {
+	$('textarea#wmd-input-second').val(text);
+	updateCitations();
+}
+
 /* citations */
 
 function groupCitations() {
