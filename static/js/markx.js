@@ -1,3 +1,40 @@
+function alert_message(message) {
+	if (!message || !message.length) {
+		message = "Undefined";
+	}
+	$('#general-alert-message').html("<strong>Error:</strong> " + message);
+	$('#general-alert').show();
+}
+
+function info_message(message) {
+	if (!message || !message.length) {
+		message = "Undefined";
+	}
+	$('#general-info-message').html("<strong>Note:</strong> " + message);
+	$('#general-info').show();
+}
+
+function panelsDisplay() {
+	var leftPanel = $('#left-panel')
+	var rightPanel = $('#right-panel')
+	if (panelsDisplayStatus == 'dual') {
+		panelsDisplayStatus = 'left';
+		leftPanel.show().removeClass().addClass('span12');
+		rightPanel.hide().removeClass();
+	} else if (panelsDisplayStatus == 'left') {
+		panelsDisplayStatus = 'right';
+		leftPanel.hide().removeClass();
+		rightPanel.show().removeClass().addClass('span12');
+	} else {
+		panelsDisplayStatus = 'dual';
+		leftPanel.show().removeClass().addClass('span6');
+		rightPanel.show().removeClass().addClass('span6');
+	}
+	return panelsDisplayStatus;
+}
+
+/* citations */
+
 function groupCitations() {
 	var citations = new Array();
 	var regex = /\[?-?@(\w+)\]?/gm; 
@@ -28,6 +65,8 @@ function updateCitations() {
 		get_bibtext(citations[c]);
 	}
 }
+
+/* markdown */
 
 function processTitleBlockToHTML(text) {
 	// This doesn't work because the first lines are wrapped in <p>
@@ -106,6 +145,8 @@ function init_markdown_editor() {
 	return editor2;
 };
 
+/* files */
+
 function readSingleFile(evt) {
 	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
@@ -123,25 +164,6 @@ function readSingleFile(evt) {
     } else { 
     	alert("Failed to load file");
     }
-}
-
-function panelsDisplay() {
-	var leftPanel = $('#left-panel')
-	var rightPanel = $('#right-panel')
-	if (panelsDisplayStatus == 'dual') {
-		panelsDisplayStatus = 'left';
-		leftPanel.show().removeClass().addClass('span12');
-		rightPanel.hide().removeClass();
-	} else if (panelsDisplayStatus == 'left') {
-		panelsDisplayStatus = 'right';
-		leftPanel.hide().removeClass();
-		rightPanel.show().removeClass().addClass('span12');
-	} else {
-		panelsDisplayStatus = 'dual';
-		leftPanel.show().removeClass().addClass('span6');
-		rightPanel.show().removeClass().addClass('span6');
-	}
-	return panelsDisplayStatus;
 }
 
 function check_for_filename(callback) {

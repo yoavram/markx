@@ -134,22 +134,6 @@
 {% block footer %}
 
 <script type="text/javascript">
-function alert_message(message) {
-	if (!message || !message.length) {
-		message = "Undefined";
-	}
-	$('#general-alert-message').html("<strong>Error:</strong> " + message);
-	$('#general-alert').show();
-}
-
-function info_message(message) {
-	if (!message || !message.length) {
-		message = "Undefined";
-	}
-	$('#general-info-message').html("<strong>Note:</strong> " + message);
-	$('#general-info').show();
-}
-
 /* markdown editor */
 var editor = init_markdown_editor();
 $('#wmd-input-second').wordCount({counterElement:"word_counter"});
@@ -360,6 +344,7 @@ $(function() {
 				alert_message(err['message']);
 			} else {
 				$('textarea#wmd-input-second').val(data);
+				updateCitations();
 			}
 		});
 	});
