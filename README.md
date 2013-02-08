@@ -59,7 +59,7 @@ We would love to get feedback from anyone using it!
 1. Clone this repo
 1. Install [Python] 
 1. Install [Flask]: `pip install Flask`
-1. Optional: Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`.
+1. Optional: Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`. Please note that the path should be absolute and should not start with a `~`.
 1. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
 
 ## License
