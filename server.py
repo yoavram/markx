@@ -24,6 +24,7 @@ DEFAULT_TEXT_FILE = "README.md"
 with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
 PANDOC_EXTENSIONS = ['.pdf', '.docx', '.epub', '.html', '.htm']    
+DOCVERTER_URL =   'http://c.docverter.com/convert'
 
 app = Flask(__name__)
 app.config.from_object(__name__)  
@@ -63,6 +64,49 @@ def pandoc(filename, extension):
         options += ['--citation-abbreviations=' + CSL_FOLDER + os.path.sep + abbr_file]
     print options
     return subprocess.check_call(options)
+
+def docverter(filename, extension):
+    print 'Sending request to Docverter for file', filename
+    r = requests.post(app.config['DOCVERTER_URL'], data={
+        'to': extension,
+        'from': 'markdown',
+        },
+        files={
+        'input_files[]': open(filename,'rb')
+        })
+    if r.ok:
+        outname = '.'.join(filename.split('.')[:-1] + [to_fromat] ) 
+        fout = open(outname, 'wb')
+        fout.write(r.content)
+        fout.close()
+        return outname
+    else:
+        print 'Request failed:', r.status_code
+        return ''
+
+import requests
+@app.route('/convert', methods=["POST"])
+def convert():
+    extension = request.form.get('extension', 'html', type=str)
+    filename = request.form.get('filename', 'markx.md', type=str)
+    print 'Sending request to Docverter for file', filename
+    r = requests.post(app.config['DOCVERTER_URL'], data={
+        'to': extension,
+        'from': 'markdown',
+        },
+        files={
+        'input_files[]': open(path_to_file(filename),'rb')
+        })
+    if r.ok:
+        print 'Request was successful:', r.status_code
+        outname = '.'.join(filename.split('.')[:-1] + [extension] ) 
+        with open(path_to_file(outname), 'wb') as fout:
+            fout.write(r.content)
+        return jsonify(result=outname)
+    else:
+        print 'Request failed:', r.status_code
+        return jsonify(error={'message': r.status_code})
+
 
 @app.route('/bibtex')
 def bibtex():

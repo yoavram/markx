@@ -57,6 +57,7 @@
 					{% endfor %}
 				</ul>
 			</div>
+			<button id="btn-convert-html" class="btn" rel="tooltip" title="Download as HTML"><i class="icon-file"></i> </button>
 			<button class="btn btn-inverse" id="word_counter" rel="tooltip" title="Word count" disabled>0</button>
 		</div>
 		<div class="btn-toolbar" id="github-toolbar" style="display: none">
@@ -233,6 +234,9 @@ $(function() {
 	});
 	$('#btn-download-html').click(function() {
 		saveOutput('html', view);
+	});
+	$('#btn-convert-html').click(function() {
+		convert('html', view);
 	});
 
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);

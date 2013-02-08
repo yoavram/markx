@@ -406,6 +406,17 @@ function saveOutput(extension, callack) {
 	});
 }
 
+function convert(format, callback) {
+	saveMarkdown(function(filename) {
+		$.post('/convert', {
+			extension: 'pdf',
+			filename: filename
+		}, function(data) {
+			view(data.result);
+		});
+	});
+}
+
 /*
  * http://roshanbh.com.np/2008/10/jquery-plugin-word-counter-textarea.html
  * Textarea Word Count Jquery Plugin 
