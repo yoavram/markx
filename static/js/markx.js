@@ -1,33 +1,257 @@
-function groupCitations() {
-	var citations = new Array();
+function alertMessage(message) {
+	if (!message || !message.length) {
+		message = "Undefined";
+	}
+	$('#general-alert-message').html("<strong>Error:</strong> " + message);
+	$('#general-alert').show();
+}
+
+function infoMessage(message) {
+	if (!message || !message.length) {
+		message = "Undefined";
+	}
+	$('#general-info-message').html("<strong>Note:</strong> " + message);
+	$('#general-info').show();
+}
+
+function panelsDisplay() {
+	var leftPanel = $('#left-panel')
+	var rightPanel = $('#right-panel')
+	if (panelsDisplayStatus == 'dual') {
+		panelsDisplayStatus = 'left';
+		leftPanel.show().removeClass().addClass('span12');
+		rightPanel.hide().removeClass();
+	} else if (panelsDisplayStatus == 'left') {
+		panelsDisplayStatus = 'right';
+		leftPanel.hide().removeClass();
+		rightPanel.show().removeClass().addClass('span12');
+	} else {
+		panelsDisplayStatus = 'dual';
+		leftPanel.show().removeClass().addClass('span6');
+		rightPanel.show().removeClass().addClass('span6');
+	}
+	return panelsDisplayStatus;
+}
+
+/* github */
+
+function signinToGithub() {
+	var username = $('#github-username').val();
+	var password = $('#github-password').val();
+	clearGithubSigninForm();
+
+	if (!username || !username.length) {
+		alertMessage("GitHub sign in requires a username");
+		return false;
+	}
+	if (!password || !password.length) {
+		alertMessage("GitHub sign in requires a password");
+		return false;
+	}
+	github = new Github({
+		username: username,
+		password: password,
+		auth: "basic"
+	});
+	password = null; // for security mesaures
+	if (!github) {
+		alertMessage("Failed contacting GitHub");
+		return false;
+	}
+	$('#user').val(username); // TODO check if this toggles "change" event, maybe move after next line		
+	if (!loadUserRepos(username)) {
+		return false;
+	}
+	$('#github-toolbar').show();
+	$('#btn-github-signin-show').hide();
+	$('#btn-github-signout').show();
+}
+
+function signoutOfGithub() {
+	github = null;
+	user = null;
+	repo = null;
+	$('#user').val('');
+	$('#repo').empty();
+	$('#branch').empty();
+	$('#path').empty();
+	$('#github-toolbar').hide();
+	$(this).hide();
+	$('#btn-github-signin-show').show();
+}
+
+function loadUserRepos(username) {
+	user = github.getUser(username);
+	repo = null;
+	// TODO check if user loaded
+	user.userRepos(username, function(err, repos) {
+		if (err){
+			var code = err['error'];
+			if (code == 401) {
+				code = String(code) + " Unauthorized";
+			} else {
+				code = String(code);
+			}
+			alertMessage(code);
+			return false;
+		}
+		$('#repo').empty();
+		jQuery.each(repos, function(index, item) {
+			var reponame = $.trim(item['name']);
+			var option = '<option value="' + reponame + '">' + reponame + '</option>';
+			$('#repo').append(option);					
+		});			
+	});
+	$('#repo').focus();
+	return true;
+}
+
+function loadRepoBranches(username, reponame) {
+	$('#branch').empty();
+	$('#path').empty();
+	repo = github.getRepo(username, reponame);
+	repo.listBranches(function(err, branches) {
+		if (err){
+			alertMessage(err['message']);
+			return false;
+		} 
+		jQuery.each(branches, function(index, item) {
+			var branchname = $.trim(item['name']);
+			var option = '<option value="' + branchname + '">' + branchname + '</option>';
+			$('#branch').append(option);	
+		});			
+	});
+	$('#branch').focus();
+	return true;
+}
+
+function loadBranchPaths(branchname) {
+	$('#path').empty();
+	repo.getTree(branchname, function(err, tree) {
+		if (err) {
+			alertMessage(err['message']);
+			return false;
+		} 
+		jQuery.each(tree, function(index, item){
+			var path =$.trim(item['path']);
+			var option = '<option value="' + path + '">' + path + '</option>';
+			$('#path').append(option);	
+		});
+	});
+	$('#path').focus();
+	return true;
+}
+
+function clearGithubSigninForm() {
+	$('#modal-github-signin').modal('hide');
+	$('#github-username').val('');
+	$('#github-password').val('');
+}
+
+function checkVariablesForGithubFileAction(branchname, filepath) {
+	if (repo == null) {
+		alertMessage("Please load a repository");
+		$('#repo-ok').focus();
+		return false;
+	}
+	
+	if (!branchname || !branchname.length) {
+		alertMessage("Please choose a branch");
+		$('#branch').focus();
+		return false;
+	}
+
+	if (!filepath || !filepath.length) {
+		alertMessage("Please choose a file");
+		$('#path').focus();
+		return false;
+	}
+	return true;
+}
+
+function pullFromGithub(branchname, filepath, text, callback) {
+	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
+		return false;
+	}
+
+	if (text.length) {
+		if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
+			return false;
+		}
+	}
+
+	repo.read(branchname, filepath, function (err, data) {
+		if (err) {
+			alertMessage(err['message']);
+		} else {
+			updateEditor(data);
+		}
+	});
+}
+
+function pushToGithub(branchname, filepath, commit_msg, text) {
+	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
+		return false;
+	}
+
+	if (!commit_msg || !commit_msg.length) {
+		alertMessage("Please enter a commit message");
+		$('#commit-message').focus();
+		return false;
+	}
+	
+	if (!text || !text.length) {
+		if (!confirm("Editor is empty, continue with commit?")) {
+			return false;
+		}
+	}
+
+	repo.write(branchname, filepath, text, commit_msg, function (err) {
+		if (err) {
+			alertMessage(err['message']);
+		} else {
+			infoMessage("Commit was successful");
+		}
+	});
+}
+
+function updateEditor(text) {
+	$('textarea#wmd-input-second').val(text);
+	updateCitations();
+}
+
+/* citations */
+
+function updateCitations() {
+	// clear citations
+	$('#bibtex_input').text('');
+	$('#bibtex_display').html('');
+	// redo citations
 	var regex = /\[?-?@(\w+)\]?/gm; 
-	var input = $('#wmd-preview-second').text();
+	var input = $('textarea#wmd-input-second').val();
 	var match = regex.exec(input);
 	while (match != null) {
-		citations.push(match[1]);
+		getCitation(match[1]);
 		match = regex.exec(input);
 	}
-	return(citations);
-};
+}
 
-function get_bibtext(citation) {
+
+function getCitation(citation) {
 	$.getJSON('/bibtex', {
 		key: citation
 	}, function(data) {
+		// data is a bibtex entry
+		// append it to the bibtex hidden textarea
 		$('#bibtex_input').append(data.result); 
+		// and call bibtex.js function to render citations list
 		bibtex_js_draw();
 	});
-};
-
-function updateCitations() {
-	$('#bibtex_input').text('');
-	$('#bibtex_display').html('');
-	var citations = groupCitations();
-	citations.sort();
-	for (c in citations) {
-		get_bibtext(citations[c]);
-	}
 }
+
+
+/* markdown */
+
 
 function processTitleBlockToHTML(text) {
 	// This doesn't work because the first lines are wrapped in <p>
@@ -54,6 +278,7 @@ function processTitleBlockToHTML(text) {
 	return text;
 }
 
+
 function processTitleBlockToMarkdown(text) {
 	var textSplit = text.split('\n');
 
@@ -78,17 +303,21 @@ function processTitleBlockToMarkdown(text) {
 	return text;
 } 
 
+
+function processGooglePrettifierPreBlocks(text) {
+	text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
+	text = text.replace("\n</code></pre>", '\n</pre>');
+	return text;
+}
+
+
 function init_markdown_editor() {   
 	var converter2 = new Markdown.Converter();
 
 	//converter2.hooks.chain("postConversion", processTitleBlockToHTML);
 	converter2.hooks.chain("preConversion", processTitleBlockToMarkdown);
 
-	converter2.hooks.chain("postConversion", function(text) {
-		text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
-		text = text.replace("\n</code></pre>", '\n</pre>');
-		return text;
-	});
+	converter2.hooks.chain("postConversion", processGooglePrettifierPreBlocks);
 
 	var help = function () { alert("Do you need help?"); }
 	var options = {
@@ -106,54 +335,35 @@ function init_markdown_editor() {
 	return editor2;
 };
 
+/* files */
+
 function readSingleFile(evt) {
 	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
+    var file = evt.target.files[0]; 
 
-    if (f) {
-    	var r = new FileReader();
-    	r.onload = function(e) { 
-    		var contents = e.target.result;
+    if (file) {
+    	var reader = new FileReader();
+    	reader.onload = function(event) { 
+    		var contents = event.target.result;
     		$('textarea#wmd-input-second').val(contents);
     		editor.refreshPreview();
     		updateCitations();
     	}
-    	r.readAsText(f);
+    	reader.readAsText(file);
     } else { 
     	alert("Failed to load file");
     }
 }
 
-function panelsDisplay() {
-	var leftPanel = $('#left-panel')
-	var rightPanel = $('#right-panel')
-	if (panelsDisplayStatus == 'dual') {
-		panelsDisplayStatus = 'left';
-		leftPanel.show().removeClass().addClass('span12');
-		rightPanel.hide().removeClass();
-	} else if (panelsDisplayStatus == 'left') {
-		panelsDisplayStatus = 'right';
-		leftPanel.hide().removeClass();
-		rightPanel.show().removeClass().addClass('span12');
-	} else {
-		panelsDisplayStatus = 'dual';
-		leftPanel.show().removeClass().addClass('span6');
-		rightPanel.show().removeClass().addClass('span6');
-	}
-	return panelsDisplayStatus;
-}
 
-function check_for_filename(callback) {
-	var filename = $('#filename').val();
-	if (filename) {
-		$('#general-alert').hide();
-		callback(filename);
-	} else {
-		$('#general-alert').show();
-		$('#general-alert-message').html("<strong>Please choose a filename</strong>");
-		$('#filename').focus();
+function checkForFilename(callback) {
+	var filename = $('#path').val();
+	if (!filename) {
+		filename = "markx";
 	}
+	filename = filename.substr(0, filename.lastIndexOf('.')) || filename;
+	callback(filename);
 }
 
 function save(content, filename, extension, callback) {
@@ -176,23 +386,23 @@ function view(filename) {
 	window.open(url, '_newtab');
 }
 
-function save_text(content, extension, callback) {
-	check_for_filename(function(filename) {
+function saveText(content, extension, callback) {
+	checkForFilename(function(filename) {
 		save(content, filename, extension, callback);
 	});
 }
 
-function save_markdown(callack) {
-	save_text($('textarea#wmd-input-second').val(), 'md', callack);
+function saveMarkdown(callack) {
+	saveText($('textarea#wmd-input-second').val(), 'md', callack);
 }
 
-function save_bibtext(callack) {
-	save_text($('textarea#bibtex_input').val(), 'bib', callack);
+function saveBibtext(callack) {
+	saveText($('textarea#bibtex_input').val(), 'bib', callack);
 }
 
-function save_output(extension, callack) {
-	save_text($('textarea#bibtex_input').val(), 'bib', function() {
-		save_text($('textarea#wmd-input-second').val(), extension, callack);
+function saveOutput(extension, callack) {
+	saveBibtext(function() {
+		saveText($('textarea#wmd-input-second').val(), extension, callack);
 	});
 }
 
