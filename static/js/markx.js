@@ -220,7 +220,15 @@ function updateEditor(text) {
 	updateCitations();
 }
 
+function getEditor() {
+	return($('textarea#wmd-input-second').val());
+}
+
 /* citations */
+
+function getBibtex() {
+	return($('#bibtex_input').val())
+}
 
 function updateCitations() {
 	// clear citations
@@ -357,65 +365,56 @@ function readSingleFile(evt) {
 }
 
 
-function checkForFilename(callback) {
+function save(callback) {
 	var filename = $('#path').val();
 	if (!filename) {
 		filename = "markx";
 	}
-	filename = filename.substr(0, filename.lastIndexOf('.')) || filename;
-	callback(filename);
-}
+	filename = filename.substr(0, filename.lastIndexOf('.')) || filename; // remove extension
+	var content = getEditor();
+	var bibtex = getBibtex();
 
-function save(content, filename, extension, callback) {
 	$.post('/save', {
 		content: content,
-		extension: extension,
-		filename: filename
+		filename: filename,
+		bibtex: bibtex
 	}, function(data) {
 		callback(data.result);
 	});
 }
+
+
+function convert(extension, callback) {
+	var filename = $('#path').val();
+	if (!filename) {
+		filename = "markx";
+	}
+	filename = filename.substr(0, filename.lastIndexOf('.')) || filename; // remove extension
+	var content = getEditor();
+	var bibtex = getBibtex();
+
+	$.post('/convert', {
+		content: content,
+		filename: filename,
+		bibtex: bibtex,
+		extension: extension
+	}, function(data) {
+		callback(data.result);
+	});
+}
+
 
 function download(filename) {
 	var url = '/download/' + filename;
 	window.location.assign(url);
 }
 
+
 function view(filename) {
 	var url = '/view/' + filename;
 	window.open(url, '_newtab');
 }
 
-function saveText(content, extension, callback) {
-	checkForFilename(function(filename) {
-		save(content, filename, extension, callback);
-	});
-}
-
-function saveMarkdown(callack) {
-	saveText($('textarea#wmd-input-second').val(), 'md', callack);
-}
-
-function saveBibtext(callack) {
-	saveText($('textarea#bibtex_input').val(), 'bib', callack);
-}
-
-function saveOutput(extension, callack) {
-	saveBibtext(function() {
-		saveText($('textarea#wmd-input-second').val(), extension, callack);
-	});
-}
-
-function convert(format, callback) {
-	saveMarkdown(function(filename) {
-		$.post('/convert', {
-			extension: 'pdf',
-			filename: filename
-		}, function(data) {
-			view(data.result);
-		});
-	});
-}
 
 /*
  * http://roshanbh.com.np/2008/10/jquery-plugin-word-counter-textarea.html
