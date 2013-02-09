@@ -89,4 +89,4 @@ More help can be found in the [help file](https://github.com/yoavram/markx/blob/
 [GitHub]: https://github.com/
 [Github.js]: https://github.com/michael/github
 [Docverter]: http://www.docverter.com/
-[requests]: http://docs.python-requests.org/
+[requests]: http://python-requests.org/
