@@ -211,6 +211,7 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 			alertMessage(err['message']);
 		} else {
 			infoMessage("Commit was successful");
+			$('#commit-message').val('');
 		}
 	});
 }
