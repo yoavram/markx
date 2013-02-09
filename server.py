@@ -111,7 +111,7 @@ def save():
     bibtex = request.form.get('bibtex', '', type=str)
     extension = request.form.get('extension', 'md', type=str).lower()
     filename = request.form.get('filename', 'markx', type=str)
-    converter = request.form.get('converter', 'docverter', type=str)
+    converter = request.form.get('converter', 'pandoc', type=str)
     if converter == 'docverter':
         converter = docverter
     elif converter == 'pandoc':
