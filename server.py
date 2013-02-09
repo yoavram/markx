@@ -21,7 +21,7 @@ if not os.path.exists(FILES_FOLDER):
 CSL_FOLDER = 'static' + os.path.sep + 'csl'
 CSL_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.csl')]
 ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
-DEFAULT_TEXT_FILE = "README.md"
+DEFAULT_TEXT_FILE = "HELP.md"
 with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
 PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
