@@ -1,23 +1,6 @@
 # Markx
-
-*Markx* is a [Markdown] editor for scientific writing.
-
-## Features
-
-1. Zenware
-1. Realtime preview
-1. Integration with [GitHub]
-1. Display math - $x^2+y^2=r^2$
-1. Imitating the [Markdown] flavor of [Pandoc]
-1. Citations using [Pandoc]+[BibTeX]: [@Drake1991]
-1. Code highlighting:
-		
-		if __name__ == '__main__':
-		    # Bind to PORT if defined, otherwise default to 5000.
-		    port = int(os.environ.get('PORT', 5000))
-		    app.run(host='0.0.0.0', port=port, debug=app.debug)
-
 ## Help
+Last update: 9 Feb 2013
 
 ### Writing Markdown
 [Markdown] is a markup language.
@@ -25,28 +8,28 @@
 Markdown is very easy to learn and there are many tutorials, just use Google.
 You should use *Pandoc-flavored Markdown* as both converters ([Pandoc] and [Docverter] use that). The HTML preview on the right is processed using [PageDown], so there could be some thing it doesn't process like Pandoc does (found something? open an [issue]).
 
-For equations you can use [LaTeX] - just write it between `$`s or `\\(` and `\\)` for inline equations and `$$`s or `\\[` and `\\]` for display mode:
+For equations you can use $LaTeX$ - just write it between `$`s or `\\(` and `\\)` for inline equations and `$$`s or `\\[` and `\\]` for display mode:
 
 - Inline mode $e=mc^2$
 - Display mode: $$\frac{df(x)}{dt}=lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
 
 ### Toolbar
-1. Use the <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
-1. Use the <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
-1. Use the <i class="icon-books"></i> button to **parse citation keys** such as [@Drake1991].
-1. Use the <i class="icon-download-2"></i> button to **download and convert** the Markdown text to various format or to download a *BibTeX* file of the citations referenced in the text.
+1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
+1. Use the *Screen* <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
+1. Use the *Books* <i class="icon-books"></i> button to **parse citation keys** such as [@Drake1991].
+1. Use the *Download* <i class="icon-download-2"></i> button to **download and convert** the Markdown text to various format or to download a *BibTeX* file of the citations referenced in the text.
 1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
   - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF.
  - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
-1. Click the <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
-1. The grey box withe the numbers displays the text **word count**.
+1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
+1. The grey box with the numbers displays the **word count**.
 
 ### GitHub Integration
 Your [GitHub] username and password are **never sent to the Markx server**. They are sent by JavaScript to directly to the GitHub API server. Your credentials are not saved in cookies and are removed from the browser memory as soon as the sign in is complete. If you would like to check the security of this feature please view the `signinToGithub` function in [markx.js] and open an [issue] if you find any problems.
 
 After you sign in to GitHub you can use the GitHub toolbar to:
 
-1. Click the  <i class="icon-github-2"></i> button - this doesn't do anything right now.
+1. Click the  *GitHub* <i class="icon-github-2"></i> button - this doesn't do anything right now.
 1. Change the username - doesn't do anything yet.
 1. Choose a repository that belongs to the specified user.
 1. Click the first <i class="icon-folder-open"></i> to load the branch list
@@ -55,8 +38,11 @@ After you sign in to GitHub you can use the GitHub toolbar to:
 1. Choose a file in the selected branch
 1. Click <i class="icon-cloud-download"></i> button to **pull the file** to the editor. The current contents will be deleted without saving them.
 1. Click <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit.
+1. Click the *sign out* <i class="icon-exit"></i> button in the general toolbar to **sign out of GitHub**.
 
-There is currently no support for creation of new files. You can do that on GitHub or using `git`. There is also no way to commit the `.bib` citations file to GitHub via Markx. These features will be added in the future.
+There is currently no support for creation of new files. You can [do that on GitHub](https://github.com/blog/1327-creating-files-on-github) very easily or in the traditional way via the terminal/command line (`touch <filename>`, `git add <filename>`, `git commit <filename> -m "new file"`, `git push`). 
+
+There is also no way to commit the `.bib` citations file to GitHub via Markx. These features will be added in the future.
 
 ### Editor Toolbar
 The buttons above the editor window are part of the [PageDown] markdown editor. They allow quick shortcuts to common Markdown markups.
