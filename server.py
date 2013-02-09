@@ -145,14 +145,14 @@ def bibtex():
 def download(filename):
     extension = os.path.splitext(filename)[1][1:].strip()
     mimetype = get_mimetype(extension)
-    return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=True, attachment_filename=filename)
+    return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=True, attachment_filename=filename,  cache_timeout=0)
 
 
 @app.route('/view/<string:filename>')
 def view(filename):
     extension = os.path.splitext(filename)[1][1:].strip()
     mimetype = get_mimetype(extension)
-    return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=False)
+    return send_file(path_to_file(filename), mimetype=mimetype, as_attachment=False, cache_timeout=0)
 
 
 @app.route("/")
