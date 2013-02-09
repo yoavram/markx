@@ -59,7 +59,7 @@ def save_text_file(filename, content):
 def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
     options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
-    options += ['--ascii', '-s', '--toc']
+    options += ['-s'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     print "Bibpath:", bibpath
     if os.path.exists(bibpath):
@@ -83,12 +83,13 @@ def pandoc(filename, extension, bibpath):
         return False, "Pandoc return code " + str(e.returncode)
 
 
-def docverter(filename, extension):
+def docverter(filename, extension, bibpath):
     print ' * Sending request to Docverter for file', filename
     with open(path_to_file(filename + '.md')) as filestream:
         docverter_response = requests.post(app.config['DOCVERTER_URL'], data={
             'to': extension,
             'from': 'markdown',
+            'variable': 'geometry:' + app.config['DEFAULT_LATEX_PAPER_SIZE']
             },
                 files={
                 'input_files[]': filestream 
