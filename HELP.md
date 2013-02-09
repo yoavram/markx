@@ -108,5 +108,5 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [issue]: https://github.com/yoavram/markx/issues
 [markx.js]: https://github.com/yoavram/markx/blob/master/static/js/markx.js
 [Markx]: https://github.com/yoavram/markx
-[requests]: http://docs.python-requests.org/
+[requests]: http://python-requests.org/
 	
