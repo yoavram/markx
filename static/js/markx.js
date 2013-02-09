@@ -220,7 +220,15 @@ function updateEditor(text) {
 	updateCitations();
 }
 
+function getEditor() {
+	return($('textarea#wmd-input-second').val());
+}
+
 /* citations */
+
+function getBibtex() {
+	return($('#bibtex_input').val())
+}
 
 function updateCitations() {
 	// clear citations
@@ -356,55 +364,47 @@ function readSingleFile(evt) {
     }
 }
 
+function getConverter() {
+	var converter = ($('#btn-converter').text() == 'D')  ? "docverter" : 'pandoc';
+	return(converter);
+}
 
-function checkForFilename(callback) {
+function _save(extension, callback) {
 	var filename = $('#path').val();
 	if (!filename) {
 		filename = "markx";
 	}
-	filename = filename.substr(0, filename.lastIndexOf('.')) || filename;
-	callback(filename);
-}
-
-function save(content, filename, extension, callback) {
+	filename = filename.substr(0, filename.lastIndexOf('.')) || filename; // remove extension
+	var content = getEditor();
+	var bibtex = getBibtex();
+	var converter = getConverter();
 	$.post('/save', {
 		content: content,
+		filename: filename,
+		bibtex: bibtex,
 		extension: extension,
-		filename: filename
+		converter: converter
 	}, function(data) {
-		callback(data.result);
+		if ('error' in data){
+			alertMessage("Conversion failed: " + data.error)
+		} else {
+			callback(data.result);
+		}
 	});
 }
+var save = _.throttle(_save, 10000) 
 
 function download(filename) {
 	var url = '/download/' + filename;
 	window.location.assign(url);
 }
 
+
 function view(filename) {
 	var url = '/view/' + filename;
 	window.open(url, '_newtab');
 }
 
-function saveText(content, extension, callback) {
-	checkForFilename(function(filename) {
-		save(content, filename, extension, callback);
-	});
-}
-
-function saveMarkdown(callack) {
-	saveText($('textarea#wmd-input-second').val(), 'md', callack);
-}
-
-function saveBibtext(callack) {
-	saveText($('textarea#bibtex_input').val(), 'bib', callack);
-}
-
-function saveOutput(extension, callack) {
-	saveBibtext(function() {
-		saveText($('textarea#wmd-input-second').val(), extension, callack);
-	});
-}
 
 /*
  * http://roshanbh.com.np/2008/10/jquery-plugin-word-counter-textarea.html

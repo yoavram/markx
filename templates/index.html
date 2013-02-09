@@ -21,7 +21,7 @@
 				<i class="icon-books"></i>
 			</button>			
 			<div class="btn-group">
-				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert">
+				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert. May take up to a minute.">
 					<i class="icon-download-2"></i>
 					<span class="caret"></span>
 				</button>
@@ -35,7 +35,7 @@
 					<li><a href='#' id="btn-download-docx"  rel="tooltip" title="Download as Word docx">
 						<i class="icon-file-word"></i> Word
 					</a></li>
-					<li><a href='#' id="btn-download-epub"  rel="tooltip" title="Download as ePub">
+					<li><a href='#' id="btn-download-epub"  rel="tooltip" title="Download as ePub. No images allowed.">
 						<i class="icon-book"></i> ePub
 					</a></li>
 					<li><a href='#' id="btn-download-html" rel="tooltip" title="Download as HTML">
@@ -46,6 +46,7 @@
 					</a></li>
 				</ul>
 			</div>
+			<button class="btn" id="btn-converter" rel="tooltip" title="Toggle Markdown converters: Pandoc or Docverter">P</button>
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
 					<i class="icon-code"></i>
@@ -215,24 +216,30 @@ $(function() {
 		pushToGithub(branchname, filepath, commit_msg, text);
 	});
 
-	/* files - maybe move to onclick in the buttons? */
+	/* file conversion */
 	$('#btn-download-md').click(function() {
-		saveMarkdown(download);
+		save('md', download);
 	});
 	$('#btn-download-bibtex').click(function() {
-		saveBibtext(download);
+		save('bib', view);
 	});
 	$('#btn-download-pdf').click(function() {
-		saveOutput('pdf', view);
+		save('pdf', view);
 	});
 	$('#btn-download-docx').click(function() {
-		saveOutput('docx', download);
+		save('docx', download);
 	});
 	$('#btn-download-epub').click(function() {
-		saveOutput('epub', download);
+		save('epub', download);
 	});
 	$('#btn-download-html').click(function() {
-		saveOutput('html', view);
+		save('html', view);
+	});
+	$('#btn-converter').click(function() {
+	  if ($(this).text() == 'D') 
+	    $(this).text('P');
+	  else 
+	    $(this).text('D');
 	});
 
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
