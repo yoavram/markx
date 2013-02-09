@@ -2,10 +2,12 @@
 ## Help
 Last update: 9 Feb 2013
 
+[Markx] is a Markdown editor specifically designed for academic and scientific authoring. It highlights several advantages of Markdown (plain-text, multiple format conversion, easy version control) while still supplying the basic features which are a must for academic publications (citations, math rendering, layouts).
+
 ### Writing Markdown
 [Markdown] is a markup language.
 
-Markdown is very easy to learn and there are many tutorials, just use Google.
+Markdown is very easy to learn and there are many online tutorials, just use Google.
 
 #### Markdown Flavor
 You should use **Pandoc-flavored Markdown** as both converters ([Pandoc] and [Docverter] use that). The HTML preview on the right is processed using [PageDown], so there could be some thing it doesn't process like Pandoc does (found something? open an [issue]).
@@ -70,7 +72,7 @@ The buttons above the editor window are part of the [PageDown] markdown editor. 
 The best way to get support is to open an [issue]. If you can't open issue because you don't have a [GitHub] user, just get one, they are free. 
 
 ### Contribution
-We would love for you to contribute to Markx. Fork the project or open an [issue] and we can talk on how we can collaborate. 
+We would love for you to contribute to Markx. The project code is hosted in [GitHub][Markx]. Fork the project or open an [issue] so we can talk on how we can collaborate. 
 
 The server side is written in Python with the [Flask] web framework (Ruby and Node equivalents are Sinatra and Express).
 The two Markdown converters are [Pandoc] and [Docverter], which is a cloud-based Pandoc.
@@ -105,4 +107,5 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [Docverter]: http://www.docverter.com/
 [issue]: https://github.com/yoavram/markx/issues
 [markx.js]: https://github.com/yoavram/markx/blob/master/static/js/markx.js
+[Markx]: https://github.com/yoavram/markx
 	
