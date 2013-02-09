@@ -74,7 +74,7 @@ The best way to get support is to open an [issue]. If you can't open issue becau
 ### Contribution
 We would love for you to contribute to Markx. The project code is hosted in [GitHub][Markx]. Fork the project or open an [issue] so we can talk on how we can collaborate. 
 
-The server side is written in Python with the [Flask] web framework (Ruby and Node equivalents are Sinatra and Express).
+The server side is written in Python with the [Flask] web framework (Ruby and Node equivalents are Sinatra and Express) and [requests] for connecting to [Docverter].
 The two Markdown converters are [Pandoc] and [Docverter], which is a cloud-based Pandoc.
 
 The client side is written with HTML+CSS+JS, using the JavaScript libraries:
@@ -108,4 +108,5 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [issue]: https://github.com/yoavram/markx/issues
 [markx.js]: https://github.com/yoavram/markx/blob/master/static/js/markx.js
 [Markx]: https://github.com/yoavram/markx
+[requests]: http://docs.python-requests.org/
 	
