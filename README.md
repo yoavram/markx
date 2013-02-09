@@ -23,8 +23,13 @@ It integrates with [GitHub] to allow you to seemlessly version, share and collab
 
 It is free (beer and speech).
 
-*Markx* is currently in development but the *master* branch is working nicely and can be downloaded and used.
-We would love to get feedback from anyone using it!
+*Markx* is currently in development but can be downloaded and tested. 
+Nevertheless, it is still experimental, so **take care of your data!**
+
+We would love to get feedback from anyone using it! 
+
+Please [open an issue](https://github.com/yoavram/markx/issues) with any bug or suggestion. 
+If you can't open an issue please contact Yoav on [twitter](http://www.twitter.com/yoavram) (you can use the `#markx` hashtag).
 
 ## Features
 
