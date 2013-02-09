@@ -48,7 +48,7 @@ If you can't open an issue please contact Yoav on [twitter](http://www.twitter.c
 
 ## Technology
   * Server side (this is what you need to install if you run it on localhost):
-    * [Python] with [Flask]
+    * [Python] with [Flask] and [requests]
     * [Pandoc] - optional, for conversion to PDF, DOCX etc. **Feature plans is to integrate with [Docverter] to remove this dependecy**.
   * Client side (no installation required):
     * [PageDown] - [Stack Overflow]'s [Markdown] editor
@@ -63,9 +63,11 @@ If you can't open an issue please contact Yoav on [twitter](http://www.twitter.c
 
 1. Clone this repo
 1. Install [Python] 
-1. Install [Flask]: `pip install Flask`
+1. Install [Flask] and [requests]: `pip install Flask requests`
 1. Optional: Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = /path/to/bib/file`. Please note that the path should be absolute and should not start with a `~`.
 1. Run the editor locally by calling `python server.py` and opening your browser at <http://localhost:5000>.
+
+More help can be found in the [help file](https://github.com/yoavram/markx/blob/master/HELP.md).
 
 ## License
 
@@ -87,3 +89,4 @@ If you can't open an issue please contact Yoav on [twitter](http://www.twitter.c
 [GitHub]: https://github.com/
 [Github.js]: https://github.com/michael/github
 [Docverter]: http://www.docverter.com/
+[requests]: http://docs.python-requests.org/
