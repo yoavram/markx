@@ -56,13 +56,17 @@ def save_text_file(filename, content):
     return filepath
 
 
-def pandoc(filename, extension):
+def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
     options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
     options += ['--ascii', '-s', '--toc']
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
-    if os.path.exists(path_to_file(filename + '.bib')):
-        options += ['--bibliography=' + path_to_file(filename + '.bib')]
+    print "Bibpath:", bibpath
+    if os.path.exists(bibpath):
+        print "found"
+        options += ['--bibliography=' + bibpath]
+    else: 
+        print "not found"
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
         csl_file = app.config['CSL_FILES'][0]
         options += ['--csl=' + os.path.join(CSL_FOLDER, csl_file)]
@@ -86,8 +90,8 @@ def docverter(filename, extension):
             'to': extension,
             'from': 'markdown',
             },
-            files={
-            'input_files[]': filestream 
+                files={
+                'input_files[]': filestream 
             })
     if docverter_response.ok:
         print ' * Request was successful:', docverter_response.status_code
@@ -103,7 +107,7 @@ def docverter(filename, extension):
 @app.route('/save', methods=["POST"])
 def save():
     content = request.form.get('content', '', type=unicode)
-    bibtex = request.form.get('bibtex', '', type=str).lower()
+    bibtex = request.form.get('bibtex', '', type=str)
     extension = request.form.get('extension', 'md', type=str).lower()
     filename = request.form.get('filename', 'markx', type=str)
     converter = request.form.get('converter', 'docverter', type=str)
@@ -121,7 +125,7 @@ def save():
     elif extension == 'bib':
         success, result = True, filename + '.bib'
     else:
-        success, result = converter(filename, extension)
+        success, result = converter(filename, extension, bibpath)
     if success:
         return jsonify(result=result)
     else:
