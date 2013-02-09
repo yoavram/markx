@@ -30,7 +30,7 @@ DOCVERTER_URL =   'http://c.docverter.com/convert'
 app = Flask(__name__)
 app.config.from_object(__name__) 
 print " * Overriding deafult configuration with config.py file"
-app.config.from_pyfile('config.py')
+app.config.from_pyfile('config.py', silent=True)
 if app.debug:
 	print " * Running in debug mode"
 bib = bibi.parse_file(app.config['BIB_FILE'])
