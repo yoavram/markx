@@ -65,18 +65,18 @@ def pandoc(filename, extension):
         options += ['--bibliography=' + path_to_file(filename + '.bib')]
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
         csl_file = app.config['CSL_FILES'][0]
-        options += ['--csl=' + os.path(CSL_FOLDER, csl_file)]
+        options += ['--csl=' + os.path.join(CSL_FOLDER, csl_file)]
     if 'ABBR_FILES' in app.config and len(app.config['ABBR_FILES']) > 0:
         abbr_file = app.config['ABBR_FILES'][0]
-        options += ['--citation-abbreviations=' + os.path(CSL_FOLDER, abbr_file)]
+        options += ['--citation-abbreviations=' + os.path.join(CSL_FOLDER, abbr_file)]
     try:
-        print ' * Sending command to Pandoc for file', filepath
+        print ' * Sending command to Pandoc for file', filename
         pandoc_result = subprocess.check_call(options)
         print ' * Command was successful:', pandoc_result
-        return True, outname
+        return True, filename + '.' + extension
     except subprocess.CalledProcessError as e:
         print ' * Command failed:', e.returncode
-        return False, "pandoc return code " + e.returncode
+        return False, "Pandoc return code " + str(e.returncode)
 
 
 def docverter(filename, extension):
