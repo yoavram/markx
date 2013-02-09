@@ -364,6 +364,10 @@ function readSingleFile(evt) {
     }
 }
 
+function getConverter() {
+	var converter = ($('#btn-converter').text() == 'D')  ? "docverter" : 'pandoc';
+	return(converter);
+}
 
 function _save(extension, callback) {
 	var filename = $('#path').val();
@@ -373,12 +377,13 @@ function _save(extension, callback) {
 	filename = filename.substr(0, filename.lastIndexOf('.')) || filename; // remove extension
 	var content = getEditor();
 	var bibtex = getBibtex();
-
+	var converter = getConverter();
 	$.post('/save', {
 		content: content,
 		filename: filename,
 		bibtex: bibtex,
-		extension: extension
+		extension: extension,
+		converter: converter
 	}, function(data) {
 		if ('error' in data){
 			alertMessage("Conversion failed: " + data.error)

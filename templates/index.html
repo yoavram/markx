@@ -46,6 +46,7 @@
 					</a></li>
 				</ul>
 			</div>
+			<button class="btn" id="btn-converter" rel="tooltip" title="Toggle Markdown converters: Pandoc or Docverter">D</button>
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
 					<i class="icon-code"></i>
@@ -215,7 +216,7 @@ $(function() {
 		pushToGithub(branchname, filepath, commit_msg, text);
 	});
 
-	/* files - maybe move to onclick in the buttons? */
+	/* file conversion */
 	$('#btn-download-md').click(function() {
 		save('md', download);
 	});
@@ -233,6 +234,12 @@ $(function() {
 	});
 	$('#btn-download-html').click(function() {
 		save('html', view);
+	});
+	$('#btn-converter').click(function() {
+	  if ($(this).text() == 'D') 
+	    $(this).text('P');
+	  else 
+	    $(this).text('D');
 	});
 
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
