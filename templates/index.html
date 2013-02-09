@@ -21,7 +21,7 @@
 				<i class="icon-books"></i>
 			</button>			
 			<div class="btn-group">
-				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert">
+				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert. May take up to a minute.">
 					<i class="icon-download-2"></i>
 					<span class="caret"></span>
 				</button>
@@ -217,22 +217,22 @@ $(function() {
 
 	/* files - maybe move to onclick in the buttons? */
 	$('#btn-download-md').click(function() {
-		save(download);
+		save('md', download);
 	});
 	$('#btn-download-bibtex').click(function() {
-		save(download);
+		save('bib', view);
 	});
 	$('#btn-download-pdf').click(function() {
-		convert('pdf', view);
+		save('pdf', view);
 	});
 	$('#btn-download-docx').click(function() {
-		convert('docx', download);
+		save('docx', download);
 	});
 	$('#btn-download-epub').click(function() {
-		convert('epub', download);
+		save('epub', download);
 	});
 	$('#btn-download-html').click(function() {
-		convert('html', view);
+		save('html', view);
 	});
 
 	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);

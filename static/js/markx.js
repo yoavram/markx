@@ -365,7 +365,7 @@ function readSingleFile(evt) {
 }
 
 
-function _save(callback) {
+function _save(extension, callback) {
 	var filename = $('#path').val();
 	if (!filename) {
 		filename = "markx";
@@ -377,33 +377,17 @@ function _save(callback) {
 	$.post('/save', {
 		content: content,
 		filename: filename,
-		bibtex: bibtex
-	}, function(data) {
-		callback(data.result);
-	});
-}
-var save = _.throttle(_save, 10000) 
-
-function _convert(extension, callback) {
-	console.log("convert");
-	var filename = $('#path').val();
-	if (!filename) {
-		filename = "markx";
-	}
-	filename = filename.substr(0, filename.lastIndexOf('.')) || filename; // remove extension
-	var content = getEditor();
-	var bibtex = getBibtex();
-
-	$.post('/convert', {
-		content: content,
-		filename: filename,
 		bibtex: bibtex,
 		extension: extension
 	}, function(data) {
-		callback(data.result);
+		if ('error' in data){
+			alertMessage("Conversion failed: " + data.error)
+		} else {
+			callback(data.result);
+		}
 	});
 }
-var convert = _.throttle(_convert, 10000) 
+var save = _.throttle(_save, 10000) 
 
 function download(filename) {
 	var url = '/download/' + filename;

@@ -104,17 +104,6 @@ def docverter(filename, extension):
 def save():
     content = request.form.get('content', '', type=unicode)
     bibtex = request.form.get('bibtex', '', type=str).lower()
-    filename = request.form.get('filename', 'markx', type=str)
-    filename = just_the_filename(filename)
-    filepath = save_text_file(filename + '.md', content)
-    bibpath = save_text_file(filename + '.bib', bibtex)
-    return jsonify(result=filename + '.md')
-
-
-@app.route('/convert', methods=["POST"])
-def convert():
-    content = request.form.get('content', '', type=unicode)
-    bibtex = request.form.get('bibtex', '', type=str).lower()
     extension = request.form.get('extension', 'md', type=str).lower()
     filename = request.form.get('filename', 'markx', type=str)
     converter = request.form.get('converter', 'docverter', type=str)
@@ -127,7 +116,12 @@ def convert():
     filename = just_the_filename(filename)
     filepath = save_text_file(filename + '.md', content)
     bibpath = save_text_file(filename + '.bib', bibtex)
-    success, result = converter(filename, extension)
+    if extension == 'md':
+        success, result = True, filename + '.md'
+    elif extension == 'bib':
+        success, result = True, filename + '.bib'
+    else:
+        success, result = converter(filename, extension)
     if success:
         return jsonify(result=result)
     else:
