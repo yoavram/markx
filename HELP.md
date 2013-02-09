@@ -58,7 +58,7 @@ After you sign in to GitHub you can use the GitHub toolbar to:
 1. Click the second *folder* <i class="icon-folder-open"></i> button  to **load the files list** (currently only loads a single level, no subfolders)
 1. **Choose a file** in the selected branch
 1. Click the *download* <i class="icon-cloud-download"></i> button to **pull the file** to the editor. The current contents will be deleted without saving them.
-1. Click the *upload* <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit.
+1. Click the *upload* <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit. After the push is finalized you will get a success or failure message.
 1. Click the *sign out* <i class="icon-exit"></i> button in the general toolbar to **sign out of GitHub**.
 
 There is currently no support for creation of new files. You can [do that on GitHub](https://github.com/blog/1327-creating-files-on-github) very easily or in the traditional way via the terminal/command line (`touch <filename>`, `git add <filename>`, `git commit <filename> -m "new file"`, `git push`). 
