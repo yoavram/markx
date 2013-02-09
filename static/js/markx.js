@@ -365,7 +365,7 @@ function readSingleFile(evt) {
 }
 
 
-function save(callback) {
+function _save(callback) {
 	var filename = $('#path').val();
 	if (!filename) {
 		filename = "markx";
@@ -382,9 +382,10 @@ function save(callback) {
 		callback(data.result);
 	});
 }
+var save = _.throttle(_save, 10000) 
 
-
-function convert(extension, callback) {
+function _convert(extension, callback) {
+	console.log("convert");
 	var filename = $('#path').val();
 	if (!filename) {
 		filename = "markx";
@@ -402,7 +403,7 @@ function convert(extension, callback) {
 		callback(data.result);
 	});
 }
-
+var convert = _.throttle(_convert, 10000) 
 
 function download(filename) {
 	var url = '/download/' + filename;
