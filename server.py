@@ -11,7 +11,6 @@ import subprocess
 import requests
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-PLATFORM = os.environ.get('PLATFORM', 'heroku')
 BIB_FILE = os.environ.get('BIB_FILE', '')
 PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/' # server folder
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir(os.path.join('static'  , 'css' , 'prettify', ''))] # local filesystem folder
@@ -84,13 +83,12 @@ def pandoc(filename, extension, bibpath):
         return False, "Pandoc return code " + str(e.returncode)
 
 
-def docverter(filename, out_extension, bibpath, in_extension='md'):
+def docverter(filename, extension, bibpath):
     print ' * Sending request to Docverter for file', filename
-    with open(path_to_file(filename + '.' + in_extension)) as filestream:
-        if in_extension == 'md': in_extension = 'markdown'
+    with open(path_to_file(filename + '.md')) as filestream:
         docverter_response = requests.post(app.config['DOCVERTER_URL'], data={
-            'to': out_extension,
-            'from': in_extension,
+            'to': extension,
+            'from': 'markdown',
             'variable': 'geometry:' + app.config['DEFAULT_LATEX_PAPER_SIZE']
             },
                 files={
@@ -98,7 +96,7 @@ def docverter(filename, out_extension, bibpath, in_extension='md'):
             })
     if docverter_response.ok:
         print ' * Request was successful:', docverter_response.status_code
-        outname = filename + '.' + out_extension
+        outname = filename + '.' + extension
         with open(path_to_file(outname), 'wb') as fout:
             fout.write(docverter_response.content)
         return True, outname
@@ -127,10 +125,6 @@ def save():
         success, result = True, filename + '.md'
     elif extension == 'bib':
         success, result = True, filename + '.bib'
-    elif extension == 'pdf' and app.config['PLATFORM'] == 'heroku':
-        success, result = converter(filename, "latex", bibpath)
-        result = just_the_filename(result)
-        success, result = docverter(result, extension, bibpath, "latex")
     else:
         success, result = converter(filename, extension, bibpath)
     if success:
