@@ -231,8 +231,8 @@ $(function() {
 			save('pdf', view);
 		} else {		
 			save('latex', function(filename) {
-			var filepath = window.location.origin + '/view/' + filename;
-			window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
+				var filepath = window.location.origin + '/view/' + filename;
+				window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
 			});
 		}
 	});
