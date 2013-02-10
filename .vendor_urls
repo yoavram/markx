@@ -1,1 +1,2 @@
-https://pandoc.googlecode.com/files/pandoc-1.10.1.tar.gz
+https://s3.amazonaws.com/docverter-binaries/pandoc.tar.gz
+https://s3.amazonaws.com/docverter-binaries/pandoc-templates.tar.gz
