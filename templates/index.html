@@ -227,7 +227,14 @@ $(function() {
 		save('bib', view);
 	});
 	$('#btn-download-pdf').click(function() {
-		save('pdf', view);
+		if (window.location.hostname == 'localhost') {
+			save('pdf', view);
+		} else {		
+			save('latex', function(filename) {
+			var filepath = window.location.origin + '/view/' + filename;
+			window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
+			});
+		}
 	});
 	$('#btn-download-docx').click(function() {
 		save('docx', download);
