@@ -35,6 +35,9 @@
 					<li><a href='#' id="btn-download-docx"  rel="tooltip" title="Download as Word docx">
 						<i class="icon-file-word"></i> Word
 					</a></li>
+					<li><a href='#' id="btn-download-latex"  rel="tooltip" title="Download as LaTeX">
+						<i class="icon-file-css"></i> LaTeX
+					</a></li>
 					<li><a href='#' id="btn-download-epub"  rel="tooltip" title="Download as ePub. No images allowed.">
 						<i class="icon-book"></i> ePub
 					</a></li>
@@ -228,6 +231,9 @@ $(function() {
 	});
 	$('#btn-download-docx').click(function() {
 		save('docx', download);
+	});
+	$('#btn-download-latex').click(function() {
+		save('latex', download);
 	});
 	$('#btn-download-epub').click(function() {
 		save('epub', download);
