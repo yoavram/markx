@@ -11,7 +11,7 @@ import subprocess
 import requests
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-BIB_FILE = os.environ.get('BIB_FILE', '')
+BIB_FILE = os.environ.get('BIB_FILE', 'library.bib')
 PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/' # server folder
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir(os.path.join('static'  , 'css' , 'prettify', ''))] # local filesystem folder
 DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
@@ -61,12 +61,8 @@ def pandoc(filename, extension, bibpath):
     options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
     options += ['-s'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
-    print "Bibpath:", bibpath
     if os.path.exists(bibpath):
-        print "found"
         options += ['--bibliography=' + bibpath]
-    else: 
-        print "not found"
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
         csl_file = app.config['CSL_FILES'][0]
         options += ['--csl=' + os.path.join(CSL_FOLDER, csl_file)]
