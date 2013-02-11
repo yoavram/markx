@@ -237,10 +237,15 @@ function updateCitations() {
 	$('#bibtex_display').html('');
 	// redo citations
 	var regex = /\[?-?@(\w+)\]?/gm; 
-	var input = $('textarea#wmd-input-second').val();
+	var input = $('#wmd-input-second').val();
+	var seen = new Array();
 	var match = regex.exec(input);
 	while (match != null) {
-		getCitation(match[1]);
+		var citationKey = match[1];
+		if (seen.indexOf(citationKey ) == -1) {
+			seen.push(citationKey);
+			getCitation(citationKey);
+		}
 		match = regex.exec(input);
 	}
 }
