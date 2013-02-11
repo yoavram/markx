@@ -227,7 +227,7 @@ $(function() {
 		save('bib', view);
 	});
 	$('#btn-download-pdf').click(function() {
-		if (window.location.hostname == 'localhost') {
+		if (window.location.hostname == 'localhost' || getConverter == 'docverter') {
 			save('pdf', view);
 		} else {		
 			save('latex', function(filename) {
