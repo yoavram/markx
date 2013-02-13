@@ -11,6 +11,7 @@ import subprocess
 import requests
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+GOOGLE_ANALYTICS = os.environ.get('GOOGLE_ANALYTICS', '')
 BIB_FILE = os.environ.get('BIB_FILE', 'library.bib')
 PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/' # server folder
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir(os.path.join('static'  , 'css' , 'prettify', ''))] # local filesystem folder
