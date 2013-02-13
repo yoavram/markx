@@ -6,12 +6,10 @@ sys.setdefaultencoding('utf-8')
 from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
 import os.path
-import bibi
 import subprocess
 import requests
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-BIB_FILE = os.environ.get('BIB_FILE', 'library.bib')
 PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/' # server folder
 PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir(os.path.join('static'  , 'css' , 'prettify', ''))] # local filesystem folder
 DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
@@ -33,7 +31,6 @@ print " * Overriding deafult configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
 if app.debug:
 	print " * Running in debug mode"
-bib = bibi.parse_file(app.config['BIB_FILE'])
 
 
 mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
@@ -127,13 +124,6 @@ def save():
         return jsonify(result=result)
     else:
         return jsonify(error=result)
-
-
-@app.route('/bibtex')
-def bibtex():
-    keys = [request.args.get('key', '', type=str)]
-    string = bibi.to_string(bib, keys)
-    return jsonify(result=string)
 
 
 @app.route('/download/<string:filename>')
