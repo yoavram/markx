@@ -227,8 +227,8 @@ function getEditor() {
 
 /* citations */
 
-var bibtex = new BibTex(); // the user's citation library
-var citationList = new BibTex(); // the document citation list
+var bibtex = null; // the user's citation library
+var citationList = null; // the document citation list
 
 function readBibFile(evt) {
     // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
@@ -238,17 +238,21 @@ function readBibFile(evt) {
 
     if (f) {
     	var r = new FileReader();
-    	r.onload = function(e) { 
-    		bibtex = new BibTex();
- 		bibtex.content = e.target.result; // the bibtex content as a string
- 		bibtex.parse();
-		updateCitations();
-    		infoMessage("Bibtex loaded with " + bibtex.amount().toString() + " entires");
+    	r.onload = function(e) {     		
+ 		initBibtex(e.target.result); 
+    		infoMessage("BibTeX file loaded with " + bibtex.amount().toString() + " entires");
     	}
     	r.readAsText(f);
     } else { 
     	alert("Failed to load file");
     }
+}
+
+function initBibtex(bibtexContent) {
+	bibtex = new BibTex();
+	bibtex.content = bibtexContent; // the bibtex content as a string
+	bibtex.parse();
+	updateCitations();
 }
 
 function getBibtex() {
@@ -272,8 +276,8 @@ function updateCitations() {
 	}
 	citationKeys = _.uniq(citationKeys);
 	_.each(citationKeys, addCitation);
-	$('#bibtex_display').html(citationList.html());
 	$('#bibtex_input').val(citationList.bibTex());
+	$('#bibtex_display').html(citationList.html());
 }
 
 function addCitation(citation) {

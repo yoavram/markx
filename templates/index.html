@@ -130,6 +130,8 @@
 <div id="preview-panel">
 	<div id="wmd-preview-second" class="wmd-panel wmd-preview"></div>
 	<div id="bibtex_display" class="wmd-panel wmd-preview">
+	<textarea id="bibtex_input" style="display:none;">
+	</textarea>
 	</div>
 </div>
 {% endblock right %}	
@@ -142,8 +144,8 @@ $('#wmd-input-second').wordCount({counterElement:"word_counter"});
 
 /* citations */
 $("#btn-citations").click(updateCitations);
-updateCitations();
 $('#bibtex-file').change(readBibFile);
+initBibtex('');
 
 /* code highlighting stuff */
 $(function() {
@@ -266,7 +268,4 @@ $(function() {
 	$('#btn-display-panels').click(panelsDisplay);
 })
 </script>
-<textarea id="bibtex_input" style="display:none;">
-
-</textarea>
 {%endblock footer %}	
