@@ -142,12 +142,9 @@ var editor = init_markdown_editor();
 $('#wmd-input-second').wordCount({counterElement:"word_counter"});
 
 /* citations */
-$('#btn-bib-file-input').click(function(){
-	var filename = $('#bibtex-file').val();
-	alert(filename);
-});
 $("#btn-citations").click(updateCitations);
 updateCitations();
+$('#bibtex-file').change(readBibFile);
 
 
 
@@ -265,8 +262,6 @@ $(function() {
 	  else 
 	    $(this).text('D');*/
 	});
-
-	document.getElementById('bibtex').addEventListener('change', readSingleFile, false);
 })
 /* display */
 var panelsDisplayStatus = 'dual';

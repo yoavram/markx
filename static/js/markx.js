@@ -250,6 +250,22 @@ function updateCitations() {
 	}
 }
 
+function readBibFile(evt) {
+    // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
+    //Retrieve the first (and only!) File from the FileList object
+    var f = evt.target.files[0]; 
+
+    if (f) {
+    	var r = new FileReader();
+    	r.onload = function(e) { 
+    		var contents = e.target.result;
+    		alert(contents);
+    	}
+    	r.readAsText(f);
+    } else { 
+    	alert("Failed to load file");
+    }
+}
 
 function getCitation(citation) {
 	$.getJSON('/bibtex', {
