@@ -860,7 +860,7 @@ function BibTex(options)
 		}
 	}
 	this.rtfstring         = 'AUTHORS, "{\b TITLE}", {\i JOURNAL}, YEAR';
-	this.htmlstring        = 'AUTHORS, "<strong>TITLE</strong>", <em>JOURNAL</em>, YEAR<br />';
+	this.htmlstring        = 'AUTHORS (YEAR) TITLE. <em>JOURNAL</em><br />';
 	this.allowedEntryTypes = array(
 		'article',
 		'book',
@@ -1839,6 +1839,9 @@ BibTex.prototype = {
             if (array_key_exists('year', entry)) {
                 year = this._unwrap(entry['year']);
             }
+            if (array_key_exists('url', entry)) {
+                url = this._unwrap(entry['url']);
+            }
             if (array_key_exists('author', entry)) {
                 if (this._options['extractAuthors']) {
                     tmparray = array(); //In this array the authors are saved and the joind with an and
@@ -1853,6 +1856,9 @@ BibTex.prototype = {
             }
             
             if ((''!=title) || (''!=journal) || (''!=year) || (''!=authors)) {
+                if (""!=url) {
+                    title = "<a href='" + url + "' target='_blank'>" + title + "</a>"
+                }
                 line = str_replace("TITLE", title, line);
                 line = str_replace("JOURNAL", journal, line);
                 line = str_replace("YEAR", year, line);
