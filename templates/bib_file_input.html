@@ -1,0 +1,25 @@
+<!--Bibliography file input Modal -->
+<div id="modal-bib-file-input" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-bib-file-input-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="modal-bib-file-input-label">
+    	<i class="icon-books"></i> &nbsp; Choose a Bibliography File
+    </h3>
+  </div>
+  
+  <div class="modal-body">
+  	<form class="form-inline">
+      <input type="file" id="bibtex-file"/>
+      <span class="help-block">
+      <small>
+        Please provide your bibliography file in BibTeX format.<br>
+        Your file will <strong>not</strong> be uploaded to Markx and will be processed locally by JavaScript.
+      </small>
+    </span>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal">Cancel</button>
+  <button class="btn btn-primary" id="btn-bib-file-input" data-dismiss="modal" type="submit">Confirm</button>
+</div>
+</div>

@@ -19,7 +19,10 @@
 			</button>
 			<button class="btn" id="btn-citations" rel="tooltip" title="Update citations list">
 				<i class="icon-books"></i>
-			</button>			
+			</button>	
+			<button href="#modal-bib-file-input" id="btn-bib-file-input-show" role="button" class="btn" data-toggle="modal" rel="tooltip" title="Choose a bibliography file">
+				<i class="icon-books"></i>
+			</button>		
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert. May take up to a minute.">
 					<i class="icon-download-2"></i>
@@ -108,6 +111,8 @@
 </div>
 {% include 'github_signin.html' %}
 
+{% include 'bib_file_input.html' %}
+
 {% endblock header %}
 
 {% block left %}
@@ -137,8 +142,14 @@ var editor = init_markdown_editor();
 $('#wmd-input-second').wordCount({counterElement:"word_counter"});
 
 /* citations */
+$('#btn-bib-file-input').click(function(){
+	var filename = $('#bibtex-file').val();
+	alert(filename);
+});
 $("#btn-citations").click(updateCitations);
 updateCitations();
+
+
 
 /* code highlighting stuff */
 $(function() {
@@ -255,7 +266,7 @@ $(function() {
 	    $(this).text('D');*/
 	});
 
-	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+	document.getElementById('bibtex').addEventListener('change', readSingleFile, false);
 })
 /* display */
 var panelsDisplayStatus = 'dual';
@@ -263,7 +274,6 @@ $(function() {
 	$('#btn-display-panels').click(panelsDisplay);
 })
 </script>
-<input type="file" id="fileinput" style="display:none;"/>
 <textarea id="bibtex_input" style="display:none;">
 
 </textarea>
