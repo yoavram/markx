@@ -1,145 +1,16 @@
-/*************************************************************
- *
- *  MathJax/extensions/toMathML.js
+/*
+ *  /MathJax/extensions/toMathML.js
  *  
- *  Implements a toMathML() method for the mml Element Jax that returns
- *  a MathML string from a given math expression.
+ *  Copyright (c) 2012 Design Science, Inc.
  *
- *  ---------------------------------------------------------------------
- *  
- *  Copyright (c) 2010-2011 Design Science, Inc.
+ *  Part of the MathJax library.
+ *  See http://www.mathjax.org for details.
  * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  Licensed under the Apache License, Version 2.0;
  *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
  */
 
-MathJax.Hub.Register.LoadHook("[MathJax]/jax/element/mml/jax.js",function () {
-  var VERSION = "1.1";
-  
-  var MML = MathJax.ElementJax.mml;
-  
-  MML.mbase.Augment({
+MathJax.Hub.Register.LoadHook("[MathJax]/jax/element/mml/jax.js",function(){var b="2.1";var a=MathJax.ElementJax.mml;SETTINGS=MathJax.Hub.config.menuSettings;a.mbase.Augment({toMathML:function(k){var g=(this.inferred&&this.parent.inferRow);if(k==null){k=""}var e=this.type,d=this.toMathMLattributes();if(e==="mspace"){return k+"<"+e+d+" />"}var j=[];var h=(this.isToken?"":k+(g?"":"  "));for(var f=0,c=this.data.length;f<c;f++){if(this.data[f]){j.push(this.data[f].toMathML(h))}else{if(!this.isToken){j.push(h+"<mrow />")}}}if(this.isToken){return k+"<"+e+d+">"+j.join("")+"</"+e+">"}if(g){return j.join("\n")}if(j.length===0||(j.length===1&&j[0]==="")){return k+"<"+e+d+" />"}return k+"<"+e+d+">\n"+j.join("\n")+"\n"+k+"</"+e+">"},toMathMLattributes:function(){var j=[],g=this.defaults;var c=(this.attrNames||a.copyAttributeNames),l=a.skipAttributes;if(this.type==="math"&&(!this.attr||!this.attr.xmlns)){j.push('xmlns="http://www.w3.org/1998/Math/MathML"')}if(!this.attrNames){if(this.type==="mstyle"){g=a.math.prototype.defaults}for(var d in g){if(!l[d]&&g.hasOwnProperty(d)){var e=(d==="open"||d==="close");if(this[d]!=null&&(e||this[d]!==g[d])){var k=this[d];delete this[d];if(e||this.Get(d)!==k){j.push(d+'="'+this.toMathMLattribute(k)+'"')}this[d]=k}}}}for(var h=0,f=c.length;h<f;h++){if(c[h]==="class"){continue}k=(this.attr||{})[c[h]];if(k==null){k=this[c[h]]}if(k!=null){j.push(c[h]+'="'+this.toMathMLquote(k)+'"')}}this.toMathMLclass(j);if(j.length){return" "+j.join(" ")}else{return""}},toMathMLclass:function(c){var e=[];if(this["class"]){e.push(this["class"])}if(this.isa(a.TeXAtom)&&SETTINGS.texHints){var d=["ORD","OP","BIN","REL","OPEN","CLOSE","PUNCT","INNER","VCENTER"][this.texClass];if(d){e.push("MJX-TeXAtom-"+d)}}if(this.mathvariant&&this.toMathMLvariants[this.mathvariant]){e.push("MJX"+this.mathvariant)}if(this.arrow){e.push("MJX-arrow")}if(this.variantForm){e.push("MJX-variant")}if(e.length){c.unshift('class="'+e.join(" ")+'"')}},toMathMLattribute:function(c){if(typeof(c)==="string"&&c.replace(/ /g,"").match(/^(([-+])?(\d+(\.\d*)?|\.\d+))mu$/)){return RegExp.$2+((1/18)*RegExp.$3).toFixed(3).replace(/\.?0+$/,"")+"em"}else{if(this.toMathMLvariants[c]){return this.toMathMLvariants[c]}}return this.toMathMLquote(c)},toMathMLvariants:{"-tex-caligraphic":a.VARIANT.SCRIPT,"-tex-caligraphic-bold":a.VARIANT.BOLDSCRIPT,"-tex-oldstyle":a.VARIANT.NORMAL,"-tex-oldstyle-bold":a.VARIANT.BOLD,"-tex-mathit":a.VARIANT.ITALIC},toMathMLquote:function(e){e=String(e).split("");for(var f=0,d=e.length;f<d;f++){var h=e[f].charCodeAt(0);if(h<32||h>126){e[f]="&#x"+h.toString(16).toUpperCase()+";"}else{var g={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[e[f]];if(g){e[f]=g}}}return e.join("")}});a.msubsup.Augment({toMathML:function(h){var e=this.type;if(this.data[this.sup]==null){e="msub"}if(this.data[this.sub]==null){e="msup"}var d=this.toMathMLattributes();delete this.data[0].inferred;var g=[];for(var f=0,c=this.data.length;f<c;f++){if(this.data[f]){g.push(this.data[f].toMathML(h+"  "))}}return h+"<"+e+d+">\n"+g.join("\n")+"\n"+h+"</"+e+">"}});a.munderover.Augment({toMathML:function(h){var e=this.type;if(this.data[this.under]==null){e="mover"}if(this.data[this.over]==null){e="munder"}var d=this.toMathMLattributes();delete this.data[0].inferred;var g=[];for(var f=0,c=this.data.length;f<c;f++){if(this.data[f]){g.push(this.data[f].toMathML(h+"  "))}}return h+"<"+e+d+">\n"+g.join("\n")+"\n"+h+"</"+e+">"}});a.TeXAtom.Augment({toMathML:function(d){var c=this.toMathMLattributes();if(!c&&this.data[0].data.length===1){return d.substr(2)+this.data[0].toMathML(d)}return d+"<mrow"+c+">\n"+this.data[0].toMathML(d+"  ")+"\n"+d+"</mrow>"}});a.chars.Augment({toMathML:function(c){return(c||"")+this.toMathMLquote(this.toString())}});a.entity.Augment({toMathML:function(c){return(c||"")+"&"+this.data[0]+";<!-- "+this.toString()+" -->"}});a.xml.Augment({toMathML:function(c){return(c||"")+this.toString()}});MathJax.Hub.Register.StartupHook("TeX mathchoice Ready",function(){a.TeXmathchoice.Augment({toMathML:function(c){return this.Core().toMathML(c)}})});MathJax.Hub.Startup.signal.Post("toMathML Ready")});MathJax.Ajax.loadComplete("[MathJax]/extensions/toMathML.js");
 
-    toMathML: function (space) {
-      var inferred = (this.inferred && this.parent.inferRow);
-      if (space == null) {space = ""}
-      var tag = this.type, attr = this.MathMLattributes();
-      if (tag === "mspace") {return space + "<"+tag+attr+" />"}
-      var data = []; var SPACE = (this.isToken ? "" : space+(inferred ? "" : "  "));
-      for (var i = 0, m = this.data.length; i < m; i++) {
-        if (this.data[i]) {data.push(this.data[i].toMathML(SPACE))}
-          else if (!this.isToken) {data.push(SPACE+"<mrow />")}
-      }
-      if (this.isToken) {return space + "<"+tag+attr+">"+data.join("")+"</"+tag+">"}
-      if (inferred) {return data.join("\n")}
-      if (data.length === 0 || (data.length === 1 && data[0] === ""))
-        {return space + "<"+tag+attr+" />"}
-      return space + "<"+tag+attr+">\n"+data.join("\n")+"\n"+ space +"</"+tag+">";
-    },
-
-    MathMLattributes: function () {
-      var attr = [], defaults = this.defaults;
-      var copy = this.copyAttributes,
-          skip = this.skipAttributes;
-
-      if (this.type === "math") {attr.push('xmlns="http://www.w3.org/1998/Math/MathML"')}
-      if (this.type === "mstyle") {defaults = MML.math.prototype.defaults}
-      for (var id in defaults) {if (!skip[id] && defaults.hasOwnProperty(id)) {
-        var force = (id === "open" || id === "close");
-        if (this[id] != null && (force || this[id] !== defaults[id])) {
-          var value = this[id]; delete this[id];
-          if (force || this.Get(id) !== value)
-            {attr.push(id+'="'+this.quoteHTML(value)+'"')}
-          this[id] = value;
-        }
-      }}
-      for (var i = 0, m = copy.length; i < m; i++) {
-        if (this[copy[i]] != null) {attr.push(copy[i]+'="'+this.quoteHTML(this[copy[i]])+'"')}
-      }
-      if (attr.length) {return " "+attr.join(" ")} else {return ""}
-    },
-    copyAttributes: [
-      "fontfamily","fontsize","fontweight","fontstyle",
-      "color","background",
-      "id","class","href","style"
-    ],
-    skipAttributes: {texClass: 1, useHeight: 1, texprimestyle: 1},
-    
-    quoteHTML: function (string) {
-      string = String(string).split("");
-      for (var i = 0, m = string.length; i < m; i++) {
-        var n = string[i].charCodeAt(0);
-        if (n < 0x20 || n > 0x7E) {
-          string[i] = "&#x"+n.toString(16).toUpperCase()+";";
-        } else {
-          var c = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;'}[string[i]];
-          if (c) {string[i] = c}
-        }
-      }
-      return string.join("");
-    }
-  });
-  
-  MML.msubsup.Augment({
-    toMathML: function (space) {
-      var tag = this.type;
-      if (this.data[this.sup] == null) {tag = "msub"}
-      if (this.data[this.sub] == null) {tag = "msup"}
-      var attr = this.MathMLattributes();
-      delete this.data[0].inferred;
-      var data = [];
-      for (var i = 0, m = this.data.length; i < m; i++)
-        {if (this.data[i]) {data.push(this.data[i].toMathML(space+"  "))}}
-      return space + "<"+tag+attr+">\n" + data.join("\n") + "\n" + space + "</"+tag+">";
-    }
-  });
-  
-  MML.munderover.Augment({
-    toMathML: function (space) {
-      var tag = this.type;
-      if (this.data[this.under] == null) {tag = "mover"}
-      if (this.data[this.over] == null)  {tag = "munder"}
-      var attr = this.MathMLattributes();
-      delete this.data[0].inferred;
-      var data = [];
-      for (var i = 0, m = this.data.length; i < m; i++)
-        {if (this.data[i]) {data.push(this.data[i].toMathML(space+"  "))}}
-      return space + "<"+tag+attr+">\n" + data.join("\n") + "\n" + space + "</"+tag+">";
-    }
-  });
-  
-  MML.TeXAtom.Augment({
-    toMathML: function (space) {
-      // FIXME:  Handle spacing using mpadded?
-      return space+"<mrow>\n"+this.data[0].toMathML(space+"  ")+"\n"+space+"</mrow>";
-    }
-  });
-  
-  MML.chars.Augment({
-    toMathML: function (space) {return (space||"") + this.quoteHTML(this.toString())}
-  });
-  
-  MML.entity.Augment({
-    toMathML: function (space) {return (space||"") + "&"+this.data[0]+";<!-- "+this.toString()+" -->"}
-  });
-  
-  MathJax.Hub.Register.StartupHook("TeX mathchoice Ready",function () {
-    MML.TeXmathchoice.Augment({
-      toMathML: function (space) {return this.Core().toMathML(space)}
-    });
-  });
-  
-  MathJax.Hub.Startup.signal.Post("toMathML Ready");
-  
-});
-
-MathJax.Ajax.loadComplete("[MathJax]/extensions/toMathML.js");
