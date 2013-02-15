@@ -1,5 +1,5 @@
-body 
-{ 
+body
+{
 	background-color: White;
     font-family: sans-serif;
 }
@@ -12,49 +12,51 @@ body
 	min-width: 500px;
 }
 
-.wmd-button-bar 
+.wmd-button-bar
 {
 	width: 100%;
 	height: 400px;
-	background-color: Silver; 
+	background-color: Silver;
 }
 
-.wmd-input 
-{ 
+.wmd-input
+{
 	margin: 10px 10px 10px 10px;
 	width: 100%;
 	height: auto;
-	min-height: 450px;
-	background-color: #ffffff;
+	min-height: 600px;
+    font-family: anonymous-pro, serif;
+	background-color: #fcfcfa;
 	border: 1px solid DarkGray;
 }
 
-.wmd-preview 
-{ 
+.wmd-preview
+{
+    font-family: 'Vollkorn', serif;
 	margin: 10px 10px 10px 10px;
-	background-color: #ffffff; 
+	background-color: #ffffff;
 }
 
-.wmd-button-row 
+.wmd-button-row
 {
-	position: relative; 
+	position: relative;
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-bottom: 5px;
 	margin-top: 10px;
-	padding: 0px;  
+	padding: 0px;
 	height: 20px;
 }
 
 .wmd-spacer
 {
-	width: 1px; 
-	height: 20px; 
+	width: 1px;
+	height: 20px;
 	margin-left: 14px;
-	
+
 	position: absolute;
 	background-color: Silver;
-	display: inline-block; 
+	display: inline-block;
 	list-style: none;
 }
 
