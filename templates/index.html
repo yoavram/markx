@@ -13,15 +13,26 @@
 			</button>
 			<button id="btn-github-signout" class="btn" rel="tooltip" title="Sign out of GitHub" style="display: none;">
 				<i class="icon-exit"></i>
-			</button>	
+			</button>
 			<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">
 				<i class=" icon-screen"></i>
 			</button>
-			<button class="btn" id="btn-citations" rel="tooltip" title="Update citations list">
-				<i class="icon-books"></i>
-			</button>			
 			<div class="btn-group">
-				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and convert. May take up to a minute.">
+				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Citations and Bibliography">
+					<i class="icon-books"></i>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href='#' id="btn-citations">
+						Update citations
+					</a></li>
+					<li><a href="#modal-bib-file-input" id="btn-bib-file-input-show" role="button" data-toggle="modal" rel="tooltip" title="Choose a bibliography file">
+						Load a Bibliography File
+					</a></li>
+				</ul>
+			</div>
+			<div class="btn-group">
+				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Download and Convert. May take up to a minute.">
 					<i class="icon-download-2"></i>
 					<span class="caret"></span>
 				</button>
@@ -75,7 +86,7 @@
 			</select>
 			<button id="branch-ok" class="btn" rel="tooltip" title="Open branch">
 				<i class="icon-folder-open"></i>
-			</button>		
+			</button>
 			<select class="input-medium" type="text" id="path" placeholder="/path/to/file" style="margin: auto 5px">
 			</select>
 
@@ -85,8 +96,8 @@
 				</button>
 				<button class="btn" id="btn-commit-push" rel="tooltip" title="Commit file and push">
 					<i class="icon-cloud-upload"></i>
-				</button>		
-			</div>	
+				</button>
+			</div>
 			<input class="input" type="text" id="commit-message" placeholder="Commit message: Fixed typos" style="margin: auto 5px">
 		</div>
 	</div>
@@ -108,6 +119,8 @@
 </div>
 {% include 'github_signin.html' %}
 
+{% include 'bib_file_input.html' %}
+
 {% endblock header %}
 
 {% block left %}
@@ -127,10 +140,11 @@
 	<div id="bibtex_display" class="wmd-panel wmd-preview">
 	</div>
 </div>
-{% endblock right %}	
+<textarea id="bibtex_input" style="display:none;">
+</textarea>
+{% endblock right %}
 
 {% block footer %}
-
 <script type="text/javascript">
 /* markdown editor */
 var editor = init_markdown_editor();
@@ -138,7 +152,8 @@ $('#wmd-input-second').wordCount({counterElement:"word_counter"});
 
 /* citations */
 $("#btn-citations").click(updateCitations);
-updateCitations();
+$('#bibtex-file').change(readBibFile);
+initBibtex('');
 
 /* code highlighting stuff */
 $(function() {
@@ -229,7 +244,7 @@ $(function() {
 	$('#btn-download-pdf').click(function() {
 		if (window.location.hostname == 'localhost' || getConverter == 'docverter') {
 			save('pdf', view);
-		} else {		
+		} else {
 			save('latex', function(filename) {
 				var filepath = window.location.origin + '/view/' + filename;
 				window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
@@ -249,13 +264,11 @@ $(function() {
 		save('html', view);
 	});
 	$('#btn-converter').click(function() {
-	  /*if ($(this).text() == 'D') 
+	  /*if ($(this).text() == 'D')
 	    $(this).text('P');
-	  else 
+	  else
 	    $(this).text('D');*/
 	});
-
-	document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 })
 /* display */
 var panelsDisplayStatus = 'dual';
@@ -263,6 +276,7 @@ $(function() {
 	$('#btn-display-panels').click(panelsDisplay);
 })
 </script>
+
 
 {% if config.GOOGLE_ANALYTICS %}
 	<script type="text/javascript">
@@ -282,4 +296,4 @@ $(function() {
 <textarea id="bibtex_input" style="display:none;">
 
 </textarea>
-{%endblock footer %}	
+{%endblock footer %}

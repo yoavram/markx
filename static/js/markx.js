@@ -227,40 +227,66 @@ function getEditor() {
 
 /* citations */
 
+var bibtex = null; // the user's citation library
+var citationList = null; // the document citation list
+
+function readBibFile(evt) {
+    // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
+    //Retrieve the first (and only!) File from the FileList object
+    $('#modal-bib-file-input').modal('hide')
+    var f = evt.target.files[0]; 
+
+    if (f) {
+    	var r = new FileReader();
+    	r.onload = function(e) {     		
+ 		initBibtex(e.target.result); 
+    		infoMessage("BibTeX file loaded with " + bibtex.amount().toString() + " entires");
+    	}
+    	r.readAsText(f);
+    } else { 
+    	alert("Failed to load file");
+    }
+}
+
+function initBibtex(bibtexContent) {
+	bibtex = new BibTex();
+	bibtex.content = bibtexContent; // the bibtex content as a string
+	bibtex.parse();
+	updateCitations();
+}
+
 function getBibtex() {
 	return($('#bibtex_input').val())
 }
 
 function updateCitations() {
 	// clear citations
-	$('#bibtex_input').text('');
+	citationList = new BibTex();
+	$('#bibtex_input').val('');
 	$('#bibtex_display').html('');
 	// redo citations
 	var regex = /\[?-?@(\w+)\]?/gm; 
 	var input = $('#wmd-input-second').val();
-	var seen = new Array();
+	var citationKeys = new Array();
 	var match = regex.exec(input);
 	while (match != null) {
 		var citationKey = match[1];
-		if (seen.indexOf(citationKey ) == -1) {
-			seen.push(citationKey);
-			getCitation(citationKey);
-		}
+		citationKeys.push(citationKey);
 		match = regex.exec(input);
 	}
+	citationKeys = _.uniq(citationKeys);
+	_.each(citationKeys, addCitation);
+	$('#bibtex_input').val(citationList.bibTex());
+	$('#bibtex_display').html(citationList.html());
 }
 
-
-function getCitation(citation) {
-	$.getJSON('/bibtex', {
-		key: citation
-	}, function(data) {
-		// data is a bibtex entry
-		// append it to the bibtex hidden textarea
-		$('#bibtex_input').append(data.result); 
-		// and call bibtex.js function to render citations list
-		bibtex_js_draw();
-	});
+function addCitation(citation) {
+	var entry = _.find(bibtex.data, function(bibEntry) {
+		return bibEntry.cite == citation;
+	})
+	if (entry) {
+		citationList.addEntry(entry);
+	}
 }
 
 

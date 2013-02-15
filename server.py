@@ -6,7 +6,6 @@ sys.setdefaultencoding('utf-8')
 from flask import Flask, request, render_template, jsonify, Response, send_file
 import os
 import os.path
-import bibi
 import subprocess
 import requests
 
@@ -25,16 +24,15 @@ ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
 DEFAULT_TEXT_FILE = "HELP.md"
 with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
-PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
+PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']
 DOCVERTER_URL =   'http://c.docverter.com/convert'
 
 app = Flask(__name__)
-app.config.from_object(__name__) 
+app.config.from_object(__name__)
 print " * Overriding deafult configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
 if app.debug:
 	print " * Running in debug mode"
-bib = bibi.parse_file(app.config['BIB_FILE'])
 
 
 mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
@@ -89,7 +87,7 @@ def docverter(filename, extension, bibpath):
             'variable': 'geometry:' + app.config['DEFAULT_LATEX_PAPER_SIZE']
             },
                 files={
-                'input_files[]': filestream 
+                'input_files[]': filestream
             })
     if docverter_response.ok:
         print ' * Request was successful:', docverter_response.status_code
@@ -130,13 +128,6 @@ def save():
         return jsonify(error=result)
 
 
-@app.route('/bibtex')
-def bibtex():
-    keys = [request.args.get('key', '', type=str)]
-    string = bibi.to_string(bib, keys)
-    return jsonify(result=string)
-
-
 @app.route('/download/<string:filename>')
 def download(filename):
     extension = os.path.splitext(filename)[1][1:].strip()
@@ -157,5 +148,5 @@ def index():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))            
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=app.debug)
