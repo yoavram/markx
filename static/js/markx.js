@@ -183,10 +183,26 @@ function pullFromGithub(branchname, filepath, text, callback) {
 	repo.read(branchname, filepath, function (err, data) {
 		if (err) {
 			alertMessage(err['message']);
+			return false;
 		} else {
 			updateEditor(data);
 		}
 	});
+	
+	var mdIndex = filepath.lastIndexOf('.md');
+	if (mdIndex >= 0) {
+		var bibtexPath = filepath.substring(0, mdIndex) + '.bib';
+		repo.read(branchname, bibtexPath, function (err, data) {
+			if (err) {
+				alertMessage(err['message']);
+				return false;
+			} else {
+				alert("debug: loaded bibtex");
+				$('#bibtex_input').val(data);
+				updateCitations();
+			}
+		});
+	}
 }
 
 function pushToGithub(branchname, filepath, commit_msg, text) {
@@ -209,11 +225,27 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 	repo.write(branchname, filepath, text, commit_msg, function (err) {
 		if (err) {
 			alertMessage(err['message']);
+			return false;
 		} else {
 			infoMessage("Commit was successful");
 			$('#commit-message').val('');
 		}
 	});
+
+	var mdIndex = filepath.lastIndexOf('.md');
+	if (mdIndex >= 0) {
+		updateCitations();
+		var bibtexContent = getBibtex();
+		var bibtexPath = filepath.substring(0, mdIndex) + '.bib';
+		repo.write(branchname, bibtexPath, bibtexContent, commit_msg, function (err) {
+			if (err) {
+				alertMessage(err['message']);
+				return false;
+			} else {
+				infoMessage("Commit was successful, included BibTeX file");
+			}
+		});
+	}
 }
 
 function updateEditor(text) {
