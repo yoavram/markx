@@ -215,22 +215,20 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 			infoMessage("Commit was successful");
 			$('#commit-message').val('');
 		}
+		if (confirm("Push bibliography file too?")) {
+			updateCitations();
+			var bibtexContent = getBibtex();
+			var bibtexPath = filepath + '.bib';
+			repo.write(branchname, bibtexPath, bibtexContent, 'Update bibliography: ' + commit_msg, function (err) {
+				if (err) {
+					alertMessage(err['message']);
+					return false;
+				} else {
+					infoMessage("Commit was successful, included bibliography file");
+				}
+			});
+		}
 	});
-
-	var mdIndex = filepath.lastIndexOf('.md');
-	if (mdIndex >= 0) {
-		updateCitations();
-		var bibtexContent = getBibtex();
-		var bibtexPath = filepath.substring(0, mdIndex) + '.bib';
-		repo.write(branchname, bibtexPath, bibtexContent, commit_msg, function (err) {
-			if (err) {
-				alertMessage(err['message']);
-				return false;
-			} else {
-				infoMessage("Commit was successful, included BibTeX file");
-			}
-		});
-	}
 }
 
 function updateEditor(text) {
