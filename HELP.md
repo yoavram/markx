@@ -19,20 +19,16 @@ You can use $LaTeX$. Just write it between `$`s or `\\(` and `\\)` for inline eq
 - Display mode: $$\frac{df(x)}{dt}=lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
 
 #### Citations
-You should create a new `config.py` file in the Markx repository with the key-value pair 
-```
-BIB_FILE = r'/path/to/bib/file'
-```
-replacing `/path/to/bib/file` with the *absolute* path to a `.bib` BibTeX citations file (no `~`s in the path). If you don't have one than Markx doesn't support your citation format yet. If you use Mendeley it is easy to set it up to [sync to a BibTeX file](http://blog.mendeley.com/tipstricks/howto-use-mendeley-to-create-citations-using-latex-and-bibtex/). If you do not supply a path to a `.bib` file you will not be able to use the citations features of Markx. 
+To start working with citations in Markx you need to click the *Load a Bibliography file* from the *Citations* <i class="icon-books"></i> menu. The file should be in [BibTeX] format - if you don't have one than Markx doesn't support your citation format yet, but you might be able to convert a different format to BibTeX using online tools. If you use Mendeley it is easy to set it up to [sync to a BibTeX file](http://blog.mendeley.com/tipstricks/howto-use-mendeley-to-create-citations-using-latex-and-bibtex/). If you do not load a `.bib` file you will not be able to use the citations features of Markx. 
 
-To insert a citation, get the citation key - usually the last name of the first author, with a capital initial, and the year of publication, without spaces. If the `.bib` file has more than one publication with that key they are post-fixed with lowercase letters. Then add the citation key to the editor, wrapped by `[@` and `]`.
+To insert a citation, find the citation key - usually the last name of the first author, with a capital initial, and the year of publication, without spaces. If the `.bib` file has more than one publication with that key they are post-fixed with lowercase letters. Then add the citation key to the editor, wrapped by `[@` and `]`.
 For example: `[@Drake1991]`. Markx doesn't currently preview the citation keys in the previewed text, but it does:
 
 1. create a bibliography at the bottom of the preview text
-1. allows you to download a `.bib` file corresponding to the citation keys in the Markdown text
-1. send the bibliography to [Pandoc] for conversion
+1. allows you to download a `.bib` file corresponding to the citation keys in the Markdown text via the *Download* <i class="icon-download-2"></i> menu
+1. send the bibliography to [Pandoc] for conversion ([Docverter] does not support citations)
 
-You must click the *update citations* <i class="icon-books"></i> button after adding, removing or changing citaiton keys, as they will not be updated in real-time.
+You must click the *Update Citations* button in the *Citations* <i class="icon-books"></i> menu after adding, removing or changing citation keys, as they will not be updated in real-time.
 
 ### Toolbar
 1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
