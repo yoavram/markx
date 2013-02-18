@@ -127,7 +127,7 @@ function loadRepoBranches(username, reponame) {
 
 function loadBranchPaths(branchname) {
 	$('#path').empty();
-	repo.getTree(branchname, function(err, tree) {
+	repo.getTree(branchname + '?recursive=true', function(err, tree) {
 		if (err) {
 			alertMessage(err['message']);
 			return false;
