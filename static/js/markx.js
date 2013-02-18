@@ -188,24 +188,6 @@ function pullFromGithub(branchname, filepath, text, callback) {
 			updateEditor(data);
 		}
 	});
-	
-	var mdIndex = filepath.lastIndexOf('.md');
-	if (mdIndex >= 0) {
-		var bibtexPath = filepath.substring(0, mdIndex) + '.bib';
-		if (_.filter(v.children(), function(x)  {return(x.value=='test.md')} ).length > 0) {
-			repo.read(branchname, bibtexPath, function (err, data) {
-				if (err) {
-					alertMessage(err['message']);
-					alert("debug: no bib file");
-					return false;
-				} else {
-					alert("debug: loaded bibtex");
-					$('#bibtex_input').val(data);
-					updateCitations();
-				}
-			});
-		}
-	}
 }
 
 function pushToGithub(branchname, filepath, commit_msg, text) {
