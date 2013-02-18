@@ -33,11 +33,11 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 ### Toolbar
 1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
 1. Use the *Screen* <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
-1. Use the *Books* <i class="icon-books"></i> button to **parse citation keys** such as [@Drake1991].
-1. Use the *Download* <i class="icon-download-2"></i> button to **download and convert** the Markdown text to various format or to download a *BibTeX* file of the citations referenced in the text.
+1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991] and to load a bibliography file.
+1. Use the *Download* <i class="icon-download-2"></i> menu to **download and convert** the Markdown text to various formats or to download a [Markdown] of the text or a [BibTeX] file of the citations referenced in the text.
 1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
-  - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF.
- - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
+  - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF
+ - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography
 1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
 1. The grey box with the numbers displays the **word count**.
 
@@ -67,6 +67,16 @@ The buttons above the editor window are part of the [PageDown] markdown editor. 
 ### Support
 The best way to get support is to open an [issue]. If you can't open issue because you don't have a [GitHub] user, just get one, they are free. 
 
+### Install locally
+
+If the hosted app at <http://markx.herokuapp.com> doesn't work for you (which is possible as it is still rough around the edges) you can install Markx locally:
+
+1. Install Python 2.7.x (may work with other versions of python)
+1. If you know about `virtualenv`, you can use the bundled `requirements.txt` file
+1. Otherwise, install the requirements globally with `pip install flask requests`
+1. Run Markx with `python server.py`
+1. Open your browser at <http://localhost:5000>
+
 ### Contribution
 We would love for you to contribute to Markx. The project code is hosted in [GitHub][Markx]. Fork the project or open an [issue] so we can talk on how we can collaborate. 
 
@@ -78,7 +88,7 @@ The client side is written with HTML+CSS+JS, using the JavaScript libraries:
 1. [Twitter Bootstrap] and [jQuery] for the UI
 1. [PageDown] as the Markdown editor and real-time HTML converter 
 1. [Github.js] for the GitHub API
-1. [BibTeX-js] for previewing the bibliography
+1. [Javascript BibTeX Parser] processing citation keys and bibliography files
 1. [Google Code Prettifier] for code highlighting
 1. [MathJax] for math rendering
 
@@ -94,7 +104,7 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [Icomoon Free]: http://keyamoon.com/icomoon/
 [MathJax]: http://mathjax.org/
 [PageDown]: http://code.google.com/p/pagedown/
-[BibTeX-js]: http://bibtex-js.googlecode.com/
+[Javascript BibTeX Parser]: http://sourceforge.net/projects/jsbibtex/
 [Stack Overflow]: http://stackoverflow.com/
 [git]: http://git-scm.com/
 [BibTeX]: http://www.bibtex.org/
