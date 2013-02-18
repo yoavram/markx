@@ -133,7 +133,7 @@ function loadBranchPaths(branchname) {
 			return false;
 		} 
 		jQuery.each(tree, function(index, item){
-			var path =$.trim(item['path']);
+			var path = $.trim(item['path']);
 			var option = '<option value="' + path + '">' + path + '</option>';
 			$('#path').append(option);	
 		});
@@ -192,16 +192,19 @@ function pullFromGithub(branchname, filepath, text, callback) {
 	var mdIndex = filepath.lastIndexOf('.md');
 	if (mdIndex >= 0) {
 		var bibtexPath = filepath.substring(0, mdIndex) + '.bib';
-		repo.read(branchname, bibtexPath, function (err, data) {
-			if (err) {
-				alertMessage(err['message']);
-				return false;
-			} else {
-				alert("debug: loaded bibtex");
-				$('#bibtex_input').val(data);
-				updateCitations();
-			}
-		});
+		if (_.filter(v.children(), function(x)  {return(x.value=='test.md')} ).length > 0) {
+			repo.read(branchname, bibtexPath, function (err, data) {
+				if (err) {
+					alertMessage(err['message']);
+					alert("debug: no bib file");
+					return false;
+				} else {
+					alert("debug: loaded bibtex");
+					$('#bibtex_input').val(data);
+					updateCitations();
+				}
+			});
+		}
 	}
 }
 
