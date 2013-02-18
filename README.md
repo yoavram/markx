@@ -64,8 +64,8 @@ If you can't open an issue please contact Yoav on [twitter](http://www.twitter.c
 1. Clone [this repository](https://github.com/yoavram/markx/)
 1. Install [Python] - developed with version 2.7 
 1. Install [Flask] and [requests]: `pip install Flask requests`
-1. Optional: Add an environment variable named `BIB_FILE` with the path to your BibTeX `.bib` file, or create `config.py` file with the key-value `BIB_FILE = "/path/to/bib/file"` or replace the file `library.bib` with your own `.bib` file. Note that the path should be absolute and should not start with a `~`.
 1. Run Markx by calling `python server.py` and pointing your browser at <http://localhost:5000>.
+1. Load a BibTeX file with your citation library by choosing `Load a Bibliography File` from the `Bibliography` menu
 
 More help can be found in the [help file](https://github.com/yoavram/markx/blob/master/HELP.md).
 
