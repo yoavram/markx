@@ -19,29 +19,25 @@ You can use $LaTeX$. Just write it between `$`s or `\\(` and `\\)` for inline eq
 - Display mode: $$\frac{df(x)}{dt}=lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
 
 #### Citations
-You should create a new `config.py` file in the Markx repository with the key-value pair 
-```
-BIB_FILE = r'/path/to/bib/file'
-```
-replacing `/path/to/bib/file` with the *absolute* path to a `.bib` BibTeX citations file (no `~`s in the path). If you don't have one than Markx doesn't support your citation format yet. If you use Mendeley it is easy to set it up to [sync to a BibTeX file](http://blog.mendeley.com/tipstricks/howto-use-mendeley-to-create-citations-using-latex-and-bibtex/). If you do not supply a path to a `.bib` file you will not be able to use the citations features of Markx. 
+To start working with citations in Markx you need to click the *Load a Bibliography file* from the *Citations* <i class="icon-books"></i> menu. The file should be in [BibTeX] format - if you don't have one than Markx doesn't support your citation format yet, but you might be able to convert a different format to BibTeX using online tools. If you use Mendeley it is easy to set it up to [sync to a BibTeX file](http://blog.mendeley.com/tipstricks/howto-use-mendeley-to-create-citations-using-latex-and-bibtex/). If you do not load a `.bib` file you will not be able to use the citations features of Markx. 
 
-To insert a citation, get the citation key - usually the last name of the first author, with a capital initial, and the year of publication, without spaces. If the `.bib` file has more than one publication with that key they are post-fixed with lowercase letters. Then add the citation key to the editor, wrapped by `[@` and `]`.
+To insert a citation, find the citation key - usually the last name of the first author, with a capital initial, and the year of publication, without spaces. If the `.bib` file has more than one publication with that key they are post-fixed with lowercase letters. Then add the citation key to the editor, wrapped by `[@` and `]`.
 For example: `[@Drake1991]`. Markx doesn't currently preview the citation keys in the previewed text, but it does:
 
 1. create a bibliography at the bottom of the preview text
-1. allows you to download a `.bib` file corresponding to the citation keys in the Markdown text
-1. send the bibliography to [Pandoc] for conversion
+1. allows you to download a `.bib` file corresponding to the citation keys in the Markdown text via the *Download* <i class="icon-download-2"></i> menu
+1. send the bibliography to [Pandoc] for conversion ([Docverter] does not support citations)
 
-You must click the *update citations* <i class="icon-books"></i> button after adding, removing or changing citaiton keys, as they will not be updated in real-time.
+You must click the *Update Citations* button in the *Citations* <i class="icon-books"></i> menu after adding, removing or changing citation keys, as they will not be updated in real-time.
 
 ### Toolbar
 1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
 1. Use the *Screen* <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
-1. Use the *Books* <i class="icon-books"></i> button to **parse citation keys** such as [@Drake1991].
-1. Use the *Download* <i class="icon-download-2"></i> button to **download and convert** the Markdown text to various format or to download a *BibTeX* file of the citations referenced in the text.
+1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991] and to load a bibliography file.
+1. Use the *Download* <i class="icon-download-2"></i> menu to **download and convert** the Markdown text to various formats or to download a [Markdown] of the text or a [BibTeX] file of the citations referenced in the text.
 1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
-  - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF.
- - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
+  - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF
+ - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography
 1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
 1. The grey box with the numbers displays the **word count**.
 
@@ -71,6 +67,16 @@ The buttons above the editor window are part of the [PageDown] markdown editor. 
 ### Support
 The best way to get support is to open an [issue]. If you can't open issue because you don't have a [GitHub] user, just get one, they are free. 
 
+### Install locally
+
+If the hosted app at <http://markx.herokuapp.com> doesn't work for you (which is possible as it is still rough around the edges) you can install Markx locally:
+
+1. Install Python 2.7.x (may work with other versions of python)
+1. If you know about `virtualenv`, you can use the bundled `requirements.txt` file
+1. Otherwise, install the requirements globally with `pip install flask requests`
+1. Run Markx with `python server.py`
+1. Open your browser at <http://localhost:5000>
+
 ### Contribution
 We would love for you to contribute to Markx. The project code is hosted in [GitHub][Markx]. Fork the project or open an [issue] so we can talk on how we can collaborate. 
 
@@ -82,7 +88,7 @@ The client side is written with HTML+CSS+JS, using the JavaScript libraries:
 1. [Twitter Bootstrap] and [jQuery] for the UI
 1. [PageDown] as the Markdown editor and real-time HTML converter 
 1. [Github.js] for the GitHub API
-1. [BibTeX-js] for previewing the bibliography
+1. [Javascript BibTeX Parser] processing citation keys and bibliography files
 1. [Google Code Prettifier] for code highlighting
 1. [MathJax] for math rendering
 
@@ -98,7 +104,7 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [Icomoon Free]: http://keyamoon.com/icomoon/
 [MathJax]: http://mathjax.org/
 [PageDown]: http://code.google.com/p/pagedown/
-[BibTeX-js]: http://bibtex-js.googlecode.com/
+[Javascript BibTeX Parser]: http://sourceforge.net/projects/jsbibtex/
 [Stack Overflow]: http://stackoverflow.com/
 [git]: http://git-scm.com/
 [BibTeX]: http://www.bibtex.org/
