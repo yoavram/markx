@@ -56,21 +56,25 @@ def save_text_file(filename, content):
 
 def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
-    inname = path_to_file(filename + '.md')
-    options = ['pandoc', inname, '-o', outname]
+    options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
     options += ['-s'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     if os.path.exists(bibpath):
         options += ['--bibliography=' + bibpath]
-    print ' * Sending command to Pandoc for file', filename, 'with options', options
-    p = subprocess.Popen(options, stdout=subprocess.PIPE)
-    stdoutdata, stderrdata = p.communicate()
-    if stderrdata:
-        print ' * Command failed:', stderrdata
-        return False, "Pandoc failed: " + stderrdata
-    else:
-        print ' * Command was successful:', stdoutdata
+    if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
+        csl_file = app.config['CSL_FILES'][0]
+        options += ['--csl=' + os.path.join(CSL_FOLDER, csl_file)]
+    if 'ABBR_FILES' in app.config and len(app.config['ABBR_FILES']) > 0:
+        abbr_file = app.config['ABBR_FILES'][0]
+        options += ['--citation-abbreviations=' + os.path.join(CSL_FOLDER, abbr_file)]
+    try:
+        print ' * Sending command to Pandoc for file', filename
+        pandoc_result = subprocess.check_call(options)
+        print ' * Command was successful:', pandoc_result
         return True, filename + '.' + extension
+    except subprocess.CalledProcessError as e:
+        print ' * Command failed:', e.returncode
+        return False, "Pandoc return code " + str(e.returncode)
 
 
 def docverter(filename, extension, bibpath):
