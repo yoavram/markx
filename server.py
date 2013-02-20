@@ -67,14 +67,16 @@ def pandoc(filename, extension, bibpath):
     if 'ABBR_FILES' in app.config and len(app.config['ABBR_FILES']) > 0:
         abbr_file = app.config['ABBR_FILES'][0]
         options += ['--citation-abbreviations=' + os.path.join(CSL_FOLDER, abbr_file)]
-    try:
-        print ' * Sending command to Pandoc for file', filename
-        pandoc_result = subprocess.check_call(options)
-        print ' * Command was successful:', pandoc_result
+    print ' * Sending command to Pandoc for file', filename
+    pandoc_result = subprocess.check_call(options)
+    p = subprocess.Popen(options, stdout=subprocess.PIPE)
+    stdoutdata, stderrdata = p.communicate()
+    if stderrdata:
+        print ' * Command failed:', stderrdata
+        return False, "Pandoc failed: " + stderrdata
+    else:
+        print ' * Command was successful:', stdoutdata
         return True, filename + '.' + extension
-    except subprocess.CalledProcessError as e:
-        print ' * Command failed:', e.returncode
-        return False, "Pandoc return code " + str(e.returncode)
 
 
 def docverter(filename, extension, bibpath):
