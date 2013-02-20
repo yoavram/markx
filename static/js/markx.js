@@ -238,21 +238,21 @@ function getEditor() {
 var bibtex = null; // the user's citation library
 var citationList = null; // the document citation list
 
-function readBibFile(evt) {
+function readBibFile() {
     // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
-    //Retrieve the first (and only!) File from the FileList object
+    // Retrieve the first (and only!) File from the FileList object
     $('#modal-bib-file-input').modal('hide')
-    var f = evt.target.files[0]; 
+    var f = document.getElementById('bibtex-file').files[0];
 
     if (f) {
     	var r = new FileReader();
-    	r.onload = function(e) {     		
+	r.onload = function(e) {
  		initBibtex(e.target.result); 
     		infoMessage("BibTeX file loaded with " + bibtex.amount().toString() + " entires");
     	}
     	r.readAsText(f);
     } else { 
-    	alert("Failed to load file");
+    	alert("Failed to load BibTeX file");
     }
 }
 
