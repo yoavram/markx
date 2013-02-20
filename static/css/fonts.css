@@ -25,7 +25,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"]:before {
 */
-.icon-home:before, .icon-quill:before, .icon-image:before, .icon-camera:before, .icon-file:before, .icon-file-2:before, .icon-profile:before, .icon-file-3:before, .icon-books:before, .icon-file-4:before, .icon-copy:before, .icon-copy-2:before, .icon-copy-3:before, .icon-paste:before, .icon-paste-2:before, .icon-folder-open:before, .icon-tag:before, .icon-tags:before, .icon-envelop:before, .icon-notebook:before, .icon-support:before, .icon-calendar:before, .icon-print:before, .icon-keyboard:before, .icon-screen:before, .icon-mobile:before, .icon-drawer:before, .icon-drawer-2:before, .icon-box-add:before, .icon-box-remove:before, .icon-download:before, .icon-users:before, .icon-user:before, .icon-bubbles:before, .icon-bubbles-2:before, .icon-reply:before, .icon-forward:before, .icon-redo:before, .icon-undo:before, .icon-undo-2:before, .icon-redo-2:before, .icon-upload:before, .icon-disk:before, .icon-user-2:before, .icon-quotes-left:before, .icon-busy:before, .icon-spinner:before, .icon-spinner-2:before, .icon-search:before, .icon-expand:before, .icon-contract:before, .icon-expand-2:before, .icon-zoom-out:before, .icon-zoom-in:before, .icon-stats:before, .icon-aid:before, .icon-bars:before, .icon-briefcase:before, .icon-remove:before, .icon-lab:before, .icon-bars-2:before, .icon-contract-2:before, .icon-key:before, .icon-unlocked:before, .icon-lock:before, .icon-wrench:before, .icon-settings:before, .icon-cogs:before, .icon-switch:before, .icon-signup:before, .icon-list:before, .icon-tree:before, .icon-cloud-upload:before, .icon-cloud-download:before, .icon-star:before, .icon-contrast:before, .icon-eye:before, .icon-eye-blocked:before, .icon-attachment:before, .icon-link:before, .icon-earth:before, .icon-upload-2:before, .icon-download-2:before, .icon-info:before, .icon-spam:before, .icon-checkmark-circle:before, .icon-cancel-circle:before, .icon-enter:before, .icon-exit:before, .icon-loop:before, .icon-sigma:before, .icon-omega:before, .icon-code:before, .icon-embed:before, .icon-twitter:before, .icon-facebook:before, .icon-feed:before, .icon-wordpress:before, .icon-github:before, .icon-github-2:before, .icon-github-3:before, .icon-file-word:before, .icon-file-openoffice:before, .icon-file-pdf:before, .icon-libreoffice:before, .icon-file-excel:before, .icon-file-zip:before, .icon-file-powerpoint:before, .icon-file-xml:before, .icon-file-css:before, .icon-html5:before, .icon-firefox:before, .icon-chrome:before, .icon-IE:before, .icon-opera:before, .icon-safari:before, .icon-IcoMoon:before, .icon-book:before {
+.icon-home:before, .icon-quill:before, .icon-image:before, .icon-camera:before, .icon-file:before, .icon-file-2:before, .icon-profile:before, .icon-file-3:before, .icon-books:before, .icon-file-4:before, .icon-copy:before, .icon-copy-2:before, .icon-copy-3:before, .icon-paste:before, .icon-paste-2:before, .icon-folder-open:before, .icon-tag:before, .icon-tags:before, .icon-envelop:before, .icon-notebook:before, .icon-support:before, .icon-calendar:before, .icon-print:before, .icon-keyboard:before, .icon-screen:before, .icon-mobile:before, .icon-drawer:before, .icon-drawer-2:before, .icon-box-add:before, .icon-box-remove:before, .icon-download:before, .icon-users:before, .icon-user:before, .icon-bubbles:before, .icon-bubbles-2:before, .icon-reply:before, .icon-forward:before, .icon-redo:before, .icon-undo:before, .icon-undo-2:before, .icon-redo-2:before, .icon-upload:before, .icon-disk:before, .icon-user-2:before, .icon-quotes-left:before, .icon-busy:before, .icon-spinner:before, .icon-spinner-2:before, .icon-search:before, .icon-expand:before, .icon-contract:before, .icon-expand-2:before, .icon-zoom-out:before, .icon-zoom-in:before, .icon-stats:before, .icon-aid:before, .icon-bars:before, .icon-briefcase:before, .icon-remove:before, .icon-lab:before, .icon-bars-2:before, .icon-contract-2:before, .icon-key:before, .icon-unlocked:before, .icon-lock:before, .icon-wrench:before, .icon-settings:before, .icon-cogs:before, .icon-switch:before, .icon-signup:before, .icon-list:before, .icon-tree:before, .icon-cloud-upload:before, .icon-cloud-download:before, .icon-star:before, .icon-contrast:before, .icon-eye:before, .icon-eye-blocked:before, .icon-attachment:before, .icon-link:before, .icon-earth:before, .icon-upload-2:before, .icon-download-2:before, .icon-info:before, .icon-spam:before, .icon-checkmark-circle:before, .icon-cancel-circle:before, .icon-enter:before, .icon-exit:before, .icon-loop:before, .icon-sigma:before, .icon-omega:before, .icon-code:before, .icon-embed:before, .icon-twitter:before, .icon-facebook:before, .icon-feed:before, .icon-wordpress:before, .icon-github:before, .icon-github-2:before, .icon-github-3:before, .icon-file-word:before, .icon-file-openoffice:before, .icon-file-pdf:before, .icon-libreoffice:before, .icon-file-excel:before, .icon-file-zip:before, .icon-file-powerpoint:before, .icon-file-xml:before, .icon-file-css:before, .icon-html5:before, .icon-firefox:before, .icon-chrome:before, .icon-IE:before, .icon-opera:before, .icon-safari:before, .icon-IcoMoon:before, .icon-book:before, .icon-pencil:before, .icon-pencil-2:before, .icon-stack:before, .icon-folder:before, .icon-cloud:before, .icon-flag:before, .icon-notification:before, .icon-warning:before, .icon-question:before, .icon-info-2:before, .icon-checkmark:before, .icon-checkmark-2:before, .icon-plus:before, .icon-minus:before, .icon-close:before, .icon-arrow-right:before, .icon-arrow-down-right:before, .icon-arrow-up-right:before, .icon-arrow-up:before, .icon-arrow-up-left:before, .icon-arrow-down:before, .icon-arrow-down-left:before, .icon-arrow-left:before, .icon-arrow-left-2:before, .icon-arrow-down-left-2:before, .icon-arrow-down-2:before, .icon-arrow-down-right-2:before, .icon-arrow-right-2:before, .icon-arrow-up-right-2:before, .icon-arrow-up-2:before, .icon-arrow-up-left-2:before, .icon-checkbox-unchecked:before, .icon-checkbox-checked:before, .icon-google-plus:before, .icon-feed-2:before, .icon-twitter-2:before, .icon-twitter-3:before, .icon-html5-2:before {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -386,4 +386,118 @@ you can use the generic selector below, but it's slower:
 }
 .icon-book:before {
 	content: "\e001";
+}
+.icon-pencil:before {
+	content: "\e002";
+}
+.icon-pencil-2:before {
+	content: "\e003";
+}
+.icon-stack:before {
+	content: "\e004";
+}
+.icon-folder:before {
+	content: "\e005";
+}
+.icon-cloud:before {
+	content: "\e006";
+}
+.icon-flag:before {
+	content: "\e008";
+}
+.icon-notification:before {
+	content: "\e009";
+}
+.icon-warning:before {
+	content: "\e00a";
+}
+.icon-question:before {
+	content: "\e00b";
+}
+.icon-info-2:before {
+	content: "\e00d";
+}
+.icon-checkmark:before {
+	content: "\e00e";
+}
+.icon-checkmark-2:before {
+	content: "\e010";
+}
+.icon-plus:before {
+	content: "\e011";
+}
+.icon-minus:before {
+	content: "\e012";
+}
+.icon-close:before {
+	content: "\e013";
+}
+.icon-arrow-right:before {
+	content: "\e014";
+}
+.icon-arrow-down-right:before {
+	content: "\e015";
+}
+.icon-arrow-up-right:before {
+	content: "\e016";
+}
+.icon-arrow-up:before {
+	content: "\e017";
+}
+.icon-arrow-up-left:before {
+	content: "\e018";
+}
+.icon-arrow-down:before {
+	content: "\e019";
+}
+.icon-arrow-down-left:before {
+	content: "\e01a";
+}
+.icon-arrow-left:before {
+	content: "\e01b";
+}
+.icon-arrow-left-2:before {
+	content: "\e01c";
+}
+.icon-arrow-down-left-2:before {
+	content: "\e01d";
+}
+.icon-arrow-down-2:before {
+	content: "\e01e";
+}
+.icon-arrow-down-right-2:before {
+	content: "\e01f";
+}
+.icon-arrow-right-2:before {
+	content: "\e021";
+}
+.icon-arrow-up-right-2:before {
+	content: "\e02b";
+}
+.icon-arrow-up-2:before {
+	content: "\e02d";
+}
+.icon-arrow-up-left-2:before {
+	content: "\e02e";
+}
+.icon-checkbox-unchecked:before {
+	content: "\e032";
+}
+.icon-checkbox-checked:before {
+	content: "\e033";
+}
+.icon-google-plus:before {
+	content: "\e034";
+}
+.icon-feed-2:before {
+	content: "\e035";
+}
+.icon-twitter-2:before {
+	content: "\e036";
+}
+.icon-twitter-3:before {
+	content: "\e037";
+}
+.icon-html5-2:before {
+	content: "\e038";
 }
