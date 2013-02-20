@@ -225,6 +225,7 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 
 function updateEditor(text) {
 	$('textarea#wmd-input-second').val(text);
+	editor.refreshPreview();
 	updateCitations();
 }
 
