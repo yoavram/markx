@@ -90,13 +90,16 @@
 			<select class="input-medium" type="text" id="path" placeholder="/path/to/file" style="margin: auto 5px">
 			</select>
 
-			<div class="btn-group">
+			<div class="btn-group">				
 				<button class="btn" id="btn-pull" rel="tooltip" title="Pull file and load to editor">
 					<i class="icon-cloud-download"></i>
 				</button>
 				<button class="btn" id="btn-commit-push" rel="tooltip" title="Commit file and push">
 					<i class="icon-cloud-upload"></i>
-				</button>		
+				</button>
+				<button class="btn" id="btn-new-file" rel="tooltip" title="Create new file">
+					<i class="icon-file-4"></i>
+				</button>
 			</div>	
 			<input class="input" type="text" id="commit-message" placeholder="Commit message: Fixed typos" style="margin: auto 5px">
 		</div>
@@ -232,6 +235,31 @@ $(function() {
 		var commit_msg = $('#commit-message').val();
 		var text = $('textarea#wmd-input-second').val();
 		pushToGithub(branchname, filepath, commit_msg, text);
+	});
+
+	$('#btn-new-file').click(function() {
+		var text = $('textarea#wmd-input-second').val();
+		if (text.length) {
+			if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
+				return false;
+			}
+		}
+		var branchname = $('#branch').val();
+		var filepath = prompt("Please choose a name for the new file:");
+		if (_.some($('#path').children(), function(option) { return option.value == filepath })) {
+			alertMessage("File " + filepath + " already exists");
+			return false;
+		}
+		var commit_msg = $('#commit-message').val();
+		if (!commit_msg || !commit_msg.length) {
+			commit_msg = "Create empty file via Markx";
+		}
+		pushToGithub(branchname, filepath, commit_msg, '\n', function() {
+			loadBranchPaths(branchname, function() {
+				$('#path').val(filepath);
+			});
+		});
+		$('textarea#wmd-input-second').val('');
 	});
 
 	/* file conversion */

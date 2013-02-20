@@ -125,7 +125,7 @@ function loadRepoBranches(username, reponame) {
 	return true;
 }
 
-function loadBranchPaths(branchname) {
+function loadBranchPaths(branchname, callback) {
 	$('#path').empty();
 	repo.getTree(branchname + '?recursive=true', function(err, tree) {
 		if (err) {
@@ -135,7 +135,10 @@ function loadBranchPaths(branchname) {
 		jQuery.each(tree, function(index, item){
 			var path =$.trim(item['path']);
 			var option = '<option value="' + path + '">' + path + '</option>';
-			$('#path').append(option);	
+			$('#path').append(option);
+			if (typeof callback != "undefined") {
+				callback();	
+			}
 		});
 	});
 	$('#path').focus();
@@ -169,7 +172,7 @@ function checkVariablesForGithubFileAction(branchname, filepath) {
 	return true;
 }
 
-function pullFromGithub(branchname, filepath, text, callback) {
+function pullFromGithub(branchname, filepath, text) {
 	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
 		return false;
 	}
@@ -189,7 +192,7 @@ function pullFromGithub(branchname, filepath, text, callback) {
 	});
 }
 
-function pushToGithub(branchname, filepath, commit_msg, text) {
+function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
 		return false;
 	}
@@ -212,6 +215,9 @@ function pushToGithub(branchname, filepath, commit_msg, text) {
 		} else {
 			infoMessage("Commit was successful");
 			$('#commit-message').val('');
+			if (typeof callback != "undefined") {
+				callback();	
+			}
 		}
 	});
 }
