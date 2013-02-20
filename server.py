@@ -56,7 +56,8 @@ def save_text_file(filename, content):
 
 def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
-    options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
+    inname = path_to_file(filename + '.md')
+    options = ['pandoc', '-o', outname]
     options += ['-s'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
     if os.path.exists(bibpath):
@@ -67,9 +68,11 @@ def pandoc(filename, extension, bibpath):
     if 'ABBR_FILES' in app.config and len(app.config['ABBR_FILES']) > 0:
         abbr_file = app.config['ABBR_FILES'][0]
         options += ['--citation-abbreviations=' + os.path.join(CSL_FOLDER, abbr_file)]
+    with open(inname) as f:
+        content = f.read()
     print ' * Sending command to Pandoc for file', filename, 'with options', options
-    p = subprocess.Popen(options, stdout=subprocess.PIPE)
-    stdoutdata, stderrdata = p.communicate()
+    p = subprocess.Popen(options, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    stdoutdata, stderrdata = p.communicate(content)
     if stderrdata:
         print ' * Command failed:', stderrdata
         return False, "Pandoc failed: " + stderrdata
