@@ -190,6 +190,7 @@ function pullFromGithub(branchname, filepath, text) {
 			updateEditor(data);
 		}
 	});
+	document.title = _.last(filepath.split('/')) + " | Markx";
 }
 
 function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
