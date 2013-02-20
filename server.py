@@ -16,7 +16,7 @@ PRETTIFY_STYLESHEETS = [ x[:-4] for x in os.listdir(os.path.join('static'  , 'cs
 DEFAULT_LATEX_PAPER_SIZE = 'a4paper'
 FILES_FOLDER = 'files'
 if not os.path.exists(FILES_FOLDER):
-	os.mkdir(FILES_FOLDER)
+    os.mkdir(FILES_FOLDER)
 CSL_FOLDER = 'static' + os.path.sep + 'csl'
 CSL_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.csl')]
 ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
@@ -31,7 +31,7 @@ app.config.from_object(__name__)
 print " * Overriding deafult configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
 if app.debug:
-	print " * Running in debug mode"
+    print " * Running in debug mode"
 
 
 mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
