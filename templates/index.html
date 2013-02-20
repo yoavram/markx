@@ -187,7 +187,9 @@ $(function() {
 	});
 
 	$('#btn-github-signout').click(function() {
-		signoutOfGithub();
+		if (confirm("Realy sign out of GitHub?")) {
+			signoutOfGithub();
+		}
 	});
 
 	$('#repo-ok').click( function() {
