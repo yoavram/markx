@@ -40,7 +40,7 @@ def get_mimetype(extension):
 
 
 def path_to_file(filename):
-    return os.path.sep + FILES_FOLDER + os.path.sep + filename
+    return FILES_FOLDER + os.path.sep + filename
 
 
 def just_the_filename(path):
