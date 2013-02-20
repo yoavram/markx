@@ -55,11 +55,10 @@ After you sign in to GitHub you can use the GitHub toolbar to:
 1. **Choose a file** in the selected branch
 1. Click the *download* <i class="icon-cloud-download"></i> button to **pull the file** to the editor. The current contents will be deleted without saving them.
 1. Click the *upload* <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit. After the push is finalized you will get a success or failure message.
+1. Click the *new* <i class="icon-file-4"></i> button to **create and push** a new empty file. If you don't fill the commit message Markx fill create adefault message for you. After the push is finalized you will get a success or failure message and the files list will be updated.
 1. Click the *sign out* <i class="icon-exit"></i> button in the general toolbar to **sign out of GitHub**.
 
-There is currently no support for creation of new files. You can [do that on GitHub](https://github.com/blog/1327-creating-files-on-github) very easily or in the traditional way via the terminal/command line (`touch <filename>`, `git add <filename>`, `git commit <filename> -m "new file"`, `git push`). 
-
-There is also no way to commit the `.bib` citations file to GitHub via Markx. These features will be added in the future.
+There is also no way to commit the `.bib` citations file to GitHub via Markx. This feature will be added very soon.
 
 ### Editor Toolbar
 The buttons above the editor window are part of the [PageDown] markdown editor. They allow quick shortcuts to common Markdown markups.
