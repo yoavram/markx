@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+<mods ID="Drake1991">
+    <titleInfo>
+        <title>A constant rate of spontaneous mutation in DNA-based microbes.</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">John</namePart>
+        <namePart type="given">W</namePart>
+        <namePart type="family">Drake</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <dateIssued>1991-aug</dateIssued>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <relatedItem type="host">
+        <titleInfo>
+            <title>Proceedings of the National Academy of Sciences of the United States of America</title>
+        </titleInfo>
+        <originInfo>
+            <issuance>continuing</issuance>
+        </originInfo>
+        <genre authority="marcgt">periodical</genre>
+        <genre>academic journal</genre>
+        <identifier type="issn">0027-8424</identifier>
+    </relatedItem>
+    <abstract>In terms of evolution and fitness, the most significant spontaneous mutation rate is likely to be that for the entire genome (or its nonfrivolous fraction). Information is now available to calculate this rate for several DNA-based haploid microbes, including bacteriophages with single- or double-stranded DNA, a bacterium, a yeast, and a filamentous fungus. Their genome sizes vary by approximately 6500-fold. Their average mutation rates per base pair vary by approximately 16,000-fold, whereas their mutation rates per genome vary by only approximately 2.5-fold, apparently randomly, around a mean value of 0.0033 per DNA replication. The average mutation rate per base pair is inversely proportional to genome size. Therefore, a nearly invariant microbial mutation rate appears to have evolved. Because this rate is uniform in such diverse organisms, it is likely to be determined by deep general forces, perhaps by a balance between the usually deleterious effects of mutation and the physiological costs of further reducing mutation rates.</abstract>
+    <bibtex-annote>mu=0.0033</bibtex-annote>
+    <subject>
+        <topic>Bacterial,Bacterial: genetics,Bacteriophage lambda,Bacteriophage lambda: genetics,Base Composition,Biological Evolution,Coliphages,Coliphages: genetics,DNA,Escherichia coli,Escherichia coli: genetics,Fungal,Fungal: genetics,Genes,Mutation,Neurospora crassa,Neurospora crassa: genetics,Saccharomyces cerevisiae,Saccharomyces cerevisiae: genetics,Species Specificity,T-Phages,T-Phages: genetics,Viral,Viral: genetics,mutation rate</topic>
+    </subject>
+    <identifier type="citekey">Drake1991</identifier>
+    <identifier type="doi">10.1073/pnas.88.16.7160</identifier>
+    <location>
+        <url>http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=52253</url>
+    </location>
+    <part>
+        <date>1991-aug</date>
+        <detail type="volume"><number>88</number></detail>
+        <detail type="number"><number>16</number></detail>
+        <extent unit="page">
+            <start>7160</start>
+            <end>4</end>
+        </extent>
+    </part>
+</mods>
+</modsCollection>
