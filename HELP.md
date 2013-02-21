@@ -28,7 +28,7 @@ For example: `[@Drake1991]`. Markx doesn't currently preview the citation keys i
 1. allows you to download a `.bib` file corresponding to the citation keys in the Markdown text via the *Download* <i class="icon-download-2"></i> menu
 1. send the bibliography to [Pandoc] for conversion ([Docverter] does not support citations)
 
-You must click the *Update Citations* button in the *Citations* <i class="icon-books"></i> menu after adding, removing or changing citation keys, as they will not be updated in real-time.
+You must click the *Update Citations* button in the *Citations* <i class="icon-books"></i> menu after adding, removing or changing citation keys, as they will not be updated in real-time (this will be changed in the near future).
 
 ### Toolbar
 1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
@@ -36,8 +36,8 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991] and to load a bibliography file.
 1. Use the *Download* <i class="icon-download-2"></i> menu to **download and convert** the Markdown text to various formats or to download a [Markdown] of the text or a [BibTeX] file of the citations referenced in the text.
 1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
-  - Pandoc: must be installed on local machine, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF
- - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography
+  - Pandoc: must be installed on local machine when working locally, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF on local machine.
+ - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
 1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
 1. The grey box with the numbers displays the **word count**.
 
@@ -58,7 +58,7 @@ After you sign in to GitHub you can use the GitHub toolbar to:
 1. Click the *new* <i class="icon-file-4"></i> button to **create and push** a new empty file. If you don't fill the commit message Markx fill create adefault message for you. After the push is finalized you will get a success or failure message and the files list will be updated.
 1. Click the *sign out* <i class="icon-exit"></i> button in the general toolbar to **sign out of GitHub**.
 
-There is also no way to commit the `.bib` citations file to GitHub via Markx. This feature will be added very soon.
+There is no way to commit the `.bib` citations file to GitHub via Markx. This feature will be added very soon.
 
 ### Editor Toolbar
 The buttons above the editor window are part of the [PageDown] markdown editor. They allow quick shortcuts to common Markdown markups.
@@ -73,6 +73,7 @@ If the hosted app at <http://markx.herokuapp.com> doesn't work for you (which is
 1. Install Python 2.7.x (may work with other versions of python)
 1. If you know about `virtualenv`, you can use the bundled `requirements.txt` file
 1. Otherwise, install the requirements globally with `pip install flask requests`
+1. Optionally, install [Pandoc]
 1. Run Markx with `python server.py`
 1. Open your browser at <http://localhost:5000>
 
