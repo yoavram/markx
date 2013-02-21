@@ -295,10 +295,8 @@ $(function() {
 		save('html', view);
 	});
 	$('#btn-converter').click(function() {
-		if ($(this).text() == 'D') {
-			if (confirm("If you are using Markx on Heroku, Pandoc might crash and the recommended converter is Docverter\nDo you want to proceed?")) {
-				$(this).text('P');
-			}
+		if ($(this).text() == 'D') {			
+			$(this).text('P');
 		} else {
 			$(this).text('D');
 		}
