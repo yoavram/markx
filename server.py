@@ -9,6 +9,7 @@ import os.path
 import subprocess
 import requests
 
+
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 GOOGLE_ANALYTICS = os.environ.get('GOOGLE_ANALYTICS', '')
 PRETTIFY_STYLESHEETS_FOLDER = '/static/css/prettify/' # server folder
@@ -25,6 +26,7 @@ with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
 PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
 DOCVERTER_URL =   'http://c.docverter.com/convert'
+
 
 app = Flask(__name__)
 app.config.from_object(__name__) 
@@ -150,3 +152,4 @@ def index():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))            
     app.run(host='0.0.0.0', port=port, debug=app.debug)
+
