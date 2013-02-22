@@ -270,14 +270,14 @@ $(function() {
 		save('md', download);
 	});
 	$('#btn-download-bibtex').click(function() {
-		save('bib', view);
+		save('bib', download);
 	});
 	$('#btn-download-pdf').click(function() {
 		if (window.location.hostname == 'localhost' || getConverter == 'docverter') {
-			save('pdf', view);
+			save('pdf', download);
 		} else {		
 			save('latex', function(filename) {
-				var filepath = window.location.origin + '/view/' + filename;
+				var filepath = window.location.origin + '/download/' + filename;
 				window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
 			});
 		}
@@ -292,7 +292,7 @@ $(function() {
 		save('epub', download);
 	});
 	$('#btn-download-html').click(function() {
-		save('html', view);
+		save('html', download);
 	});
 	$('#btn-converter').click(function() {
 		if ($(this).text() == 'D') {			
