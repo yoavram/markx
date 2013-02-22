@@ -277,7 +277,7 @@ $(function() {
 			save('pdf', download);
 		} else {		
 			save('latex', function(filename) {
-				var filepath = window.location.origin + '/download/' + filename;
+				var filepath = window.location.protocol + "//" + window.location.host + ":" + window.location.port  + '/download/' + filename;
 				window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
 			});
 		}
