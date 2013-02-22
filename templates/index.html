@@ -273,7 +273,7 @@ $(function() {
 		save('bib', download);
 	});
 	$('#btn-download-pdf').click(function() {
-		if (window.location.hostname == 'localhost' || getConverter == 'docverter') {
+		if (window.location.hostname == 'localhost' || getConverter() == 'docverter') {
 			save('pdf', download);
 		} else {		
 			save('latex', function(filename) {
