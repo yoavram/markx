@@ -368,12 +368,31 @@ function processGooglePrettifierPreBlocks(text) {
 
 
 function updatePreview() {
-	var markdownString = codeMirrorEditor.getValue();
+	var markdownString = editor.getValue();
 	markdownString = processTitleBlockToMarkdown(markdownString);
 	var htmlString = marked(markdownString);
 	htmlString = processGooglePrettifierPreBlocks(htmlString);
 	$('#wmd-preview-second').html(htmlString);
 	prettyPrint();
+}
+
+
+function initMarkdownEditor() {
+	marked.setOptions({
+		smartLists: true,
+		langPrefix: ""
+	})
+	var codeMirrorEditor = CodeMirror.fromTextArea($('#wmd-input-second')[0], {
+		lineNumbers: true,
+		lineNumberFormatter: function(number) {if (number % 5 == 0) {return(number);} else {return('');}},
+		lineWrapping : true,
+		autofocus: true,
+		mode: 'markdown',
+		theme: 'elegant'
+	});
+	codeMirrorEditor.on('change', updatePreview);
+
+	return codeMirrorEditor;
 }
 
 
