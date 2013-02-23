@@ -158,8 +158,12 @@
 {% block footer %}
 <script type="text/javascript">
 /* markdown editor */
-//var editor = init_markdown_editor();
 $('#wmd-input-second').wordCount({counterElement:"word_counter"});
+marked.setOptions({
+	highlight: _.identity,
+	smartLists: true,
+	langPrefix: ''
+})
 var codeMirrorEditor = CodeMirror.fromTextArea($('#wmd-input-second')[0], {
 	lineNumbers: true,
 	lineNumberFormatter: function(number) {if (number % 5 == 0) {return(number);} else {return('');}},
@@ -189,7 +193,7 @@ $(function() {
 		prettyPrintOne();
 	});
 })
-prettyPrintOne();
+//prettyPrintOne();
 
 /* github api */
 var github = null;

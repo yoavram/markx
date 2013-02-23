@@ -361,44 +361,22 @@ function processTitleBlockToMarkdown(text) {
 
 
 function processGooglePrettifierPreBlocks(text) {
-	text = text.replace("<pre><code>", '<pre class="prettyprint linenums">');
-	text = text.replace("\n</code></pre>", '\n</pre>');
+	text = text.replace("<pre><code>", '<pre class="prettyprint linenums"><code>');
+	text = text.replace("</code></pre>", '</code></pre>');
 	return text;
 }
 
 
-function init_markdown_editor() {   
-	var converter2 = new Markdown.Converter();
-
-	//converter2.hooks.chain("postConversion", processTitleBlockToHTML);
-	converter2.hooks.chain("preConversion", processTitleBlockToMarkdown);
-
-	converter2.hooks.chain("postConversion", processGooglePrettifierPreBlocks);
-
-	var help = function () { alert("Do you need help?"); }
-	var options = {
-		helpButton: { handler: help },
-		strings: { quoteexample: "whatever you're quoting, put it right here" }
-	};
-	var editor2 = new Markdown.Editor(converter2, "-second", options);
-
-	editor2.hooks.chain("onPreviewRefresh", function () {
-		prettyPrint();
-		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-	});
-
-	editor2.run();
-	return editor2;
-};
-
 function updatePreview() {
 	var markdownString = codeMirrorEditor.getValue();
 	var htmlString = marked(markdownString);
+	htmlString = processGooglePrettifierPreBlocks(htmlString);
+	alert(htmlString);
 	$('#wmd-preview-second').html(htmlString);
 }
 
-/* files */
 
+/* files */
 function readSingleFile(evt) {
 	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
     //Retrieve the first (and only!) File from the FileList object
