@@ -336,7 +336,7 @@ function processTitleBlockToHTML(text) {
 
 
 function processTitleBlockToMarkdown(text) {
-	var textSplit = text.split('\n');
+	var textSplit = text.split('\n', 3);
 
 	if (textSplit.length > 0) {
 		var titleLine = textSplit[0];
