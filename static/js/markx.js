@@ -372,7 +372,7 @@ function updatePreview() {
 	var htmlString = marked(markdownString);
 	htmlString = processGooglePrettifierPreBlocks(htmlString);
 	$('#wmd-preview-second').html(htmlString);
-	prettyPrintOne();
+	prettyPrint();
 }
 
 
