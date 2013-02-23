@@ -229,7 +229,7 @@ function updateEditor(text) {
 }
 
 function getEditor() {
-	return($('textarea#wmd-input-second').val());
+	return codeMirrorEditor.getValue();
 }
 
 /* citations */
@@ -361,7 +361,7 @@ function processTitleBlockToMarkdown(text) {
 
 
 function processGooglePrettifierPreBlocks(text) {
-	text = text.replace("<pre><code>", '<pre class="prettyprint linenums"><code>');
+	text = text.replace("<pre><code>", '<pre class="prettyprint">');
 	text = text.replace("\n</code></pre>", '\n</pre>');
 	return text;
 }
