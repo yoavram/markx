@@ -374,10 +374,19 @@ function updatePreview() {
 	prettyPrint();
 }
 
+
+function addPreCoversionHook(converter, hook) {
+	converter.hooks.chain("preConversion", hook);
+}
+
+function addPostCoversionHook(converter, hook) {
+	converter.hooks.chain("postConversion", hook);
+}
+
 function initMarkdownConverter() {
 	var pageDownSanitizingConverter = Markdown.getSanitizingConverter();
-	pageDownSanitizingConverter.hooks.chain("preConversion", processTitleBlockToMarkdown);
-	pageDownSanitizingConverter.hooks.chain("postConversion", processGooglePrettifierPreBlocks);
+	addPreCoversionHook(pageDownSanitizingConverter, processTitleBlockToMarkdown);
+	addPostCoversionHook(pageDownSanitizingConverter, processGooglePrettifierPreBlocks);
 
     	return pageDownSanitizingConverter;
 }
