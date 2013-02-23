@@ -369,6 +369,7 @@ function processGooglePrettifierPreBlocks(text) {
 
 function updatePreview() {
 	var markdownString = codeMirrorEditor.getValue();
+	markdownString = processTitleBlockToMarkdown(markdownString);
 	var htmlString = marked(markdownString);
 	htmlString = processGooglePrettifierPreBlocks(htmlString);
 	$('#wmd-preview-second').html(htmlString);
