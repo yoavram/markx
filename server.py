@@ -8,7 +8,7 @@ import os
 import os.path
 import subprocess
 import requests
-
+import distutils.spawn
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 GOOGLE_ANALYTICS = os.environ.get('GOOGLE_ANALYTICS', '')
@@ -26,7 +26,7 @@ with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
 PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
 DOCVERTER_URL =   'http://c.docverter.com/convert'
-
+PDFLATEX_EXISTS = distutils.spawn.find_executable("pdflatex") != None
 
 app = Flask(__name__)
 app.config.from_object(__name__) 
