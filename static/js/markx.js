@@ -369,19 +369,20 @@ function processGooglePrettifierPreBlocks(text) {
 
 function updatePreview() {
 	var markdownString = editor.getValue();
-	markdownString = processTitleBlockToMarkdown(markdownString);
-	var htmlString = marked(markdownString);
-	htmlString = processGooglePrettifierPreBlocks(htmlString);
-	$('#wmd-preview-second').html(htmlString);
+	var htmlSrting = converter.makeHtml(markdownString);
+	$('#wmd-preview-second').html(htmlSrting);
 	prettyPrint();
 }
 
+function initMarkdownConverter() {
+	var pageDownSanitizingConverter = Markdown.getSanitizingConverter();
+	pageDownSanitizingConverter.hooks.chain("preConversion", processTitleBlockToMarkdown);
+	pageDownSanitizingConverter.hooks.chain("postConversion", processGooglePrettifierPreBlocks);
+
+    	return pageDownSanitizingConverter;
+}
 
 function initMarkdownEditor() {
-	marked.setOptions({
-		smartLists: true,
-		langPrefix: ""
-	})
 	var codeMirrorEditor = CodeMirror.fromTextArea($('#wmd-input-second')[0], {
 		lineNumbers: true,
 		lineNumberFormatter: function(number) {if (number % 5 == 0) {return(number);} else {return('');}},
