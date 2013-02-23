@@ -82,8 +82,8 @@ abbr {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 code, pre {

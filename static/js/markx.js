@@ -224,8 +224,7 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 }
 
 function updateEditor(text) {
-	$('textarea#wmd-input-second').val(text);
-	editor.refreshPreview();
+	codeMirrorEditor.setValue(text);
 	updateCitations();
 }
 
@@ -391,6 +390,12 @@ function init_markdown_editor() {
 	editor2.run();
 	return editor2;
 };
+
+function updatePreview() {
+	var markdownString = codeMirrorEditor.getValue();
+	var htmlString = marked(markdownString);
+	$('#wmd-preview-second').html(htmlString);
+}
 
 /* files */
 
