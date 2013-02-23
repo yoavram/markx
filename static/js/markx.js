@@ -362,7 +362,7 @@ function processTitleBlockToMarkdown(text) {
 
 function processGooglePrettifierPreBlocks(text) {
 	text = text.replace("<pre><code>", '<pre class="prettyprint linenums"><code>');
-	text = text.replace("</code></pre>", '</code></pre>');
+	text = text.replace("\n</code></pre>", '\n</pre>');
 	return text;
 }
 
@@ -371,8 +371,8 @@ function updatePreview() {
 	var markdownString = codeMirrorEditor.getValue();
 	var htmlString = marked(markdownString);
 	htmlString = processGooglePrettifierPreBlocks(htmlString);
-	alert(htmlString);
 	$('#wmd-preview-second').html(htmlString);
+	prettyPrintOne();
 }
 
 
