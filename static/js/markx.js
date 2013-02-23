@@ -297,6 +297,15 @@ function addCitation(citation) {
 	}
 }
 
+function viewCitations(bibObject) {
+	if (!bibObject || !bibObject.amount()) {
+		alertMessage("No citations to view!");
+	} else {
+		$('#div-bib-view').html(bibObject.html());
+		$('#modal-bib-view').modal('show');
+	}
+}
+
 
 /* markdown */
 

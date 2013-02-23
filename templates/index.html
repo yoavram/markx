@@ -27,8 +27,14 @@
 						Update citations
 					</a></li>
 					<li><a href="#modal-bib-file-input" id="btn-bib-file-input-show" role="button" data-toggle="modal" rel="tooltip" title="Choose a bibliography file">
-						Load a Bibliography File
+						Load References from file
 					</a></li>
+					<li><a href="#" id="btn-bib-file-view" rel="tooltip" title="View the loaded references library">
+						View reference library
+					</a></li>
+					<li><a href="#" id="btn-citations-view" rel="tooltip" title="View the current citation list">
+						View citation list
+					</a></li>						
 				</ul>
 			</div>
 			<div class="btn-group">
@@ -124,6 +130,8 @@
 
 {% include 'bib_file_input.html' %}
 
+{% include 'bib_view.html' %}
+
 {% endblock header %}
 
 {% block left %}
@@ -156,6 +164,12 @@ $('#wmd-input-second').wordCount({counterElement:"word_counter"});
 /* citations */
 $("#btn-citations").click(updateCitations);
 $('#btn-bib-file-input-submit').click(readBibFile);
+$('#btn-bib-file-view').click(function() {
+	viewCitations(bibtex);
+});
+$('#btn-citations-view').click(function() {
+	viewCitations(citationList);
+});
 initBibtex('');
 
 /* code highlighting stuff */
