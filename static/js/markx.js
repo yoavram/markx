@@ -273,7 +273,7 @@ function updateCitations() {
 	$('#bibtex_display').html('');
 	// redo citations
 	var regex = /\[?-?@(\w+)\]?/gm; 
-	var input = $('#wmd-input-second').val();
+	var input = getEditor();
 	var citationKeys = new Array();
 	var match = regex.exec(input);
 	while (match != null) {
@@ -417,7 +417,7 @@ function readSingleFile(evt) {
     	var reader = new FileReader();
     	reader.onload = function(event) { 
     		var contents = event.target.result;
-    		$('textarea#wmd-input-second').val(contents);
+    		$('#wmd-input-second').val(contents);
     		editor.refreshPreview();
     		updateCitations();
     	}

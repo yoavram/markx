@@ -243,7 +243,7 @@ $(function() {
 	$('#btn-pull').click(function() {
 		var branchname = $('#branch').val();
 		var filepath = $('#path').val();
-		var text = $('textarea#wmd-input-second').val();
+		var text = $('#wmd-input-second').val();
 		pullFromGithub(branchname, filepath, text);
 	});
 
@@ -251,12 +251,12 @@ $(function() {
 		var branchname = $('#branch').val();
 		var filepath = $('#path').val();
 		var commit_msg = $('#commit-message').val();
-		var text = $('textarea#wmd-input-second').val();
+		var text = getEditor();
 		pushToGithub(branchname, filepath, commit_msg, text);
 	});
 
 	$('#btn-new-file').click(function() {
-		var text = $('textarea#wmd-input-second').val();
+		var text = $('#wmd-input-second').val();
 		if (text.length) {
 			if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
 				return false;
