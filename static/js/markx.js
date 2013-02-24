@@ -372,6 +372,7 @@ function updatePreview() {
 	var htmlSrting = converter.makeHtml(markdownString);
 	$('#wmd-preview-second').html(htmlSrting);
 	prettyPrint();
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
 
 
