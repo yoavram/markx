@@ -360,6 +360,13 @@ function processTitleBlockToMarkdown(text) {
 } 
 
 
+function updateWordCount(text) {
+	total_words = text.split(/[\s\.\?]+/).length;
+	$('#word_counter').html(total_words);
+	return text;
+}
+
+
 function processGooglePrettifierPreBlocks(text) {
 	text = text.replace("<pre><code>", '<pre class="prettyprint">');
 	text = text.replace("\n</code></pre>", '\n</pre>');
@@ -388,7 +395,7 @@ function initMarkdownConverter() {
 	var pageDownSanitizingConverter = Markdown.getSanitizingConverter();
 	addPreCoversionHook(pageDownSanitizingConverter, processTitleBlockToMarkdown);
 	addPostCoversionHook(pageDownSanitizingConverter, processGooglePrettifierPreBlocks);
-
+	addPreCoversionHook(pageDownSanitizingConverter, updateWordCount);
     	return pageDownSanitizingConverter;
 }
 
@@ -468,39 +475,3 @@ function view(filename) {
 	window.open(url, '_newtab');
 }
 
-
-/*
- * http://roshanbh.com.np/2008/10/jquery-plugin-word-counter-textarea.html
- * Textarea Word Count Jquery Plugin 
- * Version 1.0
- * 
- * Copyright (c) 2008 Roshan Bhattarai
- * website : http://roshanbh.com.np
- * 
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- * 
-*/
-
-jQuery.fn.wordCount = function(params){
-	var p = {
-		counterElement:"display_count"
-	};
-	var total_words;
-	
-	if(params) {
-		jQuery.extend(p, params);
-	}
-	
-	//for each keypress function on text areas
-	this.keypress(function()
-	{ 
-		total_words=this.value.split(/[\s\.\?]+/).length;
-		jQuery('#'+p.counterElement).html(total_words);
-	});
-	// TODO this is a patch to get the initial word count
-	// also need to make sure this runs when loading/uploading new files
-	total_words = this.val().split(/[\s\.\?]+/).length;
-	jQuery('#'+p.counterElement).html(total_words);
-};
