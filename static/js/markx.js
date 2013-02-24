@@ -224,12 +224,12 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 }
 
 function updateEditor(text) {
-	codeMirrorEditor.setValue(text);
+	editor.setValue(text);
 	updateCitations();
 }
 
 function getEditor() {
-	return codeMirrorEditor.getValue();
+	return editor.getValue();
 }
 
 /* citations */
