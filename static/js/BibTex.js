@@ -2,7 +2,7 @@
  * Javascript BibTex Parser v0.1
  * Copyright (c) 2008 Simon Fraser University
  * @author Steve Hannah <shannah at sfu dot ca>
- * 
+ * Modifications to the original source code made for inclusion in Marks <https://github.com/yoavram/markx>.
  *
  * License:
  * 
