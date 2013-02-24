@@ -1830,6 +1830,7 @@ BibTex.prototype = {
             var journal = '';
             var year    = '';
             var authors = '';
+            var url = '';
             if (array_key_exists('title', entry)) {
                 title = this._unwrap(entry['title']);
             }
