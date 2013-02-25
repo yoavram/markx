@@ -185,15 +185,25 @@ function pullFromGithub(branchname, filepath, text) {
 			return false;
 		}
 	}
-
-	repo.read(branchname, filepath, function (err, data) {
-		if (err) {
-			alertMessage(err['message']);
-		} else {
-			updateEditor(data);
+	repo.getSha(branchname, filepath, function(err, sha) {
+		if (!sha || err) { 
+			alertMessage(filepath + "not found");
+		} else { 
+			infoMessage("Loading " + sha);
+			editorSha = sha;
+			repo.getBlob(sha, function (err, data) {
+				if (err) {
+					alertMessage(err['message']);
+				} else {
+					updateEditor(data);
+				}
+			});
 		}
 	});
 	document.title = _.last(filepath.split('/')) + " | Markx";
+}
+function commitUrl(username, repository, sha) {
+	return 'https://github.com/'+username+'/' + repository + '/commit/' + sha;
 }
 
 function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
@@ -212,15 +222,32 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 			return false;
 		}
 	}
-
-	repo.write(branchname, filepath, text, commit_msg, function (err) {
-		if (err) {
-			alertMessage(err['message']);
+	repo.getSha(branchname, filepath, function(err, sha) {
+		if (!sha || err) { 
+			alertMessage(filepath + "not found");
 		} else {
-			infoMessage("Commit was successful");
-			$('#commit-message').val('');
-			if (typeof callback != "undefined") {
-				callback();	
+			console.log(sha);
+			if (sha != editorSha) {
+				alertMessage("Can't commit, file has been changed since last pulled. To prevent data loss, the file will be downloaded to local downloads directory.");
+				save('md', download);
+			} else {
+				repo.write(branchname, filepath, text, commit_msg, function (err) {
+					if (err) {
+						alertMessage(err['message']);
+					} else {
+						repo.getSha(branchname, filepath, function(err, sha) {
+							if (!sha || err) { 
+								alertMessage(filepath + "not found");
+							} else {
+								infoMessage("Commit was successful " + sha);
+								$('#commit-message').val('');
+								if (typeof callback != "undefined") {
+									callback();	
+								}
+							}
+						});
+					}
+				});
 			}
 		}
 	});
