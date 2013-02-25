@@ -17,7 +17,7 @@
 
 .CodeMirror-lines {
   padding: 4px 0; /* Vertical padding around content */
-  line-height: 100%; // change this to set the spacing between editor lines
+  line-height: 150%; // change this to set the spacing between editor lines
 }
 .CodeMirror pre {
   padding: 0 4px; /* Horizontal padding of content */
