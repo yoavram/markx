@@ -84,7 +84,7 @@ function loadUserRepos(username) {
 	user = github.getUser(username);
 	repo = null;
 	// TODO check if user loaded
-	user.userRepos(username, function(err, repos) {
+	user.repos(function(err, repos) {
 		if (err){
 			var code = err['error'];
 			if (code == 401) {
@@ -96,7 +96,8 @@ function loadUserRepos(username) {
 			return false;
 		}
 		$('#repo').empty();
-		jQuery.each(repos, function(index, item) {
+		repos = _.sortBy(repos, function(item) { return $.trim(item['name'])})
+		_.each(repos, function(item, index) {
 			var reponame = $.trim(item['name']);
 			var option = '<option value="' + reponame + '">' + reponame + '</option>';
 			$('#repo').append(option);					
@@ -115,7 +116,8 @@ function loadRepoBranches(username, reponame) {
 			alertMessage(err['message']);
 			return false;
 		} 
-		jQuery.each(branches, function(index, item) {
+		branches = _.sortBy(branches, function(item) { return $.trim(item['name'])})
+		_.each(branches, function(item, index) {
 			var branchname = $.trim(item['name']);
 			var option = '<option value="' + branchname + '">' + branchname + '</option>';
 			$('#branch').append(option);	
@@ -132,8 +134,9 @@ function loadBranchPaths(branchname, callback) {
 			alertMessage(err['message']);
 			return false;
 		} 
-		jQuery.each(tree, function(index, item){
-			var path =$.trim(item['path']);
+		tree = _.sortBy(tree, function(item) { return $.trim(item['path'])})
+		_.each(tree, function(item, index){
+			var path = $.trim(item['path']);
 			var option = '<option value="' + path + '">' + path + '</option>';
 			$('#path').append(option);
 			if (typeof callback != "undefined") {
