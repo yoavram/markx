@@ -29,4 +29,10 @@
 $('#modal-github-signin').on('shown', function () {
   $('#github-username').focus();
 });
+$('#github-password').keyup(function(e) {
+  if ($(this).is(':visible') && e.which == 13) {
+    /* 13 is enter */
+    $('#btn-github-signin-submit').trigger('click');
+  }
+})
 </script>
