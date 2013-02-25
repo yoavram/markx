@@ -83,6 +83,9 @@
 		<div class="btn-toolbar" id="github-toolbar" style="display: none">
 			<button class="btn" rel="tooltip" title="GitHub links"  style="margin: auto 5px" disabled><i class="icon-github-2"></i></button>
 			<input class="input-small" type="text" id="user" placeholder="user" style="margin: auto 5px" disabled>
+			<button class="btn" id="reload-repos" rel="tooltip" title="Reload repositories">
+				<i class="icon-redo-2"></i>
+			</button>
 			<select class="input-medium" type="text" id="repo" style="margin: auto 5px">
 			</select>
 			<button class="btn" id="repo-ok" rel="tooltip" title="Open repository">
@@ -205,6 +208,10 @@ $(function() {
 		if (confirm("Realy sign out of GitHub?")) {
 			signoutOfGithub();
 		}
+	});
+
+	$('#reload-repos').click(function() {
+		loadUserRepos($('#user').val());
 	});
 
 	$('#repo-ok').click( function() {
