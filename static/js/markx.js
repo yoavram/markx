@@ -96,7 +96,7 @@ function loadUserRepos(username) {
 			return false;
 		}
 		$('#repo').empty();
-		repos = _.sortBy(repos, function(item) { return $.trim(item['name'])})
+		repos = _.sortBy(repos, function(item) { return $.trim(item['name'].toLowerCase())})
 		_.each(repos, function(item, index) {
 			var reponame = $.trim(item['name']);
 			var option = '<option value="' + reponame + '">' + reponame + '</option>';
@@ -116,7 +116,7 @@ function loadRepoBranches(username, reponame) {
 			alertMessage(err['message']);
 			return false;
 		} 
-		branches = _.sortBy(branches, function(item) { return $.trim(item['name'])})
+		branches = _.sortBy(branches, function(item) { return $.trim(item['name'].toLowerCase())})
 		_.each(branches, function(item, index) {
 			var branchname = $.trim(item['name']);
 			var option = '<option value="' + branchname + '">' + branchname + '</option>';
@@ -134,7 +134,7 @@ function loadBranchPaths(branchname, callback) {
 			alertMessage(err['message']);
 			return false;
 		} 
-		tree = _.sortBy(tree, function(item) { return $.trim(item['path'])})
+		tree = _.sortBy(tree, function(item) { return $.trim(item['path'].toLowerCase())})
 		_.each(tree, function(item, index){
 			var path = $.trim(item['path']);
 			var option = '<option value="' + path + '">' + path + '</option>';
