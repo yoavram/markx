@@ -364,8 +364,15 @@ function processTitleBlockToMarkdown(text) {
 
 
 function updateWordCount(text) {
-	total_words = text.split(/[\s\.\?]+/).length;
-	$('#word_counter').html(total_words);
+	total = text.split(/[\s\.\?]+/).length;
+	$('#word-counter').html(total);
+	return text;
+}
+
+
+function updateCharCount(text) {
+	total = text.match(/[a-zA-Z0-9]/g).length
+	$('#char-counter').html(total);
 	return text;
 }
 
@@ -399,6 +406,7 @@ function initMarkdownConverter() {
 	addPreCoversionHook(pageDownSanitizingConverter, processTitleBlockToMarkdown);
 	addPostCoversionHook(pageDownSanitizingConverter, processGooglePrettifierPreBlocks);
 	addPreCoversionHook(pageDownSanitizingConverter, updateWordCount);
+	addPreCoversionHook(pageDownSanitizingConverter, updateCharCount);
     	return pageDownSanitizingConverter;
 }
 
