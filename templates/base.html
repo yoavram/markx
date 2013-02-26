@@ -7,20 +7,20 @@
 	<meta name="keywords" content="">
 	<meta charset="UTF-8">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="icon" type="image/ico" href="/static/img/favicon.ico">
+	<link rel="icon" type="image/ico" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
 	<!-- Le style -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link href="/static/css/editor.css" rel="stylesheet">
-	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/fonts.css" rel="stylesheet">
-	<link href="/static/css/codemirror.css" rel="stylesheet">
-	<link href="/static/css/codemirror-elegant.css" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/editor.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/fonts.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/codemirror.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/codemirror-elegant.css') }}" rel="stylesheet">
 	
 	<!-- google code prettifier http://code.google.com/p/google-code-prettify/ -->
-	<script type="text/javascript" src="/static/js/prettify.js"></script>
-	<link href="/static/css/prettify/tomorrow-night-light.css" rel="stylesheet" id="prettify-style">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/prettify.js') }}"></script>
+	<link href="{{ url_for('static', filename='css/prettify/tomorrow-night-light.css') }}" rel="stylesheet" id="prettify-style">
 
 	<!-- MathJax -->
 	<script type="text/x-mathjax-config">
@@ -34,22 +34,22 @@
 		}
 	});
 	</script>
-	<script type="text/javascript" src="/static/js/mathjax/MathJax.js?config=TeX-AMS_HTML">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/mathjax/MathJax.js', config='TeX-AMS_HTML') }}">
 	<!--http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"-->
 	</script>
 
 	<!-- Le JS -->
-	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="/static/js/Markdown.Converter.js"></script>
-	<script type="text/javascript" src="/static/js/Markdown.Sanitizer.js"></script>
-	<script type="text/javascript" src="/static/js/underscore-min.js"></script>
-	<script type="text/javascript" src="/static/js/base64.js"></script>
-	<script type="text/javascript" src="/static/js/github.js"></script>
-	<script type="text/javascript" src="/static/js/BibTex.js"></script>
-	<script type="text/javascript" src="/static/js/codemirror.js"></script>
-	<script type="text/javascript" src="/static/js/codemirror-markdown.js"></script>
-	<script type="text/javascript" src="/static/js/markx.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>	
+	<script type="text/javascript" src="{{ url_for('static', filename='js/Markdown.Converter.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/Markdown.Sanitizer.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/underscore-min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/base64.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/github.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/BibTex.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/codemirror.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/codemirror-markdown.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/markx.js') }}"></script>
 
 	{% block head %}
 	{% endblock head %}
