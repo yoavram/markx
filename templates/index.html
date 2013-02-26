@@ -193,11 +193,6 @@ var repo = null;
 var editorSha = null;
 
 $(function() {
-	$('#user').change(function() {
-		//alert("user changed");
-		//loadUserRepos($(this).val());
-	});
-
 	$('#btn-github-signin-cancel').click(clearGithubSigninForm);
 
 	$('#btn-github-signin-close').click(clearGithubSigninForm);
@@ -220,8 +215,7 @@ $(function() {
 		var username = $('#user').val();
 		var reponame = $('#repo').val();
 		if (!username || !username.length) {
-			alertMessage("Please enter a user name");
-			$('#user').focus();
+			alertMessage("Please login to GitHub");
 			return false;
 		}
 		if (!reponame || !reponame.length) {
