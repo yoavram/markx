@@ -175,7 +175,7 @@
 // ------------BEGIN PHP FUNCTIONS -------------------------------------------------------------- //
 
 // {{{ array
-function array( ) {
+    function array( ) {
     // #!#!#!#!# array::$descr1 does not contain valid 'array' at line 258
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_array/
@@ -188,7 +188,7 @@ function array( ) {
 }// }}}
 
 // {{{ array_key_exists
-function array_key_exists ( key, search ) {
+    function array_key_exists ( key, search ) {
     // Checks if the given key or index exists in the array
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_array_key_exists/
@@ -205,7 +205,7 @@ function array_key_exists ( key, search ) {
 
     return key in search;
 }// }}}// {{{ array_keys
-function array_keys( input, search_value, strict ) {
+    function array_keys( input, search_value, strict ) {
     // Return all the keys of an array
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_array_keys/
@@ -236,7 +236,7 @@ function array_keys( input, search_value, strict ) {
 }// }}}
 
 // {{{ in_array
-function in_array(needle, haystack, strict) {
+    function in_array(needle, haystack, strict) {
     // Checks if a value exists in an array
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_in_array/
@@ -258,7 +258,7 @@ function in_array(needle, haystack, strict) {
 }// }}}
 
 // {{{ sizeof
-function sizeof ( mixed_var, mode ) {
+    function sizeof ( mixed_var, mode ) {
     // Alias of count()
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_sizeof/
@@ -269,12 +269,12 @@ function sizeof ( mixed_var, mode ) {
     // *     returns 1: 6
     // *     example 2: sizeof({'one' : [1,2,3,4,5]}, 'COUNT_RECURSIVE');
     // *     returns 2: 6
- 
+    
     return count( mixed_var, mode );
 }// }}}
 
 // {{{ count
-function count( mixed_var, mode ) {
+    function count( mixed_var, mode ) {
     // Count elements in an array, or properties in an object
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_count/
@@ -302,7 +302,7 @@ function count( mixed_var, mode ) {
 }// }}}
 
 // {{{ explode
-function explode( delimiter, string, limit ) {
+    function explode( delimiter, string, limit ) {
     // Split a string by string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_explode/
@@ -316,7 +316,7 @@ function explode( delimiter, string, limit ) {
     // *     returns 1: {0: 'Kevin', 1: 'van', 2: 'Zonneveld'}
     // *     example 2: explode('=', 'a=bc=d', 2);
     // *     returns 2: ['a', 'bc=d']
- 
+    
     var emptyArray = { 0: '' };
     
     // third argument is not required
@@ -326,14 +326,14 @@ function explode( delimiter, string, limit ) {
     {
         return null;
     }
- 
+    
     if ( delimiter === ''
         || delimiter === false
         || delimiter === null )
     {
         return false;
     }
- 
+    
     if ( typeof delimiter == 'function'
         || typeof delimiter == 'object'
         || typeof string == 'function'
@@ -341,7 +341,7 @@ function explode( delimiter, string, limit ) {
     {
         return emptyArray;
     }
- 
+    
     if ( delimiter === true ) {
         delimiter = '1';
     }
@@ -359,7 +359,7 @@ function explode( delimiter, string, limit ) {
 }// }}}
 
 // {{{ implode
-function implode( glue, pieces ) {
+    function implode( glue, pieces ) {
     // Join array elements with a string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_implode/
@@ -373,7 +373,7 @@ function implode( glue, pieces ) {
 }// }}}
 
 // {{{ join
-function join( glue, pieces ) {
+    function join( glue, pieces ) {
     // Alias of implode()
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_join/
@@ -387,7 +387,7 @@ function join( glue, pieces ) {
 }// }}}
 
 // {{{ split
-function split( delimiter, string ) {
+    function split( delimiter, string ) {
     // Split string into array by regular expression
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_split/
@@ -401,7 +401,7 @@ function split( delimiter, string ) {
 }// }}}
 
 // {{{ str_replace
-function str_replace(search, replace, subject) {
+    function str_replace(search, replace, subject) {
     // Replace all occurrences of the search string with the replacement string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_str_replace/
@@ -423,12 +423,12 @@ function str_replace(search, replace, subject) {
     while (j = 0, i--) {
         while (s[i] = s[i].split(f[j]).join(ra ? r[j] || "" : r[0]), ++j in f){};
     };
-     
+    
     return sa ? s : s[0];
 }// }}}
 
 // {{{ strlen
-function strlen( string ){
+    function strlen( string ){
     // Get string length
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_strlen/
@@ -442,7 +442,7 @@ function strlen( string ){
 }// }}}
 
 // {{{ strpos
-function strpos( haystack, needle, offset){
+    function strpos( haystack, needle, offset){
     // Find position of first occurrence of a string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_strpos/
@@ -456,7 +456,7 @@ function strpos( haystack, needle, offset){
 }// }}}
 
 // {{{ strrpos
-function strrpos( haystack, needle, offset){
+    function strrpos( haystack, needle, offset){
     // Find position of last occurrence of a char in a string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_strrpos/
@@ -470,7 +470,7 @@ function strrpos( haystack, needle, offset){
 }// }}}
 
 // {{{ strtolower
-function strtolower( str ) {
+    function strtolower( str ) {
     // Make a string lowercase
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_strtolower/
@@ -483,7 +483,7 @@ function strtolower( str ) {
 }// }}}
 
 // {{{ strtoupper
-function strtoupper( str ) {
+    function strtoupper( str ) {
     // Make a string uppercase
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_strtoupper/
@@ -496,7 +496,7 @@ function strtoupper( str ) {
 }// }}}
 
 // {{{ substr
-function substr( f_string, f_start, f_length ) {
+    function substr( f_string, f_start, f_length ) {
     // Return part of a string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_substr/
@@ -525,7 +525,7 @@ function substr( f_string, f_start, f_length ) {
 }// }}}
 
 // {{{ trim
-function trim( str, charlist ) {
+    function trim( str, charlist ) {
     // Strip whitespace (or other characters) from the beginning and end of a string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_trim/
@@ -549,25 +549,25 @@ function trim( str, charlist ) {
     } else{
         whitespace = charlist.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g, '\$1');
     }
-  
-	for (var i = 0; i < str.length; i++) {
-		if (whitespace.indexOf(str.charAt(i)) === -1) {
-		str = str.substring(i);
-		break;
-		}
-	}
-	for (i = str.length - 1; i >= 0; i--) {
-		if (whitespace.indexOf(str.charAt(i)) === -1) {
-			str = str.substring(0, i + 1);
-			break;
-    	}
-	}
-	return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
+    
+    for (var i = 0; i < str.length; i++) {
+      if (whitespace.indexOf(str.charAt(i)) === -1) {
+          str = str.substring(i);
+          break;
+      }
+  }
+  for (i = str.length - 1; i >= 0; i--) {
+      if (whitespace.indexOf(str.charAt(i)) === -1) {
+         str = str.substring(0, i + 1);
+         break;
+     }
+ }
+ return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
 }// }}}
 
 
 // {{{ wordwrap
-function wordwrap( str, int_width, str_break, cut ) {
+    function wordwrap( str, int_width, str_break, cut ) {
     // Wraps a string to a given number of characters
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_wordwrap/
@@ -594,7 +594,7 @@ function wordwrap( str, int_width, str_break, cut ) {
 }// }}}
 
 // {{{ is_string
-function is_string( mixed_var ){
+    function is_string( mixed_var ){
     // Find whether the type of a variable is string
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_is_string/
@@ -610,7 +610,7 @@ function is_string( mixed_var ){
 
 
 // {{{ ord
-function ord( string ) {
+    function ord( string ) {
     // Return ASCII value of character
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_ord/
@@ -623,7 +623,7 @@ function ord( string ) {
 }// }}}
 
 // {{{ array_unique
-function array_unique( array ) {
+    function array_unique( array ) {
     // Removes duplicate values from an array
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_array_unique/
@@ -639,7 +639,7 @@ function array_unique( array ) {
         for(p = --i; p > 0;){
             if(tmp_arr[i] === tmp_arr[--p]){
                 for(j = p; --p && tmp_arr[i] === tmp_arr[p];);
-                i -= tmp_arr.splice(p + 1, j - p).length;
+                    i -= tmp_arr.splice(p + 1, j - p).length;
             }
         }
     }
@@ -648,7 +648,7 @@ function array_unique( array ) {
 }// }}}
 
 // {{{ print_r
-function print_r( array, return_val ) {
+    function print_r( array, return_val ) {
     // Prints human-readable information about a variable
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_print_r/
@@ -671,39 +671,39 @@ function print_r( array, return_val ) {
 
         if (obj instanceof Array || obj instanceof Object) {
             str += "Array\n" + base_pad + "(\n";
-            for (var key in obj) {
-                if (obj[key] instanceof Array || obj[key] instanceof Object) {
-                    str += thick_pad + "["+key+"] => "+formatArray(obj[key], cur_depth+1, pad_val, pad_char);
-                } else {
-                    str += thick_pad + "["+key+"] => " + obj[key] + "\n";
+                for (var key in obj) {
+                    if (obj[key] instanceof Array || obj[key] instanceof Object) {
+                        str += thick_pad + "["+key+"] => "+formatArray(obj[key], cur_depth+1, pad_val, pad_char);
+                    } else {
+                        str += thick_pad + "["+key+"] => " + obj[key] + "\n";
+                    }
                 }
-            }
-            str += base_pad + ")\n";
-        } else {
-            str = obj.toString();
-        }
+                str += base_pad + ")\n";
+} else {
+    str = obj.toString();
+}
 
-        return str;
+return str;
+};
+
+var repeat_char = function (len, pad_char) {
+    var str = "";
+    for(var i=0; i < len; i++) { 
+        str += pad_char; 
     };
+    return str;
+};
+output = formatArray(array, 0, pad_val, pad_char);
 
-    var repeat_char = function (len, pad_char) {
-        var str = "";
-        for(var i=0; i < len; i++) { 
-            str += pad_char; 
-        };
-        return str;
-    };
-    output = formatArray(array, 0, pad_val, pad_char);
-
-    if (return_val !== true) {
-        document.write("<pre>" + output + "</pre>");
-        return true;
-    } else {
-        return output;
-    }
+if (return_val !== true) {
+    document.write("<pre>" + output + "</pre>");
+    return true;
+} else {
+    return output;
+}
 }// }}}
 // {{{ is_array
-function is_array( mixed_var ) {
+    function is_array( mixed_var ) {
     // Finds whether a variable is an array
     // 
     // +    discuss at: http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_is_array/
@@ -768,78 +768,78 @@ function is_array( mixed_var ) {
  * @version    Release: 0.1
  * @link       http://webgroup.fas.sfu.ca/projects/JSBibTexParser
  */
-function BibTex(options)
-{
+ function BibTex(options)
+ {
 
-	if ( typeof options == 'undefined' ) options = {};
+   if ( typeof options == 'undefined' ) options = {};
     /**
      * Array with the BibTex Data
      *
      * @access public
      * @var array
      */
-    this.data;
+     this.data;
     /**
      * String with the BibTex content
      *
      * @access public
      * @var string
      */
-    this.content;
+     this.content;
     /**
      * Array with possible Delimiters for the entries
      *
      * @access private
      * @var array
      */
-    this._delimiters;
+     this._delimiters;
     /**
      * Array to store warnings
      *
      * @access public
      * @var array
      */
-    this.warnings;
+     this.warnings;
     /**
      * Run-time configuration options
      *
      * @access private
      * @var array
      */
-    this._options;
+     this._options;
     /**
      * RTF Format String
      *
      * @access public
      * @var string
      */
-    this.rtfstring;
+     this.rtfstring;
     /**
      * HTML Format String
      *
      * @access public
      * @var string
      */
-    this.htmlstring;
+     this.htmlstring;
     /**
      * Array with the "allowed" entry types
      *
      * @access public
      * @var array
      */
-    this.allowedEntryTypes;
+     this.allowedEntryTypes;
     /**
      * Author Format Strings
      *
      * @access public
      * @var string
      */
-    this.authorstring;
-    
-    this._delimiters     = {'"':'"',
-                                        '{':'}'};
-	this.data            = [];
-	this.content         = '';
+     this.authorstring;
+     
+     this._delimiters     = {'"':'"',
+     '{':'}'};
+     this.data            = [];
+     this.content         = '';
 	//this._stripDelimiter = stripDel;
 	//this._validate       = val;
 	this.warnings        = [];
@@ -860,7 +860,7 @@ function BibTex(options)
 		}
 	}
 	this.rtfstring         = 'AUTHORS, "{\b TITLE}", {\i JOURNAL}, YEAR';
-	this.htmlstring        = 'AUTHORS (YEAR) TITLE. <em>JOURNAL</em><br />';
+	this.htmlstring        = 'AUTHORS (YEAR) TITLE <em>JOURNAL</em><br />';
 	this.allowedEntryTypes = array(
 		'article',
 		'book',
@@ -876,21 +876,21 @@ function BibTex(options)
 		'proceedings',
 		'techreport',
 		'unpublished'
-	);
+       );
 	this.authorstring = 'VON LAST, JR, FIRST';
     
 }
 
 
 BibTex.prototype = {
-     
+   
     /**
      * Constructor
      *
      * @access public
      * @return void
      */
-   
+     
 
     /**
      * Sets run-time configuration options
@@ -900,8 +900,8 @@ BibTex.prototype = {
      * @param mixed  value value for the option
      * @return mixed true on success PEAR_Error on failure
      */
-    setOption : function(option, value)
-    {
+     setOption : function(option, value)
+     {
         ret = true;
         if (array_key_exists(option, this._options)) {
             this._options[option] = value;
@@ -932,15 +932,15 @@ BibTex.prototype = {
             return PEAR::raiseError('Could not find file '+filename);
         }
     }
-	*/
+    */
     /**
      * Parses what is stored in content and clears the content if the parsing is successfull+
      *
      * @access public
      * @return boolean true on success and PEAR_Error if there was a problem
      */
-    parse: function()
-    {
+     parse: function()
+     {
     	//alert("starting to parse");
         //The amount of opening braces is compared to the amount of closing braces
         //Braces inside comments are ignored
@@ -981,7 +981,7 @@ BibTex.prototype = {
                          * But this should already generate a warning+
                          * Therefore it should not be necessary to do anything here
                          */
-                    } else {
+                     } else {
                         this.data[this.data.length] = entrydata;
                     }
                     buffer = '';
@@ -1053,8 +1053,8 @@ BibTex.prototype = {
      * @param string entry The entry
      * @return array The representation of the entry or false if there is a problem
      */
-    '_parseEntry': function(entry)
-    {
+     '_parseEntry': function(entry)
+     {
         var entrycopy = '';
         if (this._options['validate']) {
             entrycopy = entry; //We need a copy for printing the warnings
@@ -1150,8 +1150,8 @@ BibTex.prototype = {
      * @param int the current used place of the '='
      * @return bool true if the '=' is correct, false if it contains to an equation
      */
-    '_checkEqualSign': function(entry, position)
-    {
+     '_checkEqualSign': function(entry, position)
+     {
         var ret = true;
         //This is getting tricky
         //We check the string backwards until the position and count the closing an opening braces
@@ -1208,8 +1208,8 @@ BibTex.prototype = {
      * @param string entry The entry to check
      * @return bool true if allowed, false otherwise
      */
-    '_checkAllowedEntryType': function(entry)
-    {
+     '_checkAllowedEntryType': function(entry)
+     {
         return in_array(entry, this.allowedEntryTypes);
     },
     
@@ -1224,8 +1224,8 @@ BibTex.prototype = {
      * @param string entry The text of the entry until the at
      * @return bool true if the at is correct, false if the at is likely to begin the next entry+
      */
-    '_checkAt': function(entry)
-    {
+     '_checkAt': function(entry)
+     {
         var ret     = false;
         var opening = array_keys(this._delimiters);
         var closing = array_values(this._delimiters);
@@ -1272,8 +1272,8 @@ BibTex.prototype = {
      * @param string entry The entry where the Delimiter should be stripped from
      * @return string Stripped entry
      */
-    '_stripDelimiter': function(entry)
-    {
+     '_stripDelimiter': function(entry)
+     {
         var beginningdels = array_keys(this._delimiters);
         var ength        = strlen(entry);
         var firstchar     = substr(entry, 0, 1);
@@ -1297,8 +1297,8 @@ BibTex.prototype = {
      * @param string entry The entry to unwrap
      * @return string unwrapped entry
      */
-    '_unwrap': function(entry)
-    {
+     '_unwrap': function(entry)
+     {
         entry = entry.replace(/\s+/, ' ');
         return trim(entry);
     },
@@ -1310,8 +1310,8 @@ BibTex.prototype = {
      * @param string entry The entry to wrap
      * @return string wrapped entry
      */
-    '_wordwrap': function(entry)
-    {
+     '_wordwrap': function(entry)
+     {
         if ( (''!=entry) && (is_string(entry)) ) {
             entry = wordwrap(entry, this._options['wordWrapWidth'], this._options['wordWrapBreak'], this._options['wordWrapCut']);
         }
@@ -1325,14 +1325,14 @@ BibTex.prototype = {
      * @param string entry The entry with the authors
      * @return array the extracted authors
      */
-    '_extractAuthors': function(entry) {
+     '_extractAuthors': function(entry) {
         entry       = this._unwrap(entry);
         var authorarray = array();
         authorarray = split(' and ', entry);
         for (var i = 0; i < sizeof(authorarray); i++) {
             var author = trim(authorarray[i]);
             /*The first version of how an author could be written (First von Last)
-             has no commas in it*/
+            has no commas in it*/
             var first    = '';
             var von      = '';
             var last     = '';
@@ -1436,9 +1436,9 @@ BibTex.prototype = {
                     last += ' '+vonlastarray[size-1];
                 }
                 //Now we check if it is version three (three entries in the array (two commas)
-                if (3==sizeof(tmparray)) {
-                    jr = tmparray[1];
-                }
+                    if (3==sizeof(tmparray)) {
+                        jr = tmparray[1];
+                    }
                 //Everything in the last entry is first
                 first = tmparray[sizeof(tmparray)-1];
             }
@@ -1460,11 +1460,11 @@ BibTex.prototype = {
      * @param string word
      * @return int The Case or PEAR_Error if there was a problem
      */
-    '_determineCase': function(word) {
+     '_determineCase': function(word) {
         var ret         = -1;
         var trimmedword = trim (word);
         /*We need this variable+ Without the next of would not work
-         (trim changes the variable automatically to a string!)*/
+        (trim changes the variable automatically to a string!)*/
         if (is_string(word) && (strlen(trimmedword) > 0)) {
             var i         = 0;
             var found     = false;
@@ -1497,7 +1497,7 @@ BibTex.prototype = {
     
     'isError': function(obj){
     	return ( typeof(obj) == 'Object' && obj.isError == 1 );
-    
+        
     },
 
     /**
@@ -1512,8 +1512,8 @@ BibTex.prototype = {
      * @param string wholeentry The whole BibTex Entry which the one line is part of
      * @return void
      */
-    '_validateValue': function(entry, wholeentry)
-    {
+     '_validateValue': function(entry, wholeentry)
+     {
         //There is no @ allowed if the entry is enclosed by braces
         if ( entry.match(/^{.*@.*}/)) {
             this._generateWarning('WARNING_AT_IN_BRACES', entry, wholeentry);
@@ -1548,8 +1548,8 @@ BibTex.prototype = {
      * @param string value The value in which curly braces to be removed
      * @param string Value with removed curly braces
      */
-    '_removeCurlyBraces': function(value)
-    {
+     '_removeCurlyBraces': function(value)
+     {
         //First we save the delimiters
         var beginningdels = array_keys(this._delimiters);
         var firstchar     = substr(value, 0, 1);
@@ -1584,22 +1584,22 @@ BibTex.prototype = {
      * @param string entry The line of the entry where the warning occurred
      * @param string wholeentry OPTIONAL The whole entry where the warning occurred
      */
-    '_generateWarning': function(type, entry, wholeentry)
-    {
-    	if ( typeof wholeentry == 'undefined' ) wholeentry = '';
-        warning['warning']    = type;
-        warning['entry']      = entry;
-        warning['wholeentry'] = wholeentry;
-        this.warnings[this.warnings.length]      = warning;
-    },
+     '_generateWarning': function(type, entry, wholeentry)
+     {
+       if ( typeof wholeentry == 'undefined' ) wholeentry = '';
+       warning['warning']    = type;
+       warning['entry']      = entry;
+       warning['wholeentry'] = wholeentry;
+       this.warnings[this.warnings.length]      = warning;
+   },
 
     /**
      * Cleares all warnings
      *
      * @access public
      */
-    'clearWarnings': function()
-    {
+     'clearWarnings': function()
+     {
         this.warnings = array();
     },
 
@@ -1609,8 +1609,8 @@ BibTex.prototype = {
      * @access public
      * @return true if there is, false otherwise
      */
-    'hasWarning': function()
-    {
+     'hasWarning': function()
+     {
         if (sizeof(this.warnings)>0) return true;
         else return false;
     },
@@ -1621,8 +1621,8 @@ BibTex.prototype = {
      * @access public
      * @return int The amount of available BibTex entries
      */
-    'amount': function()
-    {
+     'amount': function()
+     {
         return sizeof(this.data);
     },
     /**
@@ -1634,8 +1634,8 @@ BibTex.prototype = {
      * @param array array Author array
      * @return string the formatted author string
      */
-    '_formatAuthor': function(array)
-    {
+     '_formatAuthor': function(array)
+     {
         if (!array_key_exists('von', array)) {
             array['von'] = '';
         } else {
@@ -1672,8 +1672,8 @@ BibTex.prototype = {
      * @access public
      * @return string The BibTex string
      */
-    'bibTex': function()
-    {
+     'bibTex': function()
+     {
         var bibtex = '';
         for (var i=0 ; i<this.data.length; i++) {
         	var entry = this.data[i];
@@ -1717,8 +1717,8 @@ BibTex.prototype = {
      * @param array newentry The new data to add
      * @return void
      */
-    'addEntry': function(newentry)
-    {
+     'addEntry': function(newentry)
+     {
         this.data[this.data.length] = newentry;
     },
 
@@ -1731,8 +1731,8 @@ BibTex.prototype = {
      * @access public
      * @return array Hash Table with the data
      */
-    'getStatistic': function()
-    {
+     'getStatistic': function()
+     {
         var ret = array();
         for (var i=0; i<this.data.length; i++) {
         	var entry = this.data[i];
@@ -1759,8 +1759,8 @@ BibTex.prototype = {
      *
      * @return string the RTF Strings
      */
-    'rtf': function()
-    {
+     'rtf': function()
+     {
         var ret = "{\\rtf\n";
         for (var i=0; i<this.data.length; i++) {
         	var entry = this.data[i];
@@ -1818,36 +1818,36 @@ BibTex.prototype = {
      *
      * @return string the HTML Strings
      */
-    'html': function(min,max)
-    {
-    	if ( typeof min == 'undefined' ) min = 0;
-    	if ( typeof max == 'undefined' ) max = this.data.length;
-        var ret = "<p>\n";
-        for (var i =min; i<max; i++){
-        	var entry = this.data[i];
-            var line    = this.htmlstring;
-            var title   = '';
-            var journal = '';
-            var year    = '';
-            var authors = '';
-            var url = '';
-            if (array_key_exists('title', entry)) {
-                title = this._unwrap(entry['title']);
-            }
-            if (array_key_exists('journal', entry)) {
-                journal = this._unwrap(entry['journal']);
-            }
-            if (array_key_exists('year', entry)) {
-                year = this._unwrap(entry['year']);
-            }
-            if (array_key_exists('url', entry)) {
-                url = this._unwrap(entry['url']);
-            }
-            if (array_key_exists('author', entry)) {
-                if (this._options['extractAuthors']) {
+     'html': function(min,max)
+     {
+       if ( typeof min == 'undefined' ) min = 0;
+       if ( typeof max == 'undefined' ) max = this.data.length;
+       var ret = "<p>\n";
+       for (var i =min; i<max; i++){
+           var entry = this.data[i];
+           var line    = this.htmlstring;
+           var title   = '';
+           var journal = '';
+           var year    = '';
+           var authors = '';
+           var url = '';
+           if (array_key_exists('title', entry)) {
+            title = this._unwrap(entry['title']);
+        }
+        if (array_key_exists('journal', entry)) {
+            journal = this._unwrap(entry['journal']);
+        }
+        if (array_key_exists('year', entry)) {
+            year = this._unwrap(entry['year']);
+        }
+        if (array_key_exists('url', entry)) {
+            url = this._unwrap(entry['url']);
+        }
+        if (array_key_exists('author', entry)) {
+            if (this._options['extractAuthors']) {
                     tmparray = array(); //In this array the authors are saved and the joind with an and
                     for (j in entry['author'] ) {
-                    	var authorentry = entry['author'][j];
+                        var authorentry = entry['author'][j];
                         tmparray[tmparray.length] = this._formatAuthor(authorentry);
                     }
                     authors = join(', ', tmparray);
