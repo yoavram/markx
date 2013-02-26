@@ -107,6 +107,9 @@
 				<button class="btn" id="btn-commit-push" rel="tooltip" title="Commit file and push">
 					<i class="icon-cloud-upload"></i>
 				</button>
+				<button class="btn" id="btn-pull-bib" rel="tooltip" title="Pull bibliography file and load to reference library">
+					<i class="icon-book"></i>
+				</button>
 				<button class="btn" id="btn-new-file" rel="tooltip" title="Create new file">
 					<i class="icon-file-4"></i>
 				</button>
@@ -175,7 +178,6 @@ $('#btn-bib-file-view').click(function() {
 $('#btn-citations-view').click(function() {
 	viewCitations(citationList);
 });
-initBibtex('');
 
 /* code highlighting stuff */
 $(function() {
@@ -247,6 +249,12 @@ $(function() {
 		var filepath = $('#path').val();
 		var text = $('#wmd-input-second').val();
 		pullFromGithub(branchname, filepath, text);
+	});
+
+	$('#btn-pull-bib').click(function() {
+		var branchname = $('#branch').val();
+		var filepath = $('#path').val();
+		pullBibFromGithub(branchname, filepath);
 	});
 
 	$('#btn-commit-push').click(function() {

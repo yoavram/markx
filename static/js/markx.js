@@ -175,6 +175,23 @@ function checkVariablesForGithubFileAction(branchname, filepath) {
 	return true;
 }
 
+function pullBibFromGithub(branchname, filepath) {
+	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
+		return false;
+	}
+	if (_.reduce( _.tail(filepath, -4), function(memo, char) { return memo+char }, '') != '.bib') {
+		alertMessage("Cannot pull " + filepath + " to the references library, only <code>.bib</code> files are allowed.");
+		return false;
+	}
+	repo.read(branchname, filepath, function(err, data) {
+		if (err) {
+			alertMessage(err['message']);
+			return false;
+		} 
+		parseBibtex(data);		
+	});	
+}
+
 function pullFromGithub(branchname, filepath, text) {
 	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
 		return false;
@@ -188,17 +205,17 @@ function pullFromGithub(branchname, filepath, text) {
 	repo.getSha(branchname, filepath, function(err, sha) {
 		if (!sha || err) { 
 			alertMessage(filepath + "not found");
-		} else { 
-			infoMessage("Loading " + sha);
-			editorSha = sha;
-			repo.getBlob(sha, function (err, data) {
-				if (err) {
-					alertMessage(err['message']);
-				} else {
-					updateEditor(data);
-				}
-			});
-		}
+			return false;
+		} 
+		infoMessage("Loading " + sha);
+		editorSha = sha;
+		repo.getBlob(sha, function (err, data) {
+			if (err) {
+				alertMessage(err['message']);
+				return false;
+			} 
+			updateEditor(data);			
+		});	
 	});
 	document.title = _.last(filepath.split('/')) + " | Markx";
 }
@@ -284,8 +301,8 @@ function getEditor() {
 
 /* citations */
 
-var bibtex = null; // the user's citation library
-var citationList = null; // the document citation list
+var bibtex = new BibTex(); // the user's citation library
+var citationList = new BibTex(); // the document citation list
 
 function readBibFile() {
     // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
@@ -296,8 +313,7 @@ function readBibFile() {
     if (f) {
     	var r = new FileReader();
 	r.onload = function(e) {
- 		initBibtex(e.target.result); 
-    		infoMessage("BibTeX file loaded with " + bibtex.amount().toString() + " entires");
+ 		parseBibtex(e.target.result); 
     	}
     	r.readAsText(f);
     } else { 
@@ -305,10 +321,12 @@ function readBibFile() {
     }
 }
 
-function initBibtex(bibtexContent) {
-	bibtex = new BibTex();
+function parseBibtex(bibtexContent) {
+	var countBefore = bibtex.amount();
 	bibtex.content = bibtexContent; // the bibtex content as a string
 	bibtex.parse();
+	var countAfter = bibtex.amount();
+	infoMessage("Added " + (countAfter - countBefore).toString() + " new references.");
 	updateCitations();
 }
 
@@ -316,7 +334,7 @@ function getBibtex() {
 	return($('#bibtex_input').val())
 }
 
-function updateCitations() {
+function updateCitations() {	
 	// clear citations
 	citationList = new BibTex();
 	$('#bibtex_input').val('');
@@ -337,7 +355,7 @@ function updateCitations() {
 	$('#bibtex_display').html(citationList.html());
 }
 
-function addCitation(citation) {
+function addCitation(citation) {	
 	var entry = _.find(bibtex.data, function(bibEntry) {
 		return bibEntry.cite == citation;
 	})
