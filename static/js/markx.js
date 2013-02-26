@@ -222,6 +222,7 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 			return false;
 		}
 	}
+
 	repo.getSha(branchname, filepath, function(err, sha) {
 		if (!sha || err) { 
 			alertMessage(filepath + "not found");
@@ -243,10 +244,29 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 								alertMessage(filepath + "not found");
 								return false;
 							} else {
-								infoMessage("Commit was successful " + sha);
-								$('#commit-message').val('');
-								if (typeof callback != "undefined") {
-									callback();	
+								editorSha = sha; //update the sha
+								if (confirm("Push bibliography file too?")) {
+									updateCitations();
+									var bibtexContent = getBibtex();
+									var bibtexPath = filepath.substr(0, filepath.lastIndexOf('.')) + '.bib';
+									repo.write(branchname, bibtexPath, bibtexContent, 'Update bibliography: ' + commit_msg, function (err) {
+										if (err) {
+											alertMessage("Bibliography commit failed: " + err['message']);
+											return false;
+										} else {
+											infoMessage("Commit was successful, included bibliography file " + sha);
+											$('#commit-message').val('');
+											if (typeof callback != "undefined") {
+												callback();	
+											}
+										}
+									});
+								} else {
+									infoMessage("Commit was successful " + sha);
+									$('#commit-message').val('');
+									if (typeof callback != "undefined") {
+										callback();	
+									}
 								}
 							}
 						});
