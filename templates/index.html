@@ -259,7 +259,7 @@ $(function() {
 
 	$('#btn-new-file').click(function() {
 		var text = $('#wmd-input-second').val();
-		if (text.length) {
+		if ($.trim(text).length) {
 			if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
 				return false;
 			}
@@ -278,7 +278,7 @@ $(function() {
 			loadBranchPaths(branchname, function() {
 				$('#path').val(filepath);
 			});
-		});
+		}, true);
 		updateEditor('');
 		document.title = _.last(filepath.split('/')) + " | Markx";
 	});

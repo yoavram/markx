@@ -206,7 +206,7 @@ function commitUrl(username, repository, sha) {
 	return 'https://github.com/'+username+'/' + repository + '/commit/' + sha;
 }
 
-function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
+function pushToGithub(branchname, filepath, commit_msg, text , callback, newFile) {
 	if (!checkVariablesForGithubFileAction(branchname, filepath)) {
 		return false;
 	}
@@ -224,59 +224,55 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 	}
 
 	repo.getSha(branchname, filepath, function(err, sha) {
-		if (!sha || err) { 
+		if ( (_.isUndefined(newFile) && !sha) || err) { 
 			alertMessage(filepath + "not found");
 			return false;
-		} else {
-			console.log(sha);
-			if (sha != editorSha) {
-				alertMessage("Can't commit, file has been changed since last pulled. To prevent data loss, the file will be downloaded to local downloads directory.");
-				save('md', download);
-				return false;
-			} else {
-				repo.write(branchname, filepath, text, commit_msg, function (err) {
-					if (err) {
-						alertMessage(err['message']);
-						return false;
-					} else {
-						repo.getSha(branchname, filepath, function(err, sha) {
-							if (!sha || err) { 
-								alertMessage(filepath + "not found");
-								return false;
-							} else {
-								editorSha = sha; //update the sha
-								updateCitations();
-								var bibtexContent = getBibtex();
-								if (bibtexContent && bibtexContent.length>0 && confirm("Push bibliography file too?")) {
-									var bibtexPath = filepath.substr(0, filepath.lastIndexOf('.')) + '.bib';
-									repo.write(branchname, bibtexPath, bibtexContent, 'Update bibliography: ' + commit_msg, function (err) {
-										if (err) {
-											alertMessage("Bibliography commit failed: " + err['message']);
-											return false;
-										} else {
-											infoMessage("Commit was successful, included bibliography file " + sha);
-											$('#commit-message').val('');
-											if (typeof callback != "undefined") {
-												callback();	
-											}
-										}
-									});
-								} else {
-									infoMessage("Commit was successful " + sha);
-									$('#commit-message').val('');
-									if (typeof callback != "undefined") {
-										callback();	
-									}
-								}
-							}
-						});
-					}
-				});
-			}
+		} 
+		console.log(sha);
+		if (_.isUndefined(newFile) && (sha != editorSha)) {
+			alertMessage("Can't commit, file has been changed since last pulled. To prevent data loss, the file will be downloaded to local downloads directory.");
+			save('md', download);
+			return false;
 		}
+	
+		repo.write(branchname, filepath, text, commit_msg, function (err) {
+			if (err) {
+				alertMessage(err['message']);
+				return false;
+			} 
+			repo.getSha(branchname, filepath, function(err, sha) {
+				if (!sha || err) { 
+					alertMessage(filepath + " not found");
+					return false;
+				} 
+				editorSha = sha; //update the sha
+				updateCitations();
+				var bibtexContent = getBibtex();
+				if (bibtexContent && bibtexContent.length>0 && confirm("Push bibliography file too?")) {
+					var bibtexPath = filepath.substr(0, filepath.lastIndexOf('.')) + '.bib';
+					repo.write(branchname, bibtexPath, bibtexContent, 'Update bibliography: ' + commit_msg, function (err) {
+						if (err) {
+							alertMessage("Bibliography commit failed: " + err['message']);
+							return false;
+						} 
+						infoMessage("Commit was successful, included bibliography file " + sha);
+						$('#commit-message').val('');
+						if (typeof callback != "undefined") {
+							callback();	
+						}
+					});					
+				} else {
+					infoMessage("Commit was successful " + sha);
+					$('#commit-message').val('');
+					if (!_.isUndefined(callback)) {
+						callback();
+					}
+				}
+			});
+		});
 	});
 }
-
+					
 function updateEditor(text) {
 	editor.setValue(text);
 	updateCitations();
