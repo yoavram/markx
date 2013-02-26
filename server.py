@@ -27,14 +27,15 @@ with open(DEFAULT_TEXT_FILE,'r') as f:
 PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
 DOCVERTER_URL =   'http://c.docverter.com/convert'
 PDFLATEX_EXISTS = distutils.spawn.find_executable("pdflatex") != None
+STATIC_URL_PATH = '/markx/static' # flask default
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path=STATIC_URL_PATH)
 app.config.from_object(__name__) 
 print " * Overriding deafult configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
 if app.debug:
     print " * Running in debug mode"
-
+print " * Serving static files from URL", app.static_url_path
 
 mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
 def get_mimetype(extension):
