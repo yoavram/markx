@@ -398,7 +398,10 @@ function updateWordCount(text) {
 
 
 function updateCharCount(text) {
-	total = text.match(/[a-zA-Z0-9]/g).length
+	var total = 0;
+	if (match = text.match(/[a-zA-Z0-9]/g)) {
+		var total = match.length;
+	}
 	$('#char-counter').html(total);
 	return text;
 }
