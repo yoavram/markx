@@ -245,9 +245,9 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 								return false;
 							} else {
 								editorSha = sha; //update the sha
-								if (confirm("Push bibliography file too?")) {
-									updateCitations();
-									var bibtexContent = getBibtex();
+								updateCitations();
+								var bibtexContent = getBibtex();
+								if (bibtexContent && bibtexContent.length>0 && confirm("Push bibliography file too?")) {
 									var bibtexPath = filepath.substr(0, filepath.lastIndexOf('.')) + '.bib';
 									repo.write(branchname, bibtexPath, bibtexContent, 'Update bibliography: ' + commit_msg, function (err) {
 										if (err) {
