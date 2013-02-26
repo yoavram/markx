@@ -1,6 +1,6 @@
 # Markx
 ## Help
-Last update: 9 Feb 2013
+Last update: 26 Feb 2013
 
 [Markx] is a Markdown editor specifically designed for academic and scientific authoring. It highlights several advantages of Markdown (plain-text, multiple format conversion, easy version control) while still supplying the basic features which are a must for academic publications (citations, math rendering, layouts).
 
@@ -33,13 +33,13 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 ### Toolbar
 1. Use the *GitHub* <i class="icon-github-2"></i> button to **sign-in to [GitHub]** (see more details below).
 1. Use the *Screen* <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
-1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991] and to load a bibliography file.
+1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991], to load a bibliography file, to see the loaded bibliography and the references you are citing.
 1. Use the *Download* <i class="icon-download-2"></i> menu to **download and convert** the Markdown text to various formats or to download a [Markdown] of the text or a [BibTeX] file of the citations referenced in the text.
 1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
   - Pandoc: must be installed on local machine when working locally, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF on local machine.
  - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
 1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
-1. The grey box with the numbers displays the **word count**.
+1. The grey boxes with the numbers display the **word and character counts**.
 
 ### GitHub Integration
 **Your [GitHub] username and password are never sent to the Markx server**. They are sent by JavaScript to directly to the GitHub API server using [Github.js]. Your credentials are not saved in cookies and are removed from the browser memory as soon as the sign in is complete. You can also sign out of GitHub by clicking the *sign out* <i class="icon-exit"></i> button. If you would like to check the security of this feature please view the `signinToGithub` function in [markx.js] and open an [issue] if you find any problems.
@@ -47,21 +47,16 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 After you sign in to GitHub you can use the GitHub toolbar to:
 
 1. Click the  *GitHub* <i class="icon-github-2"></i> button - this doesn't do anything right now.
-1. Change the username - doesn't do anything yet.
-1. **Choose a repository** that belongs to the specified user.
+1. Click the *Reload* <i cla=="icon-redo-2"></i> button o reload the repositories.
+1. **Choose a repository** that you can pull from and push to (you are owner or collaborator)
 1. Click the first *folder* <i class="icon-folder-open"></i> button  to load the **branch list**
 1. **Choose a branch** if the selected repository
-1. Click the second *folder* <i class="icon-folder-open"></i> button  to **load the files list** (currently only loads a single level, no subfolders)
+1. Click the second *folder* <i class="icon-folder-open"></i> button  to **load the files list**
 1. **Choose a file** in the selected branch
 1. Click the *download* <i class="icon-cloud-download"></i> button to **pull the file** to the editor. The current contents will be deleted without saving them.
-1. Click the *upload* <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit. After the push is finalized you will get a success or failure message.
+1. Click the *upload* <i class="icon-cloud-upload"></i> button to **push the editor contents** to the selected file. This will create a new *commit* on the repository. You must **fill a commit message** before pushing. Commit messages should be ~50 characters and briefly explain the reason for this commit. After the push is finalized you will get a success or failure message. If you have citations, Markx will offer to push a bibliography file as well.
 1. Click the *new* <i class="icon-file-4"></i> button to **create and push** a new empty file. If you don't fill the commit message Markx fill create adefault message for you. After the push is finalized you will get a success or failure message and the files list will be updated.
 1. Click the *sign out* <i class="icon-exit"></i> button in the general toolbar to **sign out of GitHub**.
-
-There is no way to commit the `.bib` citations file to GitHub via Markx. This feature will be added very soon.
-
-### Editor Toolbar
-The buttons above the editor window are part of the [PageDown] markdown editor. They allow quick shortcuts to common Markdown markups.
 
 ### Support
 The best way to get support is to open an [issue]. If you can't open issue because you don't have a [GitHub] user, just get one, they are free. 
@@ -86,7 +81,8 @@ The two Markdown converters are [Pandoc] and [Docverter], which is a cloud-based
 The client side is written with HTML+CSS+JS, using the JavaScript libraries:
 
 1. [Twitter Bootstrap] and [jQuery] for the UI
-1. [PageDown] as the Markdown editor and real-time HTML converter 
+1. [PageDown] as the Markdown real-time HTML converter 
+1. [CodeMirror] as the Markdown editor
 1. [Github.js] for the GitHub API
 1. [Javascript BibTeX Parser] processing citation keys and bibliography files
 1. [Google Code Prettifier] for code highlighting
@@ -115,4 +111,5 @@ The references header is **your** job, [Pandoc] will only create a citation list
 [markx.js]: https://github.com/yoavram/markx/blob/master/static/js/markx.js
 [Markx]: https://github.com/yoavram/markx
 [requests]: http://python-requests.org/
+[CodeMirror]: http://codemirror.net/
 	
