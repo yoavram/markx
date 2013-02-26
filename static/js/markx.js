@@ -225,19 +225,23 @@ function pushToGithub(branchname, filepath, commit_msg, text ,callback) {
 	repo.getSha(branchname, filepath, function(err, sha) {
 		if (!sha || err) { 
 			alertMessage(filepath + "not found");
+			return false;
 		} else {
 			console.log(sha);
 			if (sha != editorSha) {
 				alertMessage("Can't commit, file has been changed since last pulled. To prevent data loss, the file will be downloaded to local downloads directory.");
 				save('md', download);
+				return false;
 			} else {
 				repo.write(branchname, filepath, text, commit_msg, function (err) {
 					if (err) {
 						alertMessage(err['message']);
+						return false;
 					} else {
 						repo.getSha(branchname, filepath, function(err, sha) {
 							if (!sha || err) { 
 								alertMessage(filepath + "not found");
+								return false;
 							} else {
 								infoMessage("Commit was successful " + sha);
 								$('#commit-message').val('');
