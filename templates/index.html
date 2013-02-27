@@ -307,7 +307,7 @@ $(function() {
 			{% else %}
 			save('latex', function(filename) {
 				var filepath = window.location.protocol + "//" + window.location.host  + '/download/' + filename;
-				window.location.assign("http://latex.aslushnikov.com/compile?url=" + filepath);
+				window.open("http://latex.aslushnikov.com/compile?url=" + filepath, '_newtab');
 			});
 			{% endif %}
 		}
