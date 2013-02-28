@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-from flask import Flask, request, render_template, jsonify, Response, send_file
+from flask import Flask, request, render_template, url_for, jsonify, Response, send_file
 import os
 import os.path
 import subprocess
@@ -27,6 +27,8 @@ with open(DEFAULT_TEXT_FILE,'r') as f:
 PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
 DOCVERTER_URL =   'http://c.docverter.com/convert'
 PDFLATEX_EXISTS = distutils.spawn.find_executable("pdflatex") != None
+
+app = Flask(__name__)
 
 class ReverseProxied(object):
     '''Wrap the application in this middleware and configure the 
@@ -68,8 +70,11 @@ class ReverseProxied(object):
             environ['wsgi.url_scheme'] = scheme
         return self.app(environ, start_response)
 
-app = Flask(__name__)
 app.wsgi_app = ReverseProxied(app.wsgi_app)
+def get_url_for(filename, **values):
+    return url_for('static', filename=filename, **values)
+app.jinja_env.globals['static'] = get_url_for
+
 app.config.from_object(__name__) 
 print " * Overriding deafult configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
