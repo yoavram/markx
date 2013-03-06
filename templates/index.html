@@ -113,6 +113,9 @@
 				<button class="btn" id="btn-new-file" rel="tooltip" title="Create new file">
 					<i class="icon-file-4"></i>
 				</button>
+				<button class="btn" id="btn-file-history" rel="tooltip" title="View file history">
+					<i class="icon-stack"></i>
+				</button>
 			</div>	
 			<input class="input" type="text" id="commit-message" placeholder="Commit message: Fixed typos" style="margin: auto 5px">
 		</div>
@@ -289,6 +292,19 @@ $(function() {
 		}, true);
 		updateEditor('');
 		document.title = _.last(filepath.split('/')) + " | Markx";
+	});
+
+	$('#btn-file-history').click(function() {
+		var username = $('#user').val();
+		var reponame = $('#repo').val();
+		var branchname = $('#branch').val();
+		var filepath = $('#path').val();
+		if (!username || !reponame || !branchname || !filepath) {
+			alertMessage("Please choose a repository, a branch and a file");
+			return false;
+		}
+		var url = "https://github.com/"+username+"/"+reponame+"/commits/"+branchname+"/"+filepath;
+		window.open(url,  '_newtab');
 	});
 
 	/* file conversion */
