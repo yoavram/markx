@@ -17,6 +17,9 @@
 			<button class="btn" id="btn-display-panels" rel="tooltip" title="Change display">
 				<i class=" icon-screen"></i>
 			</button>
+			<button class="btn" href="#modal-md-file-input" id="btn-md-file-input-show" role="button" data-toggle="modal" rel="tooltip" title="Load a Markdown file">
+				<i class="icon-upload-2"></i>
+			</button>
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Citations and Bibliography">
 					<i class="icon-books"></i>
@@ -65,7 +68,7 @@
 						<i class="icon-books"></i> BibTeX
 					</a></li>
 				</ul>
-			</div>
+			</div>			
 			<button class="btn" id="btn-converter" rel="tooltip" title="Toggle Markdown converters: Pandoc or Docverter">D</button>
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="Change code highlighting theme">
@@ -140,6 +143,8 @@
 
 {% include 'bib_file_input.html' %}
 
+{% include 'md_file_input.html' %}
+
 {% include 'bib_view.html' %}
 
 {% endblock header %}
@@ -171,6 +176,7 @@
 var converter = initMarkdownConverter();
 var editor = initMarkdownEditor();
 updatePreview();
+$('#btn-md-file-input-submit').click(readMdFile);
 
 /* citations */
 $("#btn-citations").click(updateCitations);

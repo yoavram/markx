@@ -494,22 +494,25 @@ function initMarkdownEditor() {
 
 
 /* files */
-function readSingleFile(evt) {
-	// http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
-    //Retrieve the first (and only!) File from the FileList object
-    var file = evt.target.files[0]; 
+function readMdFile() {
+    // http://www.htmlgoodies.com/beyond/javascript/read-text-files-using-the-javascript-filereader.html#
+    // Retrieve the first (and only!) File from the FileList object
+    $('#modal-md-file-input').modal('hide')
+    if (getEditor().length) {
+	if (!confirm("The contents of the editor panel will be removed, do you want to contine?")) {
+		return false;
+	}
+}
+    var f = document.getElementById('md-file').files[0];
 
-    if (file) {
-    	var reader = new FileReader();
-    	reader.onload = function(event) { 
-    		var contents = event.target.result;
-    		$('#wmd-input-second').val(contents);
-    		editor.refreshPreview();
-    		updateCitations();
+    if (f) {
+    	var r = new FileReader();
+	r.onload = function(e) {
+ 		updateEditor(e.target.result); 
     	}
-    	reader.readAsText(file);
+    	r.readAsText(f);
     } else { 
-    	alert("Failed to load file");
+    	alert("Failed to load Markdown file");
     }
 }
 
