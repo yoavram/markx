@@ -19,12 +19,12 @@ function panelsDisplay() {
 	var rightPanel = $('#right-panel')
 	if (panelsDisplayStatus == 'dual') {
 		panelsDisplayStatus = 'left';
-		leftPanel.show().removeClass().addClass('span12');
+		leftPanel.show().removeClass().addClass('offset1 span8');
 		rightPanel.hide().removeClass();
 	} else if (panelsDisplayStatus == 'left') {
 		panelsDisplayStatus = 'right';
 		leftPanel.hide().removeClass();
-		rightPanel.show().removeClass().addClass('span12');
+		rightPanel.show().removeClass().addClass('offset1 span8');
 	} else {
 		panelsDisplayStatus = 'dual';
 		leftPanel.show().removeClass().addClass('span6');
