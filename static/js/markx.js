@@ -452,13 +452,14 @@ function processGooglePrettifierPreBlocks(text) {
 }
 
 
-function updatePreview() {
+function _updatePreview() {
 	var markdownString = editor.getValue();
 	var htmlSrting = converter.makeHtml(markdownString);
 	$('#wmd-preview-second').html(htmlSrting);
 	prettyPrint();
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
+var updatePreview = _.throttle(_updatePreview, 100);
 
 
 function addPreCoversionHook(converter, hook) {
