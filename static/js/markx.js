@@ -457,10 +457,12 @@ function _updatePreview() {
 	var htmlSrting = converter.makeHtml(markdownString);
 	$('#wmd-preview-second').html(htmlSrting);
 	prettyPrint();
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+	updateMath();
 }
 var updatePreview = _.throttle(_updatePreview, 100);
-
+var updateMath = _.debounce(function() {
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+	}, 1500);
 
 function addPreCoversionHook(converter, hook) {
 	converter.hooks.chain("preConversion", hook);
