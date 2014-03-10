@@ -59,8 +59,11 @@ def save_text_file(filename, content):
 def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
     options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
-    options += ['-s'] #--toc
+    options += ['--from', 'markdown+tex_math_double_backslash'] # --to inferred from outname 
+    options += ['--standalone'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
+    # Use https CDN address ("ugly but stable") so html will work both over http and https.
+    options += ['--mathjax=https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML']
     if os.path.exists(bibpath):
         options += ['--bibliography=' + bibpath]
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:
