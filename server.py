@@ -59,8 +59,10 @@ def save_text_file(filename, content):
 def pandoc(filename, extension, bibpath):
     outname = path_to_file(filename + '.' + extension)
     options = ['pandoc', path_to_file(filename + '.md'), '-o', outname]
-    options += ['-s'] #--toc
+    options += ['--from', 'markdown+tex_math_double_backslash'] # --to inferred from outname 
+    options += ['--standalone'] #--toc
     options += ['--variable=geometry:' + DEFAULT_LATEX_PAPER_SIZE]
+    options += ['--mathjax']
     if os.path.exists(bibpath):
         options += ['--bibliography=' + bibpath]
     if 'CSL_FILES' in app.config and len(app.config['CSL_FILES']) > 0:

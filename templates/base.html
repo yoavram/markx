@@ -26,11 +26,18 @@
 	<script type="text/x-mathjax-config">
 	<!-- Online Debugger: http://www.onemathematicalcat.org/MathJaxDocumentation/TeXSyntax.htm -->
 	<!-- Doc: http://docs.mathjax.org/en/latest/output.html -->`
-	MathJax.Hub.Config({  
-		tex2jax: {inlineMath: [['$','$']]},          
-		"HTML-CSS": { availableFonts: ["STIX", "TeX"], 
-						linebreaks: { automatic: true },
-						imageFont: null
+	MathJax.Hub.Config({
+		tex2jax: {
+			// Markdown source can use double-backslash math
+			// delimiters but PageDown converts \\ -> \ so
+			// MathJax sees single-backslash delimiters.
+			inlineMath: [["$","$"], ["\\(","\\)"]],
+			displayMath: [["$$","$$"], ["\\[","\\]"]]
+		},
+		"HTML-CSS": {
+			availableFonts: ["STIX", "TeX"],
+			linebreaks: { automatic: true },
+			imageFont: null
 		}
 	});
 	</script>

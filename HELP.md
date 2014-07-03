@@ -16,7 +16,7 @@ You should use **Pandoc-flavored Markdown** as both converters ([Pandoc] and [Do
 You can use $LaTeX$. Just write it between `$`s or `\\(` and `\\)` for inline equations and `$$`s or `\\[` and `\\]` for display mode:
 
 - Inline mode $e=mc^2$
-- Display mode: $$\frac{df(x)}{dt}=lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
+- Display mode: $$\frac{df(x)}{dx}=\lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
 
 #### Citations
 To start working with citations in Markx you need to click the *Load a Bibliography file* from the *Citations* <i class="icon-books"></i> menu. The file should be in [BibTeX] format - if you don't have one than Markx doesn't support your citation format yet, but you might be able to convert a different format to BibTeX using online tools. If you use Mendeley it is easy to set it up to [sync to a BibTeX file](http://blog.mendeley.com/tipstricks/howto-use-mendeley-to-create-citations-using-latex-and-bibtex/). If you do not load a `.bib` file you will not be able to use the citations features of Markx. 
