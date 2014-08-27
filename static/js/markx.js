@@ -446,8 +446,8 @@ function updateCharCount(text) {
 
 
 function processGooglePrettifierPreBlocks(text) {
-	text = text.replace("<pre><code>", '<pre class="prettyprint">');
-	text = text.replace("\n</code></pre>", '\n</pre>');
+	text = text.replace(new RegExp("<pre><code>", "g"), '<pre class="prettyprint">');
+	text = text.replace(new RegExp("\n</code></pre>", "g"), '\n</pre>');
 	return text;
 }
 
