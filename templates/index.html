@@ -52,6 +52,9 @@
 					<li><a href='#' id="btn-download-pdf"  rel="tooltip" title="Download as PDF">
 						<i class="icon-file-pdf"></i> PDF
 					</a></li>
+					<li><a href='#' id="btn-download-odt" rel="tooltip" title="Download as Open Document">
+						<i class="icon-file-word"></i> Word
+					</a></li>
 					<li><a href='#' id="btn-download-docx"  rel="tooltip" title="Download as Word docx">
 						<i class="icon-file-word"></i> Word
 					</a></li>
@@ -336,6 +339,9 @@ $(function() {
 	});
 	$('#btn-download-docx').click(function() {
 		save('docx', download);
+	});
+	$('#btn-download-odt').click(function() {
+		save('odt', download);
 	});
 	$('#btn-download-latex').click(function() {
 		save('latex', download);
