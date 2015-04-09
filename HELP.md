@@ -15,7 +15,7 @@ You should use **Pandoc-flavored Markdown** as both converters ([Pandoc] and [Do
 #### Math
 You can use $LaTeX$. Just write it between `$`s or `\\(` and `\\)` for inline equations and `$$`s or `\\[` and `\\]` for display mode:
 
-- Inline mode $e=mc^2$
+- Inline mode $E=mc^2$
 - Display mode: $$\frac{df(x)}{dx}=\lim_{x \to 0}{\frac{f(x+h)-f(x)}{h}}$$
 
 #### Citations
