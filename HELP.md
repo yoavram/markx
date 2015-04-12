@@ -10,7 +10,7 @@ Last update: 26 Feb 2013
 Markdown is very easy to learn and there are many online tutorials, just use Google.
 
 #### Markdown Flavor
-You should use **Pandoc-flavored Markdown** as both converters ([Pandoc] and [Docverter] use that). The HTML preview on the right is processed using [PageDown], so there could be some thing it doesn't process like Pandoc does (found something? open an [issue]).
+You should use **Pandoc-flavored Markdown** as both converters ([Pandoc] and [Docverter]) use that. The HTML preview on the right is processed using [PageDown], so there could be some thing it doesn't process like Pandoc does (found something? open an [issue]).
 
 #### Math
 You can use $LaTeX$. Just write it between `$`s or `\\(` and `\\)` for inline equations and `$$`s or `\\[` and `\\]` for display mode:
@@ -42,7 +42,7 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 1. The grey boxes with the numbers display the **word and character counts**.
 
 ### GitHub Integration
-**Your [GitHub] username and password are never sent to the Markx server**. They are sent by JavaScript to directly to the GitHub API server using [Github.js]. Your credentials are not saved in cookies and are removed from the browser memory as soon as the sign in is complete. You can also sign out of GitHub by clicking the *sign out* <i class="icon-exit"></i> button. If you would like to check the security of this feature please view the `signinToGithub` function in [markx.js] and open an [issue] if you find any problems.
+**Your [GitHub] username and password are never sent to the Markx server**. They are sent by JavaScript directly to the GitHub API server using [Github.js]. Your credentials are not saved in cookies and are removed from the browser memory as soon as the sign in is complete. You can also sign out of GitHub by clicking the *sign out* <i class="icon-exit"></i> button. If you would like to check the security of this feature please view the `signinToGithub` function in [markx.js] and open an [issue] if you find any problems.
 
 After you sign in to GitHub you can use the GitHub toolbar to:
 
