@@ -35,9 +35,9 @@ You must click the *Update Citations* button in the *Citations* <i class="icon-b
 1. Use the *Screen* <i class="icon-screen"></i> button to change between **editor**, **preview** and **dual** modes.
 1. Use the *Books* <i class="icon-books"></i> menu to **parse citation keys** such as [@Drake1991], to load a bibliography file, to see the loaded bibliography and the references you are citing.
 1. Use the *Download* <i class="icon-download-2"></i> menu to **download and convert** the Markdown text to various formats or to download a [Markdown] of the text or a [BibTeX] file of the citations referenced in the text.
-1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter]. 
-  - Pandoc: must be installed on local machine when working locally, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF on local machine.
- - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
+1. Click on **P** or **D** to **change the Markdown converter** between [Pandoc] and [Docverter].
+    - Pandoc: must be installed on local machine when working locally, can't process image URLs, slow conversion to PDF on Windows, requires *pdflatex* to convert to PDF on local machine.
+    - Docverter: must be connected to the internet to be used, doesn't process citation keys and bibliography.
 1. Click the *Code* <i class="icon-code"></i> button to get change the **code highlighting styles**. Example code above.
 1. The grey boxes with the numbers display the **word and character counts**.
 
