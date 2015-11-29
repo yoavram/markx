@@ -24,7 +24,7 @@ ABBR_FILES = [ x for x in os.listdir(CSL_FOLDER) if x.endswith('.abbr')]
 DEFAULT_TEXT_FILE = "HELP.md"
 with open(DEFAULT_TEXT_FILE,'r') as f:
     DEFAULT_TEXT = f.read()
-PANDOC_EXTENSIONS = ['pdf', 'docx', 'epub', 'html']    
+PANDOC_EXTENSIONS = ['pdf', 'odt', 'docx', 'epub', 'html']    
 DOCVERTER_URL =   'http://c.docverter.com/convert'
 PDFLATEX_EXISTS = distutils.spawn.find_executable("pdflatex") != None
 
@@ -36,7 +36,7 @@ if app.debug:
     print " * Running in debug mode"
 
 
-mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip'}
+mimetypes = {'md':'text/x-markdown', 'bib':'text/x-bibtex','html':'text/html','htm':'text/html','pdf':'application/pdf', 'latex':'application/x-latex', 'docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','epub':'application/epub+zip','odt':'application/vnd.oasis.opendocument.txt'}
 def get_mimetype(extension):
     return mimetypes.get(extension, 'application/octet-stream')
 
