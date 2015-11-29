@@ -30,7 +30,7 @@ PDFLATEX_EXISTS = distutils.spawn.find_executable("pdflatex") != None
 
 app = Flask(__name__)
 app.config.from_object(__name__) 
-print " * Overriding deafult configuration with config.py file"
+print " * Overriding default configuration with config.py file"
 app.config.from_pyfile('config.py', silent=True)
 if app.debug:
     print " * Running in debug mode"
